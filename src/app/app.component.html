@@ -1,20 +1,14 @@
-<app-header (toggleSidenav)="toggleSidenav()"></app-header>
-<mat-sidenav-container class="example-container" hasBackdrop="unset">
-    <mat-sidenav #sidenav mode="over" class="p-4 w-1/2">
-        <nav class="has-[button]:w-full flex flex-col gap-3">
-            <button class="hidden sm:flex" mat-raised-button color="primary">Recámara 1</button>
-            <button class="hidden sm:flex" mat-raised-button color="primary">Recámara 2</button>
-            <button class="hidden sm:flex" mat-raised-button color="primary">Baño 1</button>
-            <button class="hidden sm:flex" mat-raised-button color="primary">Baño 2</button>
-            <button class="hidden sm:flex" mat-raised-button color="primary">Sala</button>
-            <button class="hidden sm:flex" mat-raised-button color="primary">Cocina</button>
-            <button class="hidden sm:flex" mat-raised-button color="primary">Garage</button>
-        </nav>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <router-outlet />
-        <main class="h-screen">
-            <h1>Hola</h1>
-        </main>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+<main>
+    <app-header (toggleSidenav)="toggleSidenav()"></app-header>
+    <mat-sidenav-container hasBackdrop="unset">
+        <mat-sidenav #sidenav mode="over" class="w-full md:w-3/4 xl:w-1/2 p-4">
+            <app-sidenav />
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <router-outlet />
+            <main class="h-screen">
+                <h1>Hola</h1>
+            </main>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</main>
