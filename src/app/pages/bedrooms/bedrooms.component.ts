@@ -11,7 +11,7 @@ import { iBedroom } from '../../core/interfaces/i-Bedroom.interface';
   styleUrl: './bedrooms.component.scss',
 })
 export class BedroomsComponent {
-  public dataSensors = [
+  public dataSensors: iBedroom[] = [
     {
       id: 1,
       name: 'PIR',

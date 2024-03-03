@@ -1,10 +1,12 @@
 <main>
     <app-header (toggleSidenav)="toggleSidenav()"></app-header>
-    <mat-sidenav-container hasBackdrop="unset">
-        <mat-sidenav #sidenav mode="over" class="w-full md:w-3/4 xl:w-1/2 p-4">
-            <app-sidenav />
+    <mat-sidenav-container hasBackdrop="true" >
+        <mat-sidenav #sidenav mode="over" class="w-full md:w-3/4 xl:w-1/4 p-4 bg-slate-100">
+            <app-sidenav>
+                <button mat-button (click)="toggleSidenav()">Toggle</button>
+            </app-sidenav>
         </mat-sidenav>
-        <mat-sidenav-content>
+        <mat-sidenav-content >
             <router-outlet />
             <main class="h-screen">
                 <h1>Hola</h1>
