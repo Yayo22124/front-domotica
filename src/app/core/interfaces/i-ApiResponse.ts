@@ -3,6 +3,7 @@ import { iSensorsData } from './iSensorsData.interface';
 
 export interface iApiResponse {
   success: boolean;
-  sensorsData?: iSensorsData[] | iActuatorsData | any;
+  sensorsData?: iSensorsData[];
+  actuatorsData?: iActuatorsData[];
   error?: any;
 }
