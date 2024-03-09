@@ -10,5 +10,13 @@ export const routes: Routes = [
     {
         path: "home",
         loadComponent: () => import("./pages/home-page/home-page.component").then(component => component.HomePageComponent)
+    },
+    {
+        path: "bedroom/:location",
+        async loadComponent() {
+            const component = await import("./pages/bedrooms-page/bedrooms-page.component");
+
+            return component.BedroomsPageComponent;
+        },
     }
 ];

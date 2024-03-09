@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
 import {MatCardModule} from '@angular/material/card';
 
 @Component({
@@ -9,5 +10,6 @@ import {MatCardModule} from '@angular/material/card';
   styleUrl: './sidenav-grid-item.component.scss'
 })
 export class SidenavGridItemComponent {
+  @Input('title-room') titleRoom = "";
 
 }

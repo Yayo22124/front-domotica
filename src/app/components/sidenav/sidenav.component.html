@@ -1,9 +1,28 @@
 <nav class="has-[button]:w-full flex flex-col gap-5 mx-3 ">
     <mat-divider></mat-divider>
-    <h1 class="text-xl font-bold">Bedrooms</h1>
-    <app-sidenav-grid-item/>
-    <app-sidenav-grid-item/>
+    <h1 class="text-xl font-bold">Recámaras</h1>
+    @for (bedroom of rooms.bedrooms; track $index) {
+        <app-sidenav-grid-item [title-room]="bedroom" routerLink="/bedroom/{{bedroom}}"/>
+    }
     <mat-divider></mat-divider>
-    <app-sidenav-grid-item/>
-    <app-sidenav-grid-item/>
+    <h1 class="text-xl font-bold">Baños</h1>
+    @for (bathroom of rooms.bathrooms; track $index) {
+        <app-sidenav-grid-item [title-room]="bathroom"/>
+    }
+    <mat-divider></mat-divider>
+    <h1 class="text-xl font-bold">Cocina</h1>
+    @for (kitchen of rooms.kitchens; track $index) {
+        <app-sidenav-grid-item [title-room]="kitchen"/>
+    }
+    <mat-divider></mat-divider>
+    <h1 class="text-xl font-bold">Sala de Estar</h1>
+    @for (livingroom of rooms.livingrooms; track $index) {
+        <app-sidenav-grid-item [title-room]="livingroom"/>
+    }
+    <mat-divider></mat-divider>
+    <h1 class="text-xl font-bold">Garaje</h1>
+    @for (garage of rooms.garages; track $index) {
+        <app-sidenav-grid-item [title-room]="garage"/>
+    }
+    <mat-divider></mat-divider>
 </nav>
