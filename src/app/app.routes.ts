@@ -18,5 +18,21 @@ export const routes: Routes = [
 
             return component.BedroomsPageComponent;
         },
+    },
+    {
+        path: "livingroom/:location",
+        async loadComponent() {
+            const component = await import("./pages/livingrooms/livingrooms.component");
+
+            return component.LivingroomsComponent;
+        },
+    },
+    {
+        path: "garage/:location",
+        async loadComponent() {
+            const component = await import("./pages/garages-page/garages-page.component");
+
+            return component.GaragesPageComponent;
+        },
     }
 ];
