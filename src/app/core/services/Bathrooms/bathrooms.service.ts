@@ -8,17 +8,13 @@ import { iApiResponse } from '../../interfaces/i-ApiResponse';
   providedIn: 'root'
 })
 export class BathroomsService {
-
   constructor(
     private http: HttpClient
   ) { }
-
   getAllBathrooms(): Observable<iApiResponse> {
     return this.http.get<iApiResponse>(`${apiUrl}/bathrooms/`)
   }
-
-  getAllDataBathrooms(): Observable<iApiResponse> {
-    return this.http.get<iApiResponse>(`${apiUrl}/bathrooms/?location=Baño 2`)
+  getBathroomsData(location: string): Observable<iApiResponse> {
+    return this.http.get<iApiResponse>(`${apiUrl}/bathrooms/?location=${location}`)
   }
-
 }
