@@ -6,7 +6,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
-import { iBedroom } from '../../core/interfaces/i-Bedroom.interface';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 
 @Component({
@@ -34,7 +33,7 @@ export class BedroomsPageComponent implements OnInit {
       (params) => {
         this.bedroomName = params.get('location');
 
-        this.getBedroomData(this.bedroomName!)
+        this.getBedroomData(this.bedroomName)
       }
     )
   }
