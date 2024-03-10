@@ -5,5 +5,12 @@ export interface iApiResponse {
   success: boolean;
   sensorsData?: iSensorsData[];
   actuatorsData?: iActuatorsData[];
+  roomsNames?: {
+    bedrooms: string[],
+    bathrooms: string[],
+    garages: string[],
+    kitchens: string[],
+    livingrooms: string[],
+  }
   error?: any;
 }
