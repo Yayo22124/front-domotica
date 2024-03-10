@@ -34,7 +34,7 @@ export class BedroomsPageComponent implements OnInit {
       (params) => {
         this.bedroomName = params.get('location');
 
-        this.getBedroomData(this.bedroomName!)
+        this.getBedroomData(this.bedroomName!) 
       }
     )
   }
