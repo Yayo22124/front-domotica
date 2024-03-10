@@ -34,5 +34,13 @@ export const routes: Routes = [
 
             return component.GaragesPageComponent;
         },
-    }
+    },
+    {
+        path: "bathroom/:location",
+        async loadComponent() {
+            const component = await import("./pages/bathrooms-page/bathrooms-page.component");
+
+            return component.BathroomsPageComponent;
+        },
+    },
 ];
