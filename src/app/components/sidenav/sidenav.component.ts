@@ -1,6 +1,7 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -12,7 +13,7 @@ import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 @Component({
   selector: 'app-sidenav',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, SidenavGridItemComponent, MatDividerModule, RouterLink],
+  imports: [MatButtonModule, MatIconModule, SidenavGridItemComponent, MatDividerModule, RouterLink, MatCardModule],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss'
 })

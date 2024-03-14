@@ -1,4 +1,10 @@
 <nav class="has-[button]:w-full flex flex-col gap-5 mx-3 ">
+    <mat-card class="flex items-center justify-center p-2 cursor-pointer transition-all ease-in-out  hover:scale-105 active:scale-95" routerLink="/home/">
+        <h1 class="flex items-center justify-center gap-2 font-medium text-xl">
+            <mat-icon>home</mat-icon>
+            Home
+        </h1>
+    </mat-card>
     <mat-divider></mat-divider>
     <h1 class="text-xl font-bold">Recámaras</h1>
     @for (bedroom of rooms.bedrooms; track $index) {
