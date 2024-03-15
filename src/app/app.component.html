@@ -1,15 +1,14 @@
-<main>
-    <app-header (toggleSidenav)="toggleSidenav()"></app-header>
-    <mat-sidenav-container hasBackdrop="true" >
-        <mat-sidenav #sidenav mode="over" class="w-full md:w-3/4 xl:w-1/4 p-4 bg-slate-100">
-            <app-sidenav>
-                <button mat-button (click)="toggleSidenav()">Toggle</button>
-            </app-sidenav>
-        </mat-sidenav>
-        <mat-sidenav-content >
-            <main class="h-screen">
-                <router-outlet />
-            </main>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
-</main>
+<app-header (toggleSidenav)="toggleSidenav()"></app-header>
+<mat-sidenav-container  hasBackdrop="true">
+    <mat-sidenav #sidenav mode="over" class="w-full md:w-3/4 xl:w-1/4 p-4 bg-slate-100">
+        <app-sidenav>
+            <button mat-button (click)="toggleSidenav()">Toggle</button>
+        </app-sidenav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-loader class="flex justify-center items-center fixed top-0 left-0 "/>
+        <main class="h-screen">
+            <router-outlet />
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>

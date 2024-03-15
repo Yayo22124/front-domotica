@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { BedroomsService } from '../../core/services/Bedrooms/bedrooms.service';
+import { LoadingService } from '../../core/services/Loading/loading.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -34,6 +35,7 @@ export class BedroomsPageComponent implements OnInit {
   constructor(
     private bedroomsService: BedroomsService,
     private route: ActivatedRoute,
+    private loadingService: LoadingService
   ) {
     
   }
@@ -50,6 +52,7 @@ export class BedroomsPageComponent implements OnInit {
   }
 
   getBedroomData(location: string) {
+    this.loadingService.showLoading();
     this.bedroomsService.getBedroomData(location).subscribe(
       (response: iApiResponse) => {
         console.log(response);
@@ -70,6 +73,10 @@ export class BedroomsPageComponent implements OnInit {
           this.inLightData = this.actuatorsData.find(actuator => actuator.name === 'Led Interior')!;
           this.exLightData = this.actuatorsData.find(actuator => actuator.name === 'Led Exterior')!;
         }
+        this.loadingService.hideLoading();
+      }, (error) => {
+        this.loadingService.hideLoading();
+        console.error(error);
       }
     );
   }
