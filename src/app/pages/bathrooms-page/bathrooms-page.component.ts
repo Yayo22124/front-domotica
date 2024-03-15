@@ -14,10 +14,11 @@ import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { ProximityDataItemComponent } from '../../components/proximity-data-item/proximity-data-item.component';
+import { PresenceDataItemComponent } from '../../components/presence-data-item/presence-data-item.component';
 @Component({
   selector: 'app-bathrooms-page',
   standalone: true,
-  imports: [MatCardModule,MatButtonModule, CommonModule, MatIconModule, MatDividerModule, PhotoresistorDataItemComponent, ProximityDataItemComponent],
+  imports: [MatCardModule,MatButtonModule, CommonModule, MatIconModule, MatDividerModule, PhotoresistorDataItemComponent, ProximityDataItemComponent, PresenceDataItemComponent],
   templateUrl: './bathrooms-page.component.html',
   styleUrl: './bathrooms-page.component.scss'
 })
