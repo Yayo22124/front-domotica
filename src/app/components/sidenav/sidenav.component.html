@@ -8,27 +8,27 @@
     <mat-divider></mat-divider>
     <h1 class="text-xl font-bold">Recámaras</h1>
     @for (bedroom of rooms.bedrooms; track $index) {
-        <app-sidenav-grid-item [title-room]="bedroom" routerLink="/bedroom/{{bedroom}}"/>
+        <app-sidenav-grid-item [title-room]="bedroom" routerLink="/bedroom/{{bedroom}}" routerLinkActive="text-emerald-300 scale-105"/>
     }
     <mat-divider></mat-divider>
     <h1 class="text-xl font-bold">Baños</h1>
     @for (bathroom of rooms.bathrooms; track $index) {
-        <app-sidenav-grid-item [title-room]="bathroom" routerLink="/bathroom/{{bathroom}}"/>
+        <app-sidenav-grid-item [title-room]="bathroom" routerLink="/bathroom/{{bathroom}}" routerLinkActive="text-emerald-300 scale-105"/>
     }
     <mat-divider></mat-divider>
     <h1 class="text-xl font-bold">Cocina</h1>
     @for (kitchen of rooms.kitchens; track $index) {
-        <app-sidenav-grid-item [title-room]="kitchen" routerLink="/kitchen/{{kitchen}}"/>
+        <app-sidenav-grid-item [title-room]="kitchen" routerLink="/kitchen/{{kitchen}}" routerLinkActive="text-emerald-300 scale-105"/>
     }
     <mat-divider></mat-divider>
     <h1 class="text-xl font-bold">Sala de Estar</h1>
     @for (livingroom of rooms.livingrooms; track $index) {
-        <app-sidenav-grid-item [title-room]="livingroom" routerLink="/livingroom/{{livingroom}}"/>
+        <app-sidenav-grid-item [title-room]="livingroom" routerLink="/livingroom/{{livingroom}}" routerLinkActive="text-emerald-300 scale-105"/>
     }
     <mat-divider></mat-divider>
     <h1 class="text-xl font-bold">Garaje</h1>
     @for (garage of rooms.garages; track $index) {
-        <app-sidenav-grid-item [title-room]="garage" routerLink="/garage/{{garage}}"/>
+        <app-sidenav-grid-item [title-room]="garage" routerLink="/garage/{{garage}}" routerLinkActive="text-emerald-300 scale-105"/>
     }
     <mat-divider></mat-divider>
 </nav>
