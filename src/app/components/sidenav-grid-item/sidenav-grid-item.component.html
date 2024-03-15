@@ -1,9 +1,28 @@
-<mat-card class="rounded-xl  bg-gradient-to-r from-emerald-50 to-emerald-100 p-3 cursor-pointer delay-0 transition-all ease-in-out  hover:scale-105 active:scale-95">
-    <mat-card-header class="flex items-center justify-center">
+<mat-card class="relative rounded-xl w-11/12 mx-auto  bg-gradient-to-r from-slate-200 to-emerald-50 p-3 cursor-pointer delay-0 transition-all ease-in-out  hover:scale-105 active:scale-95">
+    <mat-card-header class="flex items-center justify-center mb-10">
         <mat-card-title class="text-xl font-semibold text-center">{{titleRoom}}</mat-card-title>
     </mat-card-header>
-    <mat-card-content>
-
-    </mat-card-content>
+    <mat-card-footer class="text-xs absolute bottom-0 p-1 left-0 rounded-br-xl rounded-bl-xl w-full bg-slate-800/20 flex gap-2">
+        @if (titleRoom.includes("Recámara")) {
+            <div class="flex items-center justify-center p-1 rounded-full text-neutral-700 bg-neutral-500/10">
+                <mat-icon>thermostat</mat-icon>
+            </div>
+            <div class="flex items-center justify-center p-1 rounded-full text-neutral-700 bg-neutral-500/10">
+                <mat-icon>water_drop</mat-icon>
+            </div>
+            <div class="flex items-center justify-center p-1 rounded-full text-neutral-700 bg-neutral-500/10">
+                <mat-icon>airwave</mat-icon>
+            </div>
+            <div class="flex items-center justify-center p-1 rounded-full text-neutral-700 bg-neutral-500/10">
+                <mat-icon>lightbulb_outline</mat-icon>
+            </div>
+            <div class="flex items-center justify-center p-1 rounded-full text-neutral-700 bg-neutral-500/10">
+                <mat-icon>sensor_door</mat-icon>
+            </div>
+            <div class="flex items-center justify-center p-1 rounded-full text-neutral-700 bg-neutral-500/10">
+                <mat-icon>window</mat-icon>
+            </div>
+        }
+    </mat-card-footer>
     
 </mat-card>
