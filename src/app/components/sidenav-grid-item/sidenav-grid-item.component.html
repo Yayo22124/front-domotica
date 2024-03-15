@@ -2,7 +2,7 @@
     <mat-card-header class="flex items-center justify-center mb-10">
         <mat-card-title class="text-xl font-semibold text-center">{{titleRoom}}</mat-card-title>
     </mat-card-header>
-    <mat-card-footer class="text-xs absolute bottom-0 p-1 left-0 rounded-br-xl rounded-bl-xl w-full bg-slate-800/20 flex gap-2">
+    <mat-card-footer class="text-xs justify-center items-center absolute bottom-0 p-1 left-0 rounded-br-xl rounded-bl-xl w-full bg-slate-800/20 flex gap-2">
         @if (titleRoom.includes("Recámara")) {
             <div class="flex items-center justify-center p-1 rounded-full text-neutral-700 bg-neutral-500/10">
                 <mat-icon>thermostat</mat-icon>
@@ -23,6 +23,41 @@
                 <mat-icon>window</mat-icon>
             </div>
         }
+        @if (titleRoom.includes("Sala")) {
+            <div class="flex items-center justify-center p-1 rounded-full text-neutral-700 bg-neutral-500/10">
+                <mat-icon>thermostat</mat-icon>
+            </div>
+            <div class="flex items-center justify-center p-1 rounded-full text-neutral-700 bg-neutral-500/10">
+                <mat-icon>water_drop</mat-icon>
+            </div>
+            <div class="flex items-center justify-center p-1 rounded-full text-neutral-700 bg-neutral-500/10">
+                <mat-icon>airwave</mat-icon>
+            </div>
+            <div class="flex items-center justify-center p-1 rounded-full text-neutral-700 bg-neutral-500/10">
+                <mat-icon>lightbulb_outline</mat-icon>
+            </div>
+            <div class="flex items-center justify-center p-1 rounded-full text-neutral-700 bg-neutral-500/10">
+                <mat-icon>sensor_door</mat-icon>
+            </div>
+            <div class="flex items-center justify-center p-1 rounded-full text-neutral-700 bg-neutral-500/10">
+                <mat-icon>window</mat-icon>
+            </div>
+        }
+        @if (titleRoom.includes("Garage")) {
+            <div class="flex items-center justify-center p-1 rounded-full text-neutral-700 bg-neutral-500/10">
+                <mat-icon>lightbulb_outline</mat-icon>
+            </div>
+            <div class="flex items-center justify-center p-1 rounded-full text-neutral-700 bg-neutral-500/10">
+                <mat-icon>sensor_door</mat-icon>
+            </div>
+            <div class="flex items-center justify-center p-1 rounded-full text-neutral-700 bg-neutral-500/10">
+                <mat-icon>directions_car</mat-icon>
+            </div>
+            <div class="flex items-center justify-center p-1 rounded-full text-neutral-700 bg-neutral-500/10">
+                <mat-icon>balcony</mat-icon>
+            </div>
+        }
+
     </mat-card-footer>
     
 </mat-card>
