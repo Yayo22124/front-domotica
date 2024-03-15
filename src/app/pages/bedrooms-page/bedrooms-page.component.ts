@@ -3,10 +3,14 @@ import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { BedroomsService } from '../../core/services/Bedrooms/bedrooms.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoadingService } from '../../core/services/Loading/loading.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+import { PhotoresistorDataItemComponent } from '../../components/photoresistor-data-item/photoresistor-data-item.component';
+import { TemperatureDataItemComponent } from '../../components/temperature-data-item/temperature-data-item.component';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
@@ -14,7 +18,7 @@ import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 @Component({
   selector: 'app-bedrooms-page',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule],
+  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule],
   templateUrl: './bedrooms-page.component.html',
   styleUrl: './bedrooms-page.component.scss'
 })

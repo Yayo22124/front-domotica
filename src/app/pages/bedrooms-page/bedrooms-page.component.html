@@ -3,39 +3,19 @@
         <h1 class="text-3xl text-neutral-800 font-bold">{{bedroomName}}</h1>
     </div>
     <div class="w-full grid grid-cols-8 max-w-full justify-center gap-4 mb-4">
-        <h2 class="col-span-8">Sensores</h2>
+        <h2 class="col-span-8 font-semibold text-xl">Sensores</h2>
+        <mat-divider class="col-span-8"></mat-divider>
         @if (dhtData) {
-            <mat-card class="col-span-2 bg-gray-50 p-2 flex flex-col gap-4 animate-fade-down animate-duration-500 animate-ease-in">
-                <mat-card-header>
-                    <mat-card-title class="text-xl font-medium">Temperatura y Humedad</mat-card-title>
-                    <mat-card-subtitle>Última Lectura: {{dhtData.endsAt | date:'short'}}</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-actions class="flex justify-around">
-                    @for (read of dhtData.readings; track $index) {
-                        @if (read.name === "Detección de Temperatura") {
-                            <div class="shadow-md rounded-sm bg-gradient-to-tr from-emerald-500 via-emerald-400 to-emerald-500 p-2 w-2/5 flex items-center justify-center text-white font-medium">
-                                <mat-icon>thermostat</mat-icon>
-                                <span>
-                                    {{read.value}} {{read.measuramentUnit}}
-                                </span>
-                            </div>
-                        } @else {
-                            <div class="shadow-md rounded-sm bg-gradient-to-tr from-slate-500 via-gray-600 to-slate-500 p-2 w-1/3 flex items-center justify-center text-white font-medium">
-                                <mat-icon>water_drop</mat-icon>
-                                <span>{{read.value}} {{read.measuramentUnit}}</span>
-                            </div>
-                        }
-                    }
-                </mat-card-actions>
-                <mat-card-footer class="w-full flex items-center justify-center">
-                    <button mat-flat-button color="primary" >Más</button>
-                </mat-card-footer>
-            </mat-card>
+        <app-temperature-data-item [dht-data]="dhtData" class="col-span-2 row-span-2" />
         }
-       
+        @if (ldrData) {
+        <app-photoresistor-data-item [ldr-data]="ldrData" class="col-span-2 row-span-2"/>
+        }
+
     </div>
     <div class="w-full grid grid-cols-8 max-w-full justify-center gap-4 mb-5 place-content-center">
-        <h2 class="col-span-8">Actuadores</h2>
-       
+        <h2 class="col-span-8 font-semibold text-xl">Actuadores</h2>
+        <mat-divider class="col-span-8"></mat-divider>
+
     </div>
 </section>
