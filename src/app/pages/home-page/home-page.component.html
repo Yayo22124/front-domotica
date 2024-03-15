@@ -4,7 +4,7 @@
     </div>
     <h1>Recámaras</h1>
     <mat-divider></mat-divider>
-    <div class="w-full grid grid-cols-8 items-center gap-4">
+    <div class="w-full grid grid-cols-8 items-center gap-4 my-5">
         @for (bedroom of rooms.bedrooms; track $index) {
         <mat-card class="
             relative 
@@ -17,7 +17,28 @@
             ">
             <mat-card-header>
                 <mat-card-title class="text-2xl font-semibold">{{bedroom}}</mat-card-title>
-                <mat-card-subtitle>Subtitle</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="w-full mb-10">
+
+            </mat-card-content>
+        </mat-card>
+        }
+    </div>
+    <h1>Sala de Estar</h1>
+    <mat-divider></mat-divider>
+    <div class="w-full grid grid-cols-8 items-center gap-4 my-5">
+        @for (livingroom of rooms.livingrooms; track $index) {
+        <mat-card class="
+            relative 
+            p-2
+            cursor-pointer 
+            flex flex-col col-span-2 
+            bg-gradient-to-tr from-slate-50 via-slate-100 to-slate-100 
+            delay-0 
+            hover:to-slate-200 hover:scale-105 transition-all ease-out hover:outline-t-4 active:opacity-75 outline-none duration-200
+            ">
+            <mat-card-header>
+                <mat-card-title class="text-2xl font-semibold">{{livingroom}}</mat-card-title>
             </mat-card-header>
             <mat-card-content class="w-full mb-10">
 
@@ -27,8 +48,26 @@
     </div>
     <h1>Cocina</h1>
     <mat-divider></mat-divider>
-    <h1>Sala de Estar</h1>
-    <mat-divider></mat-divider>
+    <div class="w-full grid grid-cols-8 items-center gap-4 my-5">
+        @for (kitchen of rooms.kitchens; track $index) {
+        <mat-card class="
+        relative 
+        p-2
+        cursor-pointer 
+        flex flex-col col-span-2 
+        bg-gradient-to-tr from-slate-50 via-slate-100 to-slate-100 
+        delay-0 
+        hover:to-sky-200 hover:scale-105 transition-all ease-out hover:outline-t-4 active:opacity-75 outline-none duration-200
+        ">
+            <mat-card-header>
+                <mat-card-title class="text-2xl font-semibold">{{kitchen}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="w-full mb-10">
+
+            </mat-card-content>
+        </mat-card>
+        }
+    </div>
     <h1>Garaje</h1>
     <mat-divider></mat-divider>
     <h1>Baños</h1>
