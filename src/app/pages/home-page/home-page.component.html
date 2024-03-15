@@ -1,18 +1,28 @@
-<section class="mt-5 px-5 mx-auto grid grid-cols-8 grid-rows-8 [&>h1]:text-xl [&>h1]:font-medium">
-    <div class="w-full flex items-center justify-center col-span-8">
+<section class="mt-5 px-5 mx-auto [&>h1]:text-xl [&>h1]:font-medium animate-fade-down animate-ease-out">
+    <div class="w-full flex items-center justify-center">
         <h1 class="font-inter font-black text-3xl text-slate-800">“Tú tienes el control.”</h1>
     </div>
-    <h1 class="col-span-8">Recámaras</h1>
-    <mat-divider class="col-span-8"></mat-divider>
-    @for (bedroom of rooms.bedrooms; track $index) {
-        <p>{{bedroom.name}}</p>
-    }
-    <h1 class="col-span-8">Cocina</h1>
-    <mat-divider class="col-span-8"></mat-divider>
-    <h1 class="col-span-8">Sala de Estar</h1>
-    <mat-divider class="col-span-8"></mat-divider>
-    <h1 class="col-span-8">Garaje</h1>
-    <mat-divider class="col-span-8"></mat-divider>
-    <h1 class="col-span-8">Baños</h1>
-    <mat-divider class="col-span-8"></mat-divider>
+    <h1>Recámaras</h1>
+    <mat-divider></mat-divider>
+    <div class="w-full grid grid-cols-8 items-center gap-4">
+        @for (bedroom of rooms.bedrooms; track $index) {
+        <mat-card class="cursor-pointer relative col-span-2 flex flex-col p-2 bg-gradient-to-tr from-slate-50 via-slate-100 to-slate-100 hover:to-emerald-200">
+            <mat-card-header>
+                <mat-card-title class="text-2xl font-semibold">{{bedroom}}</mat-card-title>
+                <mat-card-subtitle>Subtitle</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="w-full mb-10">
+                
+            </mat-card-content>
+        </mat-card>
+        }
+    </div>
+    <h1>Cocina</h1>
+    <mat-divider></mat-divider>
+    <h1>Sala de Estar</h1>
+    <mat-divider></mat-divider>
+    <h1>Garaje</h1>
+    <mat-divider></mat-divider>
+    <h1>Baños</h1>
+    <mat-divider></mat-divider>
 </section>
