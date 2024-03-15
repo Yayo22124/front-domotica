@@ -1,10 +1,20 @@
- @for (sensorData of garagesSensor; track $index) {
-    <p>{{sensorData.name}}</p>
- }
-
-
- @for (actuatorData of garagesActuators; track $index) {
-    <p>{{actuatorData.name}}</p>
- }
-
- 
+<section class="mt-5 px-5 mx-auto">
+   <div class="w-full flex items-center justify-center mb-3">
+       <h1 class="text-3xl text-neutral-800 font-bold">{{garageName}}</h1>
+   </div>
+   <div class="w-full grid grid-cols-8 max-w-full justify-center gap-4 mb-4">
+       <h2 class="col-span-8 font-semibold text-xl">Sensores</h2>
+       <mat-divider class="col-span-8"></mat-divider>
+       @if (dhtData) {
+       <app-temperature-data-item [dht-data]="dhtData" class="col-span-2 row-span-2" />
+       }
+       @if (ldrData) {
+       <app-photoresistor-data-item [ldr-data]="ldrData" class="col-span-2 row-span-2"/>
+       }
+       
+   </div>
+   <div class="w-full grid grid-cols-8 max-w-full justify-center gap-4 mb-5 place-content-center">
+       <h2 class="col-span-8">Actuadores</h2>
+       
+   </div>
+</section>
