@@ -13,11 +13,12 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { PhotoresistorDataItemComponent } from '../../components/photoresistor-data-item/photoresistor-data-item.component';
 import { TemperatureDataItemComponent } from '../../components/temperature-data-item/temperature-data-item.component';
+import { ProximityDataItemComponent } from '../../components/proximity-data-item/proximity-data-item.component';
 
 @Component({
   selector: 'app-garages-page',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule],
+  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule, ProximityDataItemComponent],
   templateUrl: './garages-page.component.html',
   styleUrl: './garages-page.component.scss'
 })
@@ -33,6 +34,7 @@ export class GaragesPageComponent implements OnInit {
   public garageName : string | null = "";
   public dhtData: iSensorsData | null = null;
   public ldrData: iSensorsData | null = null;
+  public proximityData: iSensorsData | null = null;
   public fanData: iActuatorsData | null = null;
   public doorData: iActuatorsData | null = null;
   public windowLeftData: iActuatorsData | null = null;
@@ -62,6 +64,8 @@ export class GaragesPageComponent implements OnInit {
           // Separar los datos de sensores en variables individuales
           this.dhtData = this.garageSensor.find(sensor => sensor.name === 'Temperatura y Humedad')!;
           this.ldrData = this.garageSensor.find(sensor => sensor.name === 'Fotorresistencia')!;
+          this.proximityData = this.garageSensor.find(sensor => sensor.name === 'Proximidad')!;
+
           
           // Separar los datos de actuadores en variables individuales
           this.fanData = this.garageActuators.find(actuator => actuator.name === 'Ventilador')!;
