@@ -13,4 +13,7 @@ export class GaragesService {
   getAllGarages(): Observable<iApiResponse> {
     return this.http.get<iApiResponse>(`${apiUrl}/garages/`);
   }
+  getGaragesData(location: string): Observable<iApiResponse> {
+    return this.http.get<iApiResponse>(`${apiUrl}/garages/?location=${location}&limit=20`)
+  }
 }
