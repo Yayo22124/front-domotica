@@ -14,4 +14,8 @@ export class LivingroomsService {
     getAllLivingrooms(): Observable<iApiResponse>{
       return this.http.get<iApiResponse>(`${apiUrl}/livingrooms/`);    
     }
+
+    getLivingroomData(location: string): Observable <iApiResponse> {
+      return this.http.get<iApiResponse>(`${apiUrl}/livingrooms/?location=${location}`);
+    }
 }
