@@ -7,7 +7,7 @@
     </mat-card-header>
     <mat-card-actions class="flex justify-around">
         @for (read of dhtData.readings; track $index) {
-        @if (read.name === "Detección de Temperatura") {
+        @if (read.name.toLowerCase().includes("temperatura")) {
         <div matTooltip="Temperatura"
             matTooltipShowDelay="250"
             matTooltipHideDelay="300"

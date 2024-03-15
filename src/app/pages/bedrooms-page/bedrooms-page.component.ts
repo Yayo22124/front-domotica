@@ -67,7 +67,7 @@ export class BedroomsPageComponent implements OnInit {
           
           // Separar los datos de sensores en variables individuales
           this.dhtData = this.sensorsData.find(sensor => sensor.name === 'Temperatura y Humedad')!;
-          this.ldrData = this.sensorsData.find(sensor => sensor.name === 'Fotoresistencia')!;
+          this.ldrData = this.sensorsData.find(sensor => sensor.name === 'Fotorresistencia')!;
           
           // Separar los datos de actuadores en variables individuales
           this.fanData = this.actuatorsData.find(actuator => actuator.name === 'Ventilador')!;
