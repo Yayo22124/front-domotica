@@ -6,12 +6,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { RoomsService } from '../../core/services/Rooms/rooms.service';
+import { RouterLink } from '@angular/router';
 import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [MatCardModule, MatDividerModule, MatButtonModule, MatIconModule],
+  imports: [MatCardModule, MatDividerModule, MatButtonModule, MatIconModule, RouterLink],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
