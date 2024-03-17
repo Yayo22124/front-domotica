@@ -1,6 +1,6 @@
 # Interfaz Web - iHouse - Angular 17
 
-<p align="center"><img width="460" src="/src/assets/shot_front.png" alt="iHouse Shot"></p>
+<p align="center"><img  src="/src/assets/shot_front.png" alt="iHouse Shot"></p>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.1.
 
