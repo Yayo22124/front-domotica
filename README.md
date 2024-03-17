@@ -25,3 +25,22 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Contribuidores
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Yayo22124"><img src="https://avatars.githubusercontent.com/Yayo22124" width="100px;" alt="Haziel Ortiz"/><br /><sub><b>Haziel Ortiz</b></sub></a><br /></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Zac-ek"><img src="https://avatars.githubusercontent.com/Zac-ek" width="100px;" alt="Zacek"/><br /><sub><b>Ángel Zacek</b></sub></a><br /></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/KalidRs"><img src="https://avatars.githubusercontent.com/KalidRs" width="100px;" alt="Kalid"/><br /><sub><b>Kalid Reyes</b></sub></a><br /></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/IrvingMordo"><img src="https://avatars.githubusercontent.com/IrvingMordo" width="100px;" alt="Irving"/><br /><sub><b>Irving Morales</b></sub></a><br /></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Ederdal"><img src="https://avatars.githubusercontent.com/Ederdal" width="100px;" alt="Edgar"/><br /><sub><b>Edgar Cruz</b></sub></a><br /></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/MendezPro"><img src="https://avatars.githubusercontent.com/MendezPro" width="100px;" alt="Orlando Méndez"/><br /><sub><b>Orlando Méndez</b></sub></a><br /></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Ali-2121"><img src="https://avatars.githubusercontent.com/Ali-2121" width="100px;" alt="Alina Bonilla"/><br /><sub><b>Alina Bonilla</b></sub></a><br /></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Aldotd12"><img src="https://avatars.githubusercontent.com/Aldotd12" width="100px;" alt="Aldo Tolentino"/><br /><sub><b>Aldo Tolentino</b></sub></a><br /></td>
+    </tr>
+  </tbody>
+</table>
