@@ -12,9 +12,9 @@ export class BathroomsService {
     private http: HttpClient
   ) { }
   getAllBathrooms(): Observable<iApiResponse> {
-    return this.http.get<iApiResponse>(`${apiUrl}/bathrooms/`)
+    return this.http.get<iApiResponse>(`${apiUrl}/bathrooms/?limit=1000`)
   }
   getBathroomsData(location: string): Observable<iApiResponse> {
-    return this.http.get<iApiResponse>(`${apiUrl}/bathrooms/?location=${location}`)
+    return this.http.get<iApiResponse>(`${apiUrl}/bathrooms/?location=${location}&limit=1000`)
   }
 }

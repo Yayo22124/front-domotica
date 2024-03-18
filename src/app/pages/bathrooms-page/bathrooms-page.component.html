@@ -26,5 +26,8 @@
         @if (waterPumpData){
             <app-water-pump-data-item [waterPump]="waterPumpData" class="col-span-2 row-span-2"/>
             }
+        @if (inLightData){
+            <app-in-light-data-item [inlight-data]="inLightData" class="col-span-2 row-span-2" />
+        }
     </div>
 </section>
