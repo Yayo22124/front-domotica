@@ -1,23 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { BathroomsService } from '../../core/services/Bathrooms/bathrooms.service';
-import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
-import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
-import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
-import { Observable } from 'rxjs';
-import { apiUrl } from '../../core/constants/apiUrl.constant';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
+
 import { ActivatedRoute } from '@angular/router';
-import { PhotoresistorDataItemComponent } from '../../components/photoresistor-data-item/photoresistor-data-item.component';
-import { LoadingService } from '../../core/services/Loading/loading.service';
+import { BathroomsService } from '../../core/services/Bathrooms/bathrooms.service';
 import { CommonModule } from '@angular/common';
+import { DoorDataItemComponent } from '../../components/door-data-item/door-data-item.component';
+import { InLightDataItemComponent } from '../../components/in-light-data-item/in-light-data-item.component';
+import { LoadingService } from '../../core/services/Loading/loading.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { ProximityDataItemComponent } from '../../components/proximity-data-item/proximity-data-item.component';
+import { Observable } from 'rxjs';
+import { PhotoresistorDataItemComponent } from '../../components/photoresistor-data-item/photoresistor-data-item.component';
 import { PresenceDataItemComponent } from '../../components/presence-data-item/presence-data-item.component';
-import { InLightDataItemComponent } from '../../components/in-light-data-item/in-light-data-item.component';
+import { ProximityDataItemComponent } from '../../components/proximity-data-item/proximity-data-item.component';
 import { WaterPumpDataItemComponent } from '../../components/water-pump-data-item/water-pump-data-item.component';
-import { DoorDataItemComponent } from '../../components/door-data-item/door-data-item.component';
+import { apiUrl } from '../../core/constants/apiUrl.constant';
+import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
+import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
+import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 
 @Component({
   selector: 'app-bathrooms-page',
@@ -67,10 +68,10 @@ export class BathroomsPageComponent implements OnInit {
           this.presenceData = this.sensorsData.find(sensor => sensor.name === 'Presencia')!;
           this.proximityData = this.sensorsData.find(sensor => sensor.name === 'Proximidad')!;
           
-          this.doorData = this.actuatorsData.find(actuator => actuator.name === 'Servomotor Puerta')!;
+          this.doorData = this.actuatorsData.find(actuator => actuator.name === 'Puerta')!;
           this.inLightData = this.actuatorsData.find(actuator => actuator.name === 'Led Interior')!;
           this.exLightData = this.actuatorsData.find(actuator => actuator.name === 'Led Exterior')!;
-          this.waterPumpData = this.actuatorsData.find(actuator => actuator.name === 'Mini Bomba de Agua')!;
+          this.waterPumpData = this.actuatorsData.find(actuator => actuator.name === 'Bomba de Agua')!;
         }
 
         this.loadinService.hideLoading();
