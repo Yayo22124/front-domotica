@@ -6,11 +6,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
+
 
 @Component({
   selector: 'app-water-pump-data-item',
   standalone: true,
-  imports: [MatCardModule, MatTooltipModule, MatButtonModule, MatIconModule, CommonModule],
+  imports: [MatCardModule, MatTooltipModule, MatButtonModule, MatIconModule, CommonModule,MatSlideToggleModule],
   templateUrl: './water-pump-data-item.component.html',
   styleUrl: './water-pump-data-item.component.scss'
 })
