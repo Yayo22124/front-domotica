@@ -14,11 +14,13 @@ import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface'
 import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 import { KitchensService } from '../../core/services/kitchens/kitchens.service';
+import { DoorDataItemComponent } from '../../components/door-data-item/door-data-item.component';
+import { FanDataItemComponent } from '../../components/fan-data-item/fan-data-item.component';
 
 @Component({
   selector: 'app-kitchens-page',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule],
+  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule, DoorDataItemComponent, FanDataItemComponent],
   templateUrl: './kitchens-page.component.html',
   styleUrl: './kitchens-page.component.scss'
 })
