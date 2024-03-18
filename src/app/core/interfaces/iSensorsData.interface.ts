@@ -1,5 +1,6 @@
 export interface iSensorsData {
   _id: any;
+  arduinoIp: string;
   type: string;
   name: string;
   brand: string;
@@ -7,9 +8,7 @@ export interface iSensorsData {
   specifications: any[];
   location: string;
   status: string;
-  initialDate: any;
+  registeredDate: any;
   owner: string;
-  startsAt: any;
-  endsAt: any;
   readings: any[];
 }

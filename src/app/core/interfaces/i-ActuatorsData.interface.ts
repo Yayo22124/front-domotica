@@ -1,5 +1,6 @@
 export interface iActuatorsData {
     _id: any;
+    arduinoIp: string,
     type: string;
     name: string;
     brand: string;
@@ -7,10 +8,8 @@ export interface iActuatorsData {
     specifications: any[];
     location: string;
     status: string;
-    initialDate: any;
+    registeredDate: any;
     owner: string;
-    startsAt: any;
-    endsAt: any;
     actions: any[];
   }
   

@@ -1,20 +1,25 @@
 <section class="mt-5 px-5 mx-auto [&>h1]:text-xl [&>h1]:font-medium animate-fade-down animate-ease-out">
-    <div class="w-full flex items-center justify-center">
+    <div class="w-full flex items-center justify-center mb-5">
         <h1 class="font-inter font-black text-3xl text-slate-800">“Tú tienes el control.”</h1>
     </div>
-    <h1>Recámaras</h1>
-    <mat-divider></mat-divider>
-    <div class="w-full grid grid-cols-8 items-center gap-4 my-5">
+
+    <div class="
+        w-full
+        mx-auto
+        grid grid-rows-4 grid-cols-6 auto-rows-auto  auto-cols-auto grid-flow-dense
+        content-between place-content-center items-stretch justify-stretch
+        gap-5
+    ">
         @for (bedroom of rooms.bedrooms; track $index) {
         <mat-card class="
             relative 
             p-2
             cursor-pointer 
-            flex flex-col col-span-2 
-            bg-gradient-to-tr from-slate-50 via-slate-100 to-slate-100 
+            flex flex-col col-span-2 row-span-2 items-center justify-center
+            bg-gradient-to-r from-amber-200 to-yellow-300 
             delay-0 
-            hover:to-emerald-100 hover:scale-105 transition-all ease-out hover:outline-t-4 active:opacity-75 outline-none duration-200
-            ">
+            hover:scale-[1.02] transition-all ease-out hover:outline-t-4 active:opacity-75 outline-none duration-200
+            " routerLink="/bedroom/{{bedroom}}">
             <mat-card-header>
                 <mat-card-title class="text-2xl font-semibold">{{bedroom}}</mat-card-title>
             </mat-card-header>
@@ -23,20 +28,16 @@
             </mat-card-content>
         </mat-card>
         }
-    </div>
-    <h1>Sala de Estar</h1>
-    <mat-divider></mat-divider>
-    <div class="w-full grid grid-cols-8 items-center gap-4 my-5">
         @for (livingroom of rooms.livingrooms; track $index) {
         <mat-card class="
-            relative 
-            p-2
-            cursor-pointer 
-            flex flex-col col-span-2 
-            bg-gradient-to-tr from-slate-50 via-slate-100 to-slate-100 
-            delay-0 
-            hover:to-slate-200 hover:scale-105 transition-all ease-out hover:outline-t-4 active:opacity-75 outline-none duration-200
-            ">
+        relative 
+        p-2
+        cursor-pointer 
+        flex flex-col col-span-1 row-span-3 items-center justify-center
+        bg-gradient-to-r from-stone-400 to-stone-500 text-white
+        delay-0 
+        hover:scale-[1.02] transition-all ease-out hover:outline-t-4 active:opacity-75 outline-none duration-200
+        " routerLink="/livingroom/{{livingroom}}">
             <mat-card-header>
                 <mat-card-title class="text-2xl font-semibold">{{livingroom}}</mat-card-title>
             </mat-card-header>
@@ -45,20 +46,16 @@
             </mat-card-content>
         </mat-card>
         }
-    </div>
-    <h1>Cocina</h1>
-    <mat-divider></mat-divider>
-    <div class="w-full grid grid-cols-8 items-center gap-4 my-5">
         @for (kitchen of rooms.kitchens; track $index) {
         <mat-card class="
-        relative 
-        p-2
-        cursor-pointer 
-        flex flex-col col-span-2 
-        bg-gradient-to-tr from-slate-50 via-slate-100 to-slate-100 
-        delay-0 
-        hover:to-sky-200 hover:scale-105 transition-all ease-out hover:outline-t-4 active:opacity-75 outline-none duration-200
-        ">
+    relative 
+    p-2
+    cursor-pointer 
+    flex flex-col row-span-2 col-span-3  justify-center items-center
+    bg-gradient-to-r from-violet-200 to-pink-200
+    delay-0 
+    hover:scale-[1.02] transition-all ease-out hover:outline-t-4 active:opacity-75 outline-none duration-200
+    " routerLink="/kitchen/{{kitchen}}">
             <mat-card-header>
                 <mat-card-title class="text-2xl font-semibold">{{kitchen}}</mat-card-title>
             </mat-card-header>
@@ -67,20 +64,16 @@
             </mat-card-content>
         </mat-card>
         }
-    </div>
-    <h1>Garaje</h1>
-    <mat-divider></mat-divider>
-    <div class="w-full grid grid-cols-8 items-center gap-4 my-5">
         @for (garage of rooms.garages; track $index) {
         <mat-card class="
-        relative 
-        p-2
-        cursor-pointer 
-        flex flex-col col-span-2 
-        bg-gradient-to-tr from-slate-50 via-slate-100 to-slate-100 
-        delay-0 
-        hover:to-sky-200 hover:scale-105 transition-all ease-out hover:outline-t-4 active:opacity-75 outline-none duration-200
-        ">
+    relative 
+    p-2
+    cursor-pointer 
+    flex flex-col col-span-5 justify-center items-center
+    bg-gradient-to-b from-gray-900 via-slate-700 to-slate-500 text-white
+    delay-0 
+    hover:scale-[1.02] transition-all ease-out hover:outline-t-4 active:opacity-75 outline-none duration-200
+    " routerLink="/garage/{{garage}}">
             <mat-card-header>
                 <mat-card-title class="text-2xl font-semibold">{{garage}}</mat-card-title>
             </mat-card-header>
@@ -89,20 +82,16 @@
             </mat-card-content>
         </mat-card>
         }
-    </div>
-    <h1>Baños</h1>
-    <mat-divider></mat-divider>
-    <div class="w-full grid grid-cols-8 items-center gap-4 my-5">
         @for (bathroom of rooms.bathrooms; track $index) {
         <mat-card class="
-        relative 
-        p-2
-        cursor-pointer 
-        flex flex-col col-span-2 
-        bg-gradient-to-tr from-slate-50 via-slate-100 to-slate-100 
+    relative 
+    p-2
+    cursor-pointer 
+    flex flex-col col-span-2 justify-center items-center
+    bg-gradient-to-r from-teal-200 to-teal-500 text-neutral-800 
         delay-0 
-        hover:to-sky-200 hover:scale-105 transition-all ease-out hover:outline-t-4 active:opacity-75 outline-none duration-200
-        ">
+        hover:scale-[1.02] transition-all ease-out hover:outline-t-4 active:opacity-75 outline-none duration-200
+        " routerLink="/bathroom/{{bathroom}}">
             <mat-card-header>
                 <mat-card-title class="text-2xl font-semibold">{{bathroom}}</mat-card-title>
             </mat-card-header>
@@ -112,4 +101,6 @@
         </mat-card>
         }
     </div>
+
+
 </section>
