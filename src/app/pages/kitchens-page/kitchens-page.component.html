@@ -3,48 +3,19 @@
         <h1 class="text-3xl text-neutral-800 font-bold">{{kitchenName}}</h1>
     </div>
     <div class="w-full grid grid-cols-8 max-w-full justify-center gap-4 mb-4">
-        <h2 class="col-span-8">Sensores</h2>
-        @for (sensorData of sensorsData; track $index) {
-            <mat-card class="col-span-2 p-3 bg-neutral-100">
-                <mat-card-header>
-                    <mat-card-title class="text-xl font-medium">{{sensorData.name}}</mat-card-title>
-                    <mat-card-subtitle>{{sensorData.type}}</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <ul class="list-disc">
-                        @for (read of sensorData.readings; track $index) {
-                            <li><strong>{{read.name}}:</strong> {{read.value}} {{read.measuramentUnit ? read.measuramentUnit : ""}}</li>
-                        }
-                    </ul>
-                </mat-card-content>
-                 <mat-card-actions align="start">
-                    <button mat-flat-button color="primary">Ver más</button>
-                    
-                </mat-card-actions>
-            </mat-card>
+        <h2 class="col-span-8 font-semibold text-xl">Sensores</h2>
+        <mat-divider class="col-span-8"></mat-divider>
+        @if (dhtData) {
+        <app-temperature-data-item [dht-data]="dhtData" class="col-span-2 row-span-2" />
         }
+        @if (ldrData) {
+        <app-photoresistor-data-item [ldr-data]="ldrData" class="col-span-2 row-span-2"/>
+        }
+
     </div>
     <div class="w-full grid grid-cols-8 max-w-full justify-center gap-4 mb-5 place-content-center">
-        <h2 class="col-span-8">Actuadores</h2>
-        @for (actuatorData of actuatorsData; track $index) {
-            <mat-card class="col-span-2 p-3 bg-neutral-100">
-                <mat-card-header>
-                    <mat-card-title class="text-xl font-medium">{{actuatorData.name}}</mat-card-title>
-                    <mat-card-subtitle>{{actuatorData.type}}</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <ul class="list-disc">
-                        @for (action of actuatorData.actions; track $index) {
-                            <li><strong>{{action.name}}:</strong> {{action.value}} {{action.measuramentUnit ? action.measuramentUnit : ""}}</li>
-                        }
-                    </ul>
-                </mat-card-content>
-                <mat-card-actions align="start">
-                    <button mat-flat-button color="primary">Ver más</button>
-                    
-                    
-                </mat-card-actions>
-            </mat-card>
-        }
+        <h2 class="col-span-8 font-semibold text-xl">Actuadores</h2>
+        <mat-divider class="col-span-8"></mat-divider>
+
     </div>
 </section>
