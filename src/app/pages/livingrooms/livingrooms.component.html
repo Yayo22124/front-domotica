@@ -18,5 +18,11 @@
         @if(fanData){
             <app-fan-data-item [fan-data]="fanData" class="col-span-2 row-span-2"></app-fan-data-item>
         }
+        @if(inLightData){
+            <app-in-light-data-item [inlight-data]="inLightData" class="col-span-2 row-span-2"></app-in-light-data-item>
+        }
+        @if(doorData){
+            <app-door-data-item [door-data]="doorData" class="col-span-2 row-span-2"></app-door-data-item>
+        }
     </div>
 </section>
