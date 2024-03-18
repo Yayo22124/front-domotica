@@ -71,9 +71,9 @@ export class BedroomsPageComponent implements OnInit {
           
           // Separar los datos de actuadores en variables individuales
           this.fanData = this.actuatorsData.find(actuator => actuator.name === 'Ventilador')!;
-          this.doorData = this.actuatorsData.find(actuator => actuator.name === 'Servomotor Puerta')!;
-          this.windowLeftData = this.actuatorsData.find(actuator => actuator.name === 'Servomotor Ventana Doble Izquierda')!;
-          this.windowRightData = this.actuatorsData.find(actuator => actuator.name === 'Servomotor Ventana Doble Derecha')!;
+          this.doorData = this.actuatorsData.find(actuator => actuator.name === 'Puerta')!;
+          this.windowLeftData = this.actuatorsData.find(actuator => actuator.name === 'Ventana Doble Izquierda')!;
+          this.windowRightData = this.actuatorsData.find(actuator => actuator.name === 'Ventana Doble Derecha')!;
           this.inLightData = this.actuatorsData.find(actuator => actuator.name === 'Led Interior')!;
           this.exLightData = this.actuatorsData.find(actuator => actuator.name === 'Led Exterior')!;
         }

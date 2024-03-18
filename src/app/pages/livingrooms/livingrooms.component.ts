@@ -1,20 +1,21 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
-import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
-import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
-import { LivingroomsService } from './../../core/services/Livingrooms/livingrooms.service';
 import { Component, OnInit } from '@angular/core';
+
+import { ActivatedRoute } from '@angular/router';
+import { FanDataItemComponent } from '../../components/fan-data-item/fan-data-item.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LivingroomsService } from './../../core/services/Livingrooms/livingrooms.service';
+import { LoadingService } from '../../core/services/Loading/loading.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { LoadingService } from '../../core/services/Loading/loading.service';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { PhotoresistorDataItemComponent } from '../../components/photoresistor-data-item/photoresistor-data-item.component';
 import { TemperatureDataItemComponent } from '../../components/temperature-data-item/temperature-data-item.component';
-import { FanDataItemComponent } from '../../components/fan-data-item/fan-data-item.component';
+import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
+import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
+import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 
 @Component({
   selector: 'app-livingrooms',
@@ -70,9 +71,9 @@ export class LivingroomsComponent implements OnInit {
           
           // Separar los datos de actuadores en variables individuales
           this.fanData = this.livingroomsActuators.find(actuator => actuator.name === 'Ventilador')!;
-          this.doorData = this.livingroomsActuators.find(actuator => actuator.name === 'Servomotor Puerta')!;
-          this.windowLeftData = this.livingroomsActuators.find(actuator => actuator.name === 'Servomotor Ventana Doble Izquierda')!;
-          this.windowRightData = this.livingroomsActuators.find(actuator => actuator.name === 'Servomotor Ventana Doble Derecha')!;
+          this.doorData = this.livingroomsActuators.find(actuator => actuator.name === 'Puerta')!;
+          this.windowLeftData = this.livingroomsActuators.find(actuator => actuator.name === 'Ventana Doble Izquierda')!;
+          this.windowRightData = this.livingroomsActuators.find(actuator => actuator.name === 'Ventana Doble Derecha')!;
           this.inLightData = this.livingroomsActuators.find(actuator => actuator.name === 'Led Interior')!;
           this.exLightData = this.livingroomsActuators.find(actuator => actuator.name === 'Led Exterior')!;
         }
