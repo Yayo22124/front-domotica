@@ -12,10 +12,10 @@ export class LivingroomsService {
     ) { }
 
     getAllLivingrooms(): Observable<iApiResponse>{
-      return this.http.get<iApiResponse>(`${apiUrl}/livingrooms/`);    
+      return this.http.get<iApiResponse>(`${apiUrl}/livingrooms/?limit=10000`);    
     }
 
     getLivingroomData(location: string): Observable <iApiResponse> {
-      return this.http.get<iApiResponse>(`${apiUrl}/livingrooms/?location=${location}`);
+      return this.http.get<iApiResponse>(`${apiUrl}/livingrooms/?location=${location}&limit=10000`);
     }
 }
