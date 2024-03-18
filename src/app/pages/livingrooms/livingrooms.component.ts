@@ -11,13 +11,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoadingService } from '../../core/services/Loading/loading.service';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { PhotoresistorDataItemComponent } from '../../components/photoresistor-data-item/photoresistor-data-item.component';
 import { TemperatureDataItemComponent } from '../../components/temperature-data-item/temperature-data-item.component';
+import { FanDataItemComponent } from '../../components/fan-data-item/fan-data-item.component';
 
 @Component({
   selector: 'app-livingrooms',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule],
+  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule, MatSlideToggleModule, FanDataItemComponent],
   templateUrl: './livingrooms.component.html',
   styleUrl: './livingrooms.component.scss'
 })
