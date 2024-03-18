@@ -43,12 +43,12 @@ export const routes: Routes = [
             return component.BathroomsPageComponent;
         },
     },
-    // {
-    //     path: "kitchen/:location",
-    //     async loadComponent() {
-    //         const component = await import("./pages/kirchens-page/kitchens-page.component");
+    {
+        path: "kitchen/:location",
+        async loadComponent() {
+            const component = await import("./pages/kitchens-page/kitchens-page.component");
 
-    //         return component.KitchensPageComponent;
-    //     },
-    // },
+            return component.KitchensPageComponent;
+        },
+    },
 ];
