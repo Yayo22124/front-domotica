@@ -1,0 +1,37 @@
+@if (fanData) {
+    <mat-card class="gap-5 p-2 flex flex-col justify-between">
+        <mat-card-header>
+            <mat-card-title class="text-xl font-medium">{{fanData.name}}</mat-card-title>
+            <mat-card-subtitle><strong class="font-medium">Fecha inicial:</strong> {{fanData.initialDate|
+                date:"short"}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            @for (action of fanData.actions; track $index) {
+            <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-emerald-300 via-green-400 to-emerald-500 text-white mb-4">
+                @if (action.name == "Encendido") {
+                <span class="material-symbols-outlined">
+                    mode_fan
+                </span>
+            } @else {
+                <span class="material-symbols-outlined">
+                    mode_fan_off
+                </span>
+    
+                }
+                <span>
+                    {{action.name}}
+                </span>
+    
+            </div>
+            <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl text-white mb-4">
+                <form action="">
+                    <mat-slide-toggle>Encender ventilador</mat-slide-toggle>
+                </form>
+            </div>
+            }
+        </mat-card-content>
+        <mat-card-footer class="w-full flex items-center justify-center">
+            <button mat-flat-button color="primary">Ver más</button>
+        </mat-card-footer>
+    </mat-card>
+}

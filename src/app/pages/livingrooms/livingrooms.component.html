@@ -11,10 +11,12 @@
         @if (ldrData) {
         <app-photoresistor-data-item [ldr-data]="ldrData" class="col-span-2 row-span-2"/>
         }
-        
+       
     </div>
     <div class="w-full grid grid-cols-8 max-w-full justify-center gap-4 mb-5 place-content-center">
         <h2 class="col-span-8">Actuadores</h2>
-        
+        @if(fanData){
+            <app-fan-data-item [fan-data]="fanData" class="col-span-2 row-span-2"></app-fan-data-item>
+        }
     </div>
 </section>
