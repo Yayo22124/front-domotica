@@ -16,10 +16,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProximityDataItemComponent } from '../../components/proximity-data-item/proximity-data-item.component';
 import { PresenceDataItemComponent } from '../../components/presence-data-item/presence-data-item.component';
 import { InLightDataItemComponent } from '../../components/in-light-data-item/in-light-data-item.component';
+import { WaterPumpDataItemComponent } from '../../components/water-pump-data-item/water-pump-data-item.component';
+import { DoorDataItemComponent } from '../../components/door-data-item/door-data-item.component';
+
 @Component({
   selector: 'app-bathrooms-page',
   standalone: true,
-  imports: [MatCardModule,MatButtonModule, CommonModule, MatIconModule, MatDividerModule, PhotoresistorDataItemComponent, ProximityDataItemComponent, PresenceDataItemComponent,InLightDataItemComponent],
+  imports: [MatCardModule,MatButtonModule, CommonModule, MatIconModule, MatDividerModule, PhotoresistorDataItemComponent, ProximityDataItemComponent, PresenceDataItemComponent,InLightDataItemComponent, WaterPumpDataItemComponent, DoorDataItemComponent],
   templateUrl: './bathrooms-page.component.html',
   styleUrl: './bathrooms-page.component.scss'
 })
@@ -40,7 +43,7 @@ export class BathroomsPageComponent implements OnInit {
     private bathroomsService: BathroomsService,
     private route: ActivatedRoute,
     private loadinService: LoadingService
-  ) { 
+  ) {
 
   }
   ngOnInit(): void {
