@@ -1,8 +1,15 @@
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
+import { LoadingService } from '../../core/services/Loading/loading.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { PhotoresistorDataItemComponent } from '../../components/photoresistor-data-item/photoresistor-data-item.component';
+import { TemperatureDataItemComponent } from '../../components/temperature-data-item/temperature-data-item.component';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
@@ -11,7 +18,7 @@ import { KitchensService } from '../../core/services/kitchens/kitchens.service';
 @Component({
   selector: 'app-kitchens-page',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule],
+  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule],
   templateUrl: './kitchens-page.component.html',
   styleUrl: './kitchens-page.component.scss'
 })
@@ -20,9 +27,21 @@ export class KitchensPageComponent implements OnInit {
   public actuatorsData: iActuatorsData[] | undefined = [];  
   public kitchenName: string | null = "";
 
+  public dhtData: iSensorsData | null = null;
+  public ldrData: iSensorsData | null = null;
+  public fanData: iActuatorsData | null = null;
+  public doorData: iActuatorsData | null = null;
+  public windowLeftData: iActuatorsData | null = null;
+  public windowRightData: iActuatorsData | null = null;
+  public inLightData: iActuatorsData | null = null;
+  public exLightData: iActuatorsData | null = null;
+  public buzzerData:iActuatorsData | null = null; 
+  public mqData: iSensorsData | null = null;
+
   constructor(
-    private KitchensService: KitchensService,
+    private kitchensService: KitchensService,
     private route: ActivatedRoute,
+    private loadingService: LoadingService
   ) {
     
   }
@@ -39,17 +58,34 @@ export class KitchensPageComponent implements OnInit {
   }
 
   getKitchenData(location: string) {
-    this.KitchensService.getKitchenData(location).subscribe(
+    this.loadingService.showLoading();
+    this.kitchensService.getKitchenData(location).subscribe(
       (response: iApiResponse) => {
         console.log(response);
         this.actuatorsData = response.actuatorsData;
         this.sensorsData = response.sensorsData;
+        
+        if (this.actuatorsData && this.sensorsData) {
+          
+          // Separar los datos de sensores en variables individuales
+          this.dhtData = this.sensorsData.find(sensor => sensor.name === 'Temperatura y Humedad')!;
+          this.ldrData = this.sensorsData.find(sensor => sensor.name === 'Fotorresistencia')!;
+          this.mqData = this.sensorsData.find(sensor => sensor.name === 'Gas')!;
+          
+          // Separar los datos de actuadores en variables individuales
+          this.fanData = this.actuatorsData.find(actuator => actuator.name === 'Ventilador')!;
+          this.doorData = this.actuatorsData.find(actuator => actuator.name === 'Puerta')!;
+          this.windowLeftData = this.actuatorsData.find(actuator => actuator.name === 'Ventana Doble Izquierda')!;
+          this.windowRightData = this.actuatorsData.find(actuator => actuator.name === 'Ventana Doble Derecha')!;
+          this.inLightData = this.actuatorsData.find(actuator => actuator.name === 'Led Interior')!;
+          this.buzzerData = this.actuatorsData.find(actuator => actuator.name === 'Buzzer')!;
+        }
+        this.loadingService.hideLoading();
+      }, (error) => {
+        this.loadingService.hideLoading();
+        console.error(error);
       }
-    )
+    );
   }
-
+  
 }
-
-
-// Sensores : Gas, temperatura y *----fotoresistencia----* 
-// Actuadores :  Ventilador, 3 servomotor (puerta, 2 ventanas), buzzer, 2 leds  
