@@ -7,13 +7,13 @@
         </mat-card-header>
         <mat-card-content>
             @for (action of inLightData.actions; track $index) {
-            @if(action.value == 0){
+            @if(action.value == false){
                 <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl to-gray-500 via-gray-400 from-gray-300   text-black">
                 
                     <span>
                         Apagado
                     </span>
-        
+                    
                 </div>
             }@else{
                 <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl to-green-500 via-green-400 from-green-300   text-white">
@@ -21,9 +21,21 @@
                     <span>
                         Encendido
                     </span>
-        
+                    
                 </div>
             }
+            <div>
+                @if (action.name == "Encendido") {
+                    <span class="material-symbols-outlined">
+                        mode_fan
+                    </span>
+                } @else {
+                    <span class="material-symbols-outlined">
+                        mode_fan_off
+                    </span>
+        
+                    }
+            </div>
             }
         </mat-card-content>
         <mat-card-footer class="w-full flex items-center justify-center">

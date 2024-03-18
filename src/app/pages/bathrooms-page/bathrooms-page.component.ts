@@ -68,10 +68,10 @@ export class BathroomsPageComponent implements OnInit {
           this.presenceData = this.sensorsData.find(sensor => sensor.name === 'Presencia')!;
           this.proximityData = this.sensorsData.find(sensor => sensor.name === 'Proximidad')!;
           
-          this.doorData = this.actuatorsData.find(actuator => actuator.name === 'Micro-Servo')!;
+          this.doorData = this.actuatorsData.find(actuator => actuator.name === 'Puerta')!;
           this.inLightData = this.actuatorsData.find(actuator => actuator.name === 'Led Interior')!;
           this.exLightData = this.actuatorsData.find(actuator => actuator.name === 'Led Exterior')!;
-          this.waterPumpData = this.actuatorsData.find(actuator => actuator.name === 'Mini Bomba de Agua')!;
+          this.waterPumpData = this.actuatorsData.find(actuator => actuator.name === 'Bomba de Agua')!;
         }
 
         this.loadinService.hideLoading();
