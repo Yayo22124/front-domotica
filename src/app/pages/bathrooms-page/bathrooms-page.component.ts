@@ -15,10 +15,11 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { ProximityDataItemComponent } from '../../components/proximity-data-item/proximity-data-item.component';
 import { PresenceDataItemComponent } from '../../components/presence-data-item/presence-data-item.component';
+import { InLightDataItemComponent } from '../../components/in-light-data-item/in-light-data-item.component';
 @Component({
   selector: 'app-bathrooms-page',
   standalone: true,
-  imports: [MatCardModule,MatButtonModule, CommonModule, MatIconModule, MatDividerModule, PhotoresistorDataItemComponent, ProximityDataItemComponent, PresenceDataItemComponent],
+  imports: [MatCardModule,MatButtonModule, CommonModule, MatIconModule, MatDividerModule, PhotoresistorDataItemComponent, ProximityDataItemComponent, PresenceDataItemComponent,InLightDataItemComponent],
   templateUrl: './bathrooms-page.component.html',
   styleUrl: './bathrooms-page.component.scss'
 })
@@ -66,7 +67,7 @@ export class BathroomsPageComponent implements OnInit {
           this.doorData = this.actuatorsData.find(actuator => actuator.name === 'Servomotor Puerta')!;
           this.inLightData = this.actuatorsData.find(actuator => actuator.name === 'Led Interior')!;
           this.exLightData = this.actuatorsData.find(actuator => actuator.name === 'Led Exterior')!;
-          this.waterPumpData = this.actuatorsData.find(actuator => actuator.name === 'Mini Bomba de Agua Sumergible')!;
+          this.waterPumpData = this.actuatorsData.find(actuator => actuator.name === 'Mini Bomba de Agua')!;
         }
 
         this.loadinService.hideLoading();
