@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { ActivatedRoute } from '@angular/router';
 import { BathroomsService } from '../../core/services/Bathrooms/bathrooms.service';
 import { CommonModule } from '@angular/common';
