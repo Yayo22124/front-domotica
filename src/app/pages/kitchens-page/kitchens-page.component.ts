@@ -16,17 +16,21 @@ import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 import { KitchensService } from '../../core/services/kitchens/kitchens.service';
 import { DoorDataItemComponent } from '../../components/door-data-item/door-data-item.component';
 import { FanDataItemComponent } from '../../components/fan-data-item/fan-data-item.component';
+import { BuzzerDataItemComponent } from '../../components/buzzer-data-item/buzzer-data-item.component';
+import { GasDataItemComponent } from '../../components/gas-data-item/gas-data-item.component';
+import { ExLightDataItemComponent } from '../../components/ex-light-data-item/ex-light-data-item.component';
+import { InLightDataItemComponent } from '../../components/in-light-data-item/in-light-data-item.component';
 
 @Component({
   selector: 'app-kitchens-page',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule, DoorDataItemComponent, FanDataItemComponent],
+  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule, DoorDataItemComponent, FanDataItemComponent, GasDataItemComponent, BuzzerDataItemComponent, ExLightDataItemComponent, InLightDataItemComponent],
   templateUrl: './kitchens-page.component.html',
   styleUrl: './kitchens-page.component.scss'
 })
 export class KitchensPageComponent implements OnInit {
-  public sensorsData: iSensorsData[] | undefined = [];  
-  public actuatorsData: iActuatorsData[] | undefined = [];  
+  public sensorsData: iSensorsData[] | undefined = [];
+  public actuatorsData: iActuatorsData[] | undefined = [];
   public kitchenName: string | null = "";
 
   public dhtData: iSensorsData | null = null;
@@ -37,15 +41,15 @@ export class KitchensPageComponent implements OnInit {
   public windowRightData: iActuatorsData | null = null;
   public inLightData: iActuatorsData | null = null;
   public exLightData: iActuatorsData | null = null;
-  public buzzerData:iActuatorsData | null = null; 
-  public mqData: iSensorsData | null = null;
+  public buzzerData: iActuatorsData | null = null;
+  public gasData: iSensorsData | null = null;
 
   constructor(
     private kitchensService: KitchensService,
     private route: ActivatedRoute,
     private loadingService: LoadingService
   ) {
-    
+
   }
 
   ngOnInit(): void {
@@ -66,21 +70,22 @@ export class KitchensPageComponent implements OnInit {
         console.log(response);
         this.actuatorsData = response.actuatorsData;
         this.sensorsData = response.sensorsData;
-        
+
         if (this.actuatorsData && this.sensorsData) {
-          
+
           // Separar los datos de sensores en variables individuales
           this.dhtData = this.sensorsData.find(sensor => sensor.name === 'Temperatura y Humedad')!;
           this.ldrData = this.sensorsData.find(sensor => sensor.name === 'Fotorresistencia')!;
-          this.mqData = this.sensorsData.find(sensor => sensor.name === 'Gas')!;
-          
+          this.gasData = this.sensorsData.find(sensor => sensor.name === 'Gas')!;
+
           // Separar los datos de actuadores en variables individuales
           this.fanData = this.actuatorsData.find(actuator => actuator.name === 'Ventilador')!;
           this.doorData = this.actuatorsData.find(actuator => actuator.name === 'Puerta')!;
           this.windowLeftData = this.actuatorsData.find(actuator => actuator.name === 'Ventana Doble Izquierda')!;
           this.windowRightData = this.actuatorsData.find(actuator => actuator.name === 'Ventana Doble Derecha')!;
           this.inLightData = this.actuatorsData.find(actuator => actuator.name === 'Led Interior')!;
-          this.buzzerData = this.actuatorsData.find(actuator => actuator.name === 'Buzzer')!;
+          this.inLightData = this.actuatorsData.find(actuator => actuator.name === 'Led Exterior')!;
+          this.buzzerData = this.actuatorsData.find(actuator => actuator.name === 'Alarma')!;
         }
         this.loadingService.hideLoading();
       }, (error) => {
@@ -89,5 +94,5 @@ export class KitchensPageComponent implements OnInit {
       }
     );
   }
-  
+
 }

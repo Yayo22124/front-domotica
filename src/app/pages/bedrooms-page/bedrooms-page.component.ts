@@ -2,15 +2,19 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { BedroomsService } from '../../core/services/Bedrooms/bedrooms.service';
+import { FanDataItemComponent } from '../../components/fan-data-item/fan-data-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BedroomsService } from '../../core/services/Bedrooms/bedrooms.service';
 import { LoadingService } from '../../core/services/Loading/loading.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { PhotoresistorDataItemComponent } from '../../components/photoresistor-data-item/photoresistor-data-item.component';
 import { TemperatureDataItemComponent } from '../../components/temperature-data-item/temperature-data-item.component';
+import { InLightDataItemComponent } from '../../components/in-light-data-item/in-light-data-item.component';
+import { DoorDataItemComponent } from '../../components/door-data-item/door-data-item.component';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
@@ -18,7 +22,8 @@ import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 @Component({
   selector: 'app-bedrooms-page',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule],
+  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule,
+    MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule, MatSlideToggleModule, FanDataItemComponent, InLightDataItemComponent, DoorDataItemComponent],
   templateUrl: './bedrooms-page.component.html',
   styleUrl: './bedrooms-page.component.scss'
 })
