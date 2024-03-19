@@ -6,14 +6,23 @@
                 date:"short"}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-            @for (read of doorData.actions; track $index) {
+            @for (action of doorData.actions; track $index) {
             <div
-                class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-sky-300 via-orange-400 to-sky-500 text-white">
+                class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-green-300 via-green-400 to-green-500 text-white">
 
                 <span>
-                    {{read.value}}
+                    {{action.value}}
                 </span>
 
+            </div>
+            <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl text-white mb-4">
+                <form action="">
+                    @if(action.value == false) {
+                        <mat-slide-toggle color="primary">Encender</mat-slide-toggle>
+                    }@else {
+                        <mat-slide-toggle color="primary">Apagar</mat-slide-toggle>
+                    }
+                </form>
             </div>
             }
         </mat-card-content>
