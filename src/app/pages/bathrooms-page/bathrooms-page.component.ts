@@ -19,11 +19,12 @@ import { apiUrl } from '../../core/constants/apiUrl.constant';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
+import { ExLightDataItemComponent } from '../../components/ex-light-data-item/ex-light-data-item.component';
 
 @Component({
   selector: 'app-bathrooms-page',
   standalone: true,
-  imports: [MatCardModule,MatButtonModule, CommonModule, MatIconModule, MatDividerModule, PhotoresistorDataItemComponent, ProximityDataItemComponent, PresenceDataItemComponent,InLightDataItemComponent, WaterPumpDataItemComponent, DoorDataItemComponent],
+  imports: [MatCardModule,MatButtonModule, CommonModule, MatIconModule, MatDividerModule, PhotoresistorDataItemComponent, ProximityDataItemComponent, PresenceDataItemComponent,InLightDataItemComponent, WaterPumpDataItemComponent, DoorDataItemComponent, ExLightDataItemComponent],
   templateUrl: './bathrooms-page.component.html',
   styleUrl: './bathrooms-page.component.scss'
 })

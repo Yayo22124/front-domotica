@@ -1,7 +1,9 @@
 @if(exLightData){
     <mat-card class="gap-5 p-2 flex flex-col justify-between col-span-2">
         <mat-card-header>
-            <mat-card-title class="text-xl font-medium">Luz Interior</mat-card-title>
+            <mat-card-title class="text-xl font-medium">Luz Exterior</mat-card-title>
+            <mat-card-subtitle><strong class="font-medium">Ultimo Registro:</strong> {{exLightData.registeredDate|
+                date:"short"}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
             @for (action of exLightData.actions; track $index) {
@@ -25,9 +27,9 @@
             <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl text-white mb-4">
                 <form action="">
                     @if(action.value == false) {
-                        <mat-slide-toggle color="primary">Encender ventilador</mat-slide-toggle>
+                        <mat-slide-toggle color="primary">Encender</mat-slide-toggle>
                     }@else {
-                        <mat-slide-toggle color="primary">Apagar ventilador</mat-slide-toggle>
+                        <mat-slide-toggle color="primary">Apagar</mat-slide-toggle>
                     }
                 </form>
             </div>
