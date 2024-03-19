@@ -1,0 +1,24 @@
+@if (buzzerData){
+    <mat-card class="gap-5 p-2 flex flex-col justify-between col-span-2">
+        <mat-card-header>
+            <mat-card-title class="text-xl font-medium">Gas cocina</mat-card-title>
+            <mat-card-subtitle><strong class="font-medium">Última Lectura:</strong> {{buzzerData.registeredDate|
+                date:"short"}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            @for (read of buzzerData.actions; track $index) {
+            <div
+                class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-sky-300 via-orange-400 to-sky-500 text-white">
+
+                <span>
+                    {{read.value}}
+                </span>
+
+            </div>
+            }
+        </mat-card-content>
+        <mat-card-footer class="w-full flex items-center justify-center">
+            <button mat-flat-button color="primary">Ver más</button>
+        </mat-card-footer>
+    </mat-card>
+    }
