@@ -51,14 +51,6 @@ export class BedroomsPageComponent implements OnInit {
   public inLightData: iActuatorsData | null = null;
   public exLightData: iActuatorsData | null = null;
 
-  constructor(
-    private bedroomsService: BedroomsService,
-    private route: ActivatedRoute,
-    private loadingService: LoadingService
-    ) {
-      
-    }
-
   ngOnInit(): void {
 
     this.route.paramMap.subscribe(
