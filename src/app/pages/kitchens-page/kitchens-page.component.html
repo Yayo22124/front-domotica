@@ -11,6 +11,9 @@
         @if (ldrData) {
         <app-photoresistor-data-item [ldr-data]="ldrData" class="col-span-2 row-span-2"/>
         } 
+        @if (gasData) {
+        <app-gas-data-item [gas-data]="gasData" class="col-span-2 row-span-2"/>
+        }
 
     </div>
     <div class="w-full grid grid-cols-8 max-w-full justify-center gap-4 mb-5 place-content-center">
@@ -20,7 +23,17 @@
             <app-fan-data-item [fan-data]="fanData" class="col-span-2 row-span-2"/>
             }
         @if (doorData) {
-                <app-door-data-item [door-data]="doorData" class="col-span-2 row-span-2"/>
-                }        
-            </div>
+            <app-door-data-item [door-data]="doorData" class="col-span-2 row-span-2"/>
+            }    
+        @if (inLightData) {
+            <app-in-light-data-item [inlight-data]="inLightData" class="col-span-2 row-span-2"/>
+            }    
+        @if (exLightData) {
+            <app-ex-light-data-item [exlight-data]="exLightData" class="col-span-2 row-span-2"/>
+        }
+        @if (buzzerData) {
+            <app-buzzer-data-item [buzzer-data]="buzzerData" class="col-span-2 row-span-2"/>
+        }     
+            
+        </div>
 </section>
