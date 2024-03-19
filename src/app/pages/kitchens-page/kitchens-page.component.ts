@@ -20,11 +20,12 @@ import { BuzzerDataItemComponent } from '../../components/buzzer-data-item/buzze
 import { GasDataItemComponent } from '../../components/gas-data-item/gas-data-item.component';
 import { ExLightDataItemComponent } from '../../components/ex-light-data-item/ex-light-data-item.component';
 import { InLightDataItemComponent } from '../../components/in-light-data-item/in-light-data-item.component';
+import { WindowDoubleDataItemComponent } from '../../components/window-double-data-item/window-double-data-item.component';
 
 @Component({
   selector: 'app-kitchens-page',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule, DoorDataItemComponent, FanDataItemComponent, GasDataItemComponent, BuzzerDataItemComponent, ExLightDataItemComponent, InLightDataItemComponent],
+  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule, DoorDataItemComponent, FanDataItemComponent, GasDataItemComponent, BuzzerDataItemComponent, ExLightDataItemComponent, InLightDataItemComponent, WindowDoubleDataItemComponent],
   templateUrl: './kitchens-page.component.html',
   styleUrl: './kitchens-page.component.scss'
 })
