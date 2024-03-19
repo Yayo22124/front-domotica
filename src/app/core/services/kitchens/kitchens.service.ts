@@ -13,10 +13,10 @@ export class KitchensService {
   ) {}
 
   getAllKitchens(): Observable<iApiResponse> {
-    return this.http.get<iApiResponse>(`${apiUrl}/kitchen/?limit=1000`)  
+    return this.http.get<iApiResponse>(`${apiUrl}/kitchens/?limit=1000`)  
   }
 
   getKitchenData(location: string): Observable<iApiResponse> {
-    return this.http.get<iApiResponse>(`${apiUrl}/kitchen/?location=${location}&limit=1000`)   
+    return this.http.get<iApiResponse>(`${apiUrl}/kitchens/?location=${location}&limit=1000`)   
   }
 }
