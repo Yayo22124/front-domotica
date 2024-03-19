@@ -15,6 +15,7 @@ import { PhotoresistorDataItemComponent } from '../../components/photoresistor-d
 import { TemperatureDataItemComponent } from '../../components/temperature-data-item/temperature-data-item.component';
 import { InLightDataItemComponent } from '../../components/in-light-data-item/in-light-data-item.component';
 import { DoorDataItemComponent } from '../../components/door-data-item/door-data-item.component';
+import { ExLightDataItemComponent } from '../../components/ex-light-data-item/ex-light-data-item.component'; 
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
@@ -22,7 +23,7 @@ import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 @Component({
   selector: 'app-livingrooms',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule, MatSlideToggleModule, FanDataItemComponent, InLightDataItemComponent, DoorDataItemComponent],
+  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule, MatSlideToggleModule, FanDataItemComponent, InLightDataItemComponent, DoorDataItemComponent, ExLightDataItemComponent],
   templateUrl: './livingrooms.component.html',
   styleUrl: './livingrooms.component.scss'
 })
