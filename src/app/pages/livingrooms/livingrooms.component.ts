@@ -19,11 +19,11 @@ import { ExLightDataItemComponent } from '../../components/ex-light-data-item/ex
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
-
+import { WindowDoubleDataItemComponent } from '../../components/window-double-data-item/window-double-data-item.component';
 @Component({
   selector: 'app-livingrooms',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule, MatSlideToggleModule, FanDataItemComponent, InLightDataItemComponent, DoorDataItemComponent, ExLightDataItemComponent],
+  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule, MatSlideToggleModule, FanDataItemComponent, InLightDataItemComponent, DoorDataItemComponent, ExLightDataItemComponent, WindowDoubleDataItemComponent],
   templateUrl: './livingrooms.component.html',
   styleUrl: './livingrooms.component.scss'
 })

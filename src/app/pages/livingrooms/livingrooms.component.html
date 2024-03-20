@@ -24,8 +24,11 @@
         @if(doorData){
             <app-door-data-item [door-data]="doorData" class="col-span-2 row-span-2"></app-door-data-item>
         }
-        @if(exLightData){
+        @if(exLightData){  
             <app-ex-light-data-item [exlight-data]="exLightData" class="col-span-2 row-span-2"></app-ex-light-data-item>
+        }
+        @if (windowLeftData && windowRightData) {
+            <app-window-double-data-item [windowDL-data]="windowLeftData" [windowDR-data]="windowRightData" class="col-span-2 row-span-2" />
         }
     </div>
 </section>
