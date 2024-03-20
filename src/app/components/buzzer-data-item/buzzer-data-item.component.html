@@ -9,8 +9,9 @@
             @for (action of buzzerData.actions; track $index) {
 
             @if (action.value == true) {
-                <div matTooltip="Alarma activada"  matTooltipPosition="above" 
-            class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-green-300 via-green-400 to-green-500 text-white"><span>Alarma</span></div>
+                <div
+             matTooltip="Alarma activada"  matTooltipPosition="above" 
+            class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-green-300 via-green-400 to-green-500 text-white"><span>Alarma</span> <mat-icon>circle_notifications</mat-icon></div>
             } @else {
                 <div matTooltip="Alarma desactivada"  matTooltipPosition="above" 
                 class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-gray-300 via-gray-400 to-gray-500 text-white"><span>Alarma</span> </div>
