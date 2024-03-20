@@ -2,19 +2,20 @@
     <mat-card class="gap-5 p-2 flex flex-col justify-between col-span-2">
         <mat-card-header>
             <mat-card-title class="text-xl font-medium">Servomotor Puerta</mat-card-title>
-            <mat-card-subtitle><strong class="font-medium">Última Lectura:</strong> {{doorData.registeredDate|
+            <mat-card-subtitle><strong class="font-medium">Última registro:</strong> {{doorData.registeredDate|
                 date:"short"}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
             @for (action of doorData.actions; track $index) {
-            <div
-                class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-green-300 via-green-400 to-green-500 text-white">
 
-                <span>
-                    {{action.value}}
-                </span>
-
-            </div>
+                @if (action.value == true) {
+                    <div matTooltip="Puerta abierta"  matTooltipPosition="above" 
+                class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-green-300 via-green-400 to-green-500 text-white"><span>Abierta</span></div>
+                } @else {
+                    <div matTooltip="Puerta cerrada"  matTooltipPosition="above" 
+                    class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-gray-300 via-gray-400 to-gray-500 text-white"><span>Cerrada</span> </div>
+                }
+                
             <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl text-white mb-4">
                 <form action="">
                     @if(action.value == false) {

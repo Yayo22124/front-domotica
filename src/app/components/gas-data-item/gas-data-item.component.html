@@ -8,8 +8,10 @@
         <mat-card-content>
             @for (read of gasData.readings; track $index) {
             <div
+            matTooltip="Partes por millón (ppm)" 
+            matTooltipPosition="above"
                 class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-sky-300 via-orange-400 to-sky-500 text-white">
-
+                
                 <span>
                     {{read.value}}
                 </span>
