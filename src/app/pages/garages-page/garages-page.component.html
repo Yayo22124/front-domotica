@@ -15,10 +15,14 @@
        @if (presenceData){
         <app-presence-data-item [presence-data]="presenceData" class="col-span-2 row-span-2" />
         }
+        @if (gateLeftData && gateRightData) {
+            <app-gate-double-data-item [gateLeft-data]="gateLeftData" [gateRight-data]="gateRightData" class="col-span-2 row-span-2" />
+        }
        
    </div>
    <div class="w-full grid grid-cols-8 max-w-full justify-center gap-4 mb-5 place-content-center">
-       <h2 class="col-span-8">Actuadores</h2>
+       <h2 class="col-span-8 font-semibold text-xl">Actuadores</h2>
+       <mat-divider class="col-span-8"></mat-divider>
        @if(inLightData){
         <app-in-light-data-item [inlight-data]="inLightData" class="col-span-2 row-span-2"></app-in-light-data-item>
         }
@@ -28,5 +32,9 @@
         @if(exLightData){
             <app-ex-light-data-item [exlight-data]="exLightData" class="col-span-2 row-span-2"></app-ex-light-data-item>
         }
+        @if(buzzerData){
+            <app-buzzer-data-item [buzzer-data]="buzzerData" class="col-span-2 row-span-2"></app-buzzer-data-item >
+        }
+
    </div>
 </section>
