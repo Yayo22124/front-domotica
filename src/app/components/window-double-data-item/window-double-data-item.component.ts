@@ -6,10 +6,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @Component({
   selector: 'app-window-double-data-item',
   standalone: true,
-  imports: [MatCardModule, MatTooltipModule, MatButtonModule, MatIconModule, CommonModule, MatSlideToggleModule],
+  imports: [MatCardModule, MatTooltipModule, MatButtonModule, MatIconModule, CommonModule, MatSlideToggleModule, FontAwesomeModule],
   templateUrl: './window-double-data-item.component.html',
   styleUrl: './window-double-data-item.component.scss'
 })

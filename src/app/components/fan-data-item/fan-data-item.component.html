@@ -9,13 +9,13 @@
             @for (action of fanData.actions; track $index) {
            
                 @if (action.value) {
-                    <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-emerald-300 via-green-400 to-emerald-500 text-white mb-4">
+                    <div matTooltip="Encendido"   matTooltipPosition="above"  class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-emerald-300 via-green-400 to-emerald-500 text-white mb-4">
                         <span class="material-symbols-outlined">
                             mode_fan
                         </span>
                     </div>
             } @else {
-                <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl to-gray-500 via-gray-400 from-gray-300 text-black mb-4">
+                <div matTooltip="Apagado"   matTooltipPosition="above" class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl to-gray-500 via-gray-400 from-gray-300 text-black mb-4">
                     <span class="material-symbols-outlined">
                         mode_fan_off
                     </span>

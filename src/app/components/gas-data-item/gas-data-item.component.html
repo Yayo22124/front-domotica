@@ -1,19 +1,21 @@
 @if (gasData){
     <mat-card class="gap-5 p-2 flex flex-col justify-between col-span-2">
         <mat-card-header>
-            <mat-card-title class="text-xl font-medium">Gas cocina</mat-card-title>
+            <mat-card-title class="text-xl font-medium">Gas</mat-card-title>
             <mat-card-subtitle><strong class="font-medium">Última Lectura:</strong> {{gasData.registeredDate|
                 date:"short"}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
             @for (read of gasData.readings; track $index) {
             <div
-                class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-sky-300 via-orange-400 to-sky-500 text-white">
-
+            matTooltip="Partes por millón (ppm)" 
+            matTooltipPosition="above"
+                class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-purple-300 via-purple-400 to-purple-500 text-white">
+                <mat-icon>gas_meter</mat-icon>
                 <span>
                     {{read.value}}
                 </span>
-
+            
             </div>
             }
         </mat-card-content>

@@ -86,7 +86,7 @@ export class KitchensPageComponent implements OnInit {
           this.windowRightData = this.actuatorsData.find(actuator => actuator.name === 'Ventana Doble Derecha')!;
           this.inLightData = this.actuatorsData.find(actuator => actuator.name === 'Led Interior')!;
           this.exLightData = this.actuatorsData.find(actuator => actuator.name === 'Led Exterior')!;
-          this.buzzerData = this.actuatorsData.find(actuator => actuator.name === 'Alarma')!;
+          this.buzzerData = this.actuatorsData.find(actuator => actuator.name === 'Buzzer')!;
         }
         this.loadingService.hideLoading();
       }, (error) => {
