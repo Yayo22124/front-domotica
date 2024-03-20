@@ -13,11 +13,11 @@ export class BedroomsService {
   ) {}
 
   getAllBedrooms(): Observable<iApiResponse> {
-    return this.http.get<iApiResponse>(`${apiUrl}/bedrooms/`)  
+    return this.http.get<iApiResponse>(`${apiUrl}/bedrooms/?limit=1000`)  
   }
 
   getBedroomData(location: string): Observable<iApiResponse> {
-    return this.http.get<iApiResponse>(`${apiUrl}/bedrooms/?location=${location}`) ;
+    return this.http.get<iApiResponse>(`${apiUrl}/bedrooms/?location=${location}&limit=1000`) ;
   }
 
   getComponentRecords(location: string, room: string, componentName: string): Observable<iApiResponse> {
