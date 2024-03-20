@@ -13,15 +13,17 @@ import { PhotoresistorDataItemComponent } from '../../components/photoresistor-d
 import { ProximityDataItemComponent } from '../../components/proximity-data-item/proximity-data-item.component';
 import { InLightDataItemComponent } from '../../components/in-light-data-item/in-light-data-item.component';
 import { DoorDataItemComponent } from '../../components/door-data-item/door-data-item.component';
-import { ExLightDataItemComponent } from '../../components/ex-light-data-item/ex-light-data-item.component'; 
+import { ExLightDataItemComponent } from '../../components/ex-light-data-item/ex-light-data-item.component';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
+import { BuzzerDataItemComponent } from '../../components/buzzer-data-item/buzzer-data-item.component';
+import { GateDoubleDataItemComponent } from '../../components/gate-double-data-item/gate-double-data-item.component';
 
 @Component({
   selector: 'app-garages-page',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, PhotoresistorDataItemComponent, FontAwesomeModule, ProximityDataItemComponent, PresenceDataItemComponent, InLightDataItemComponent, DoorDataItemComponent, ExLightDataItemComponent],
+  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, PhotoresistorDataItemComponent, FontAwesomeModule, ProximityDataItemComponent, PresenceDataItemComponent, InLightDataItemComponent, DoorDataItemComponent, ExLightDataItemComponent, BuzzerDataItemComponent,GateDoubleDataItemComponent],
   templateUrl: './garages-page.component.html',
   styleUrl: './garages-page.component.scss'
 })
@@ -45,6 +47,9 @@ export class GaragesPageComponent implements OnInit {
   public windowRightData: iActuatorsData | null = null;
   public inLightData: iActuatorsData | null = null;
   public exLightData: iActuatorsData | null = null;
+  public buzzerData: iActuatorsData | null = null; 
+  public gateLeftData : iActuatorsData | null = null;
+  public gateRightData : iActuatorsData | null = null;
 
 
   ngOnInit(): void {
@@ -75,7 +80,9 @@ export class GaragesPageComponent implements OnInit {
           this.inLightData = this.garageActuators.find(actuator => actuator.name === 'Led Interior')!;
           this.doorData = this.garageActuators.find(actuator => actuator.name === 'Puerta')!;
           this.exLightData = this.garageActuators.find(actuator => actuator.name === 'Led Exterior')!;
-
+          this.buzzerData = this.garageActuators.find(actuator => actuator.name === 'Buzzer')!;
+          this.gateLeftData = this.garageActuators.find(actuator => actuator.name === 'Porton Izquierda')!;
+          this.gateRightData = this.garageActuators.find(actuator => actuator.name === 'Porton Derecha')!;
 
         }
         this.loadingService.hideLoading();

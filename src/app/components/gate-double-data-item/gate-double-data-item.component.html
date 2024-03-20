@@ -1,0 +1,34 @@
+@if(gateLeftData && gateRightData){
+    <mat-card class="gap-5 p-2 flex flex-col justify-between col-span-2">
+        <mat-card-header>
+            <mat-card-title class="text-xl font-medium">Porton Doble</mat-card-title>
+            <mat-card-subtitle><strong class="font-medium">Ultimo Registro:</strong> {{gateLeftData.registeredDate|
+                date:"short"}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            @for (action of gateLeftData.actions; track $index) {
+            @if(action.value == false){
+                <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl to-yellow-500 via-yellow-400 from-yellow-300   text-white">
+                
+                    <span>
+                        Abiertas
+                    </span>
+                    
+                </div>
+            }@else{
+                <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl to-gray-500 via-gray-400 from-gray-300   text-black">
+                
+                    <span>
+                        Cerradas
+                    </span>
+                    
+                </div>
+            }
+            
+            }
+        </mat-card-content>
+        <mat-card-footer class="w-full flex items-center justify-center">
+            <button mat-flat-button color="primary">Ver más</button>
+        </mat-card-footer>
+    </mat-card>
+}
