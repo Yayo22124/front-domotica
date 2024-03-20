@@ -7,11 +7,10 @@
     </mat-card-header>
     <mat-card-content>
         @for (read of proximityData.readings; track $index) {
-        <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl to-orange-500 via-orange-400 from-orange-300   text-white">
+        <div matTooltip="Proximidad" matTooltipShowDelay="250" matTooltipHideDelay="300" matTooltipPosition="above" class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl to-orange-500 via-orange-400 from-orange-300   text-white">
             
             <span>
-                {{read.value}} 
-                {{read.measuramentUnit}}
+                {{read.value}} {{read.measurementUnit}}
             </span>
 
         </div>
