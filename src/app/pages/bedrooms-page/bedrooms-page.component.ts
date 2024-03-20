@@ -7,6 +7,7 @@ import { DoorDataItemComponent } from '../../components/door-data-item/door-data
 import { FanDataItemComponent } from '../../components/fan-data-item/fan-data-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { InLightDataItemComponent } from '../../components/in-light-data-item/in-light-data-item.component';
+
 import { LoadingService } from '../../core/services/Loading/loading.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -15,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { PhotoresistorDataItemComponent } from '../../components/photoresistor-data-item/photoresistor-data-item.component';
 import { TemperatureDataItemComponent } from '../../components/temperature-data-item/temperature-data-item.component';
+import { ExLightDataItemComponent } from '../../components/ex-light-data-item/ex-light-data-item.component'; 
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
@@ -22,12 +24,19 @@ import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 @Component({
   selector: 'app-bedrooms-page',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule,
-    MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule, MatSlideToggleModule, FanDataItemComponent, InLightDataItemComponent, DoorDataItemComponent],
+  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, TemperatureDataItemComponent, PhotoresistorDataItemComponent, FontAwesomeModule, MatSlideToggleModule, FanDataItemComponent, InLightDataItemComponent, DoorDataItemComponent, ExLightDataItemComponent],
   templateUrl: './bedrooms-page.component.html',
   styleUrl: './bedrooms-page.component.scss'
 })
 export class BedroomsPageComponent implements OnInit {
+  constructor(
+    private bedroomsService: BedroomsService,
+    private route: ActivatedRoute,
+    private loadingService: LoadingService
+  ) {
+    
+  }
+
   public sensorsData: iSensorsData[] | undefined = [];  
   public actuatorsData: iActuatorsData[] | undefined = [];  
   public bedroomName: string | null = "";
@@ -41,14 +50,6 @@ export class BedroomsPageComponent implements OnInit {
   public windowRightData: iActuatorsData | null = null;
   public inLightData: iActuatorsData | null = null;
   public exLightData: iActuatorsData | null = null;
-
-  constructor(
-    private bedroomsService: BedroomsService,
-    private route: ActivatedRoute,
-    private loadingService: LoadingService
-    ) {
-      
-    }
 
   ngOnInit(): void {
 
