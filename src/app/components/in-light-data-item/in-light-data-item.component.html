@@ -8,16 +8,22 @@
         <mat-card-content>
             @for (action of inLightData.actions; track $index) {
             @if(action.value == false){
-                <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl to-gray-500 via-gray-400 from-gray-300   text-black">
-                
+                <div 
+                matTooltip="Luz apagada" 
+                matTooltipPosition="above"
+                class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl to-gray-500 via-gray-400 from-gray-300   text-black"> <mat-icon>light_off</mat-icon>
+                   
                     <span>
                         Apagado
                     </span>
                     
                 </div>
             }@else{
-                <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl to-green-500 via-green-400 from-green-300   text-white">
-                
+                <div 
+                matTooltip="Luz Encendida" 
+                matTooltipPosition="above"
+                class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl to-green-500 via-green-400 from-green-300   text-white">
+                <mat-icon>lightbulb</mat-icon>
                     <span>
                         Encendido
                     </span>
