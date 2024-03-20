@@ -9,36 +9,23 @@
             @for (read of waterPumpData.actions; track $index) {
             <div
                 class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-sky-300 via-orange-400 to-sky-500 text-white">
-                <span>
-                    {{read.value}}
-                </span>
+                @if(read.value == 0){
+                    <span>
+                        Apagado
+                    </span>
+                }@else{
+                    <mat-icon>valve</mat-icon>
+                    <span>
+                        Encendido
+                    </span>
+                }
+            </div>
+            <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl text-white mb-4">
+                <form action="">
+                    <mat-slide-toggle>Bomba Apagada</mat-slide-toggle>
+                </form>
             </div>
             }
-        </mat-card-content>
-        <mat-card-content>
-            @for (action of waterPumpData.actions; track $index) {
-                <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-emerald-300 via-green-400 to-emerald-500 text-white mb-4">
-                    @if (action.value == false) {
-                    <span class="material-symbols-outlined">
-                        mode_fan
-                    </span>
-                } @else {
-                    <span class="material-symbols-outlined">
-                        mode_fan_off
-                    </span>
-        
-                    }
-                    <!-- <span>
-                        {{action.name}}
-                    </span> -->
-        
-                </div>
-                <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl text-white mb-4">
-                    <form action="">
-                        <mat-slide-toggle>Bomba Apagada</mat-slide-toggle>
-                    </form>
-                </div>
-                }
         </mat-card-content>
         <mat-card-footer class="w-full flex items-center justify-center">
             <button mat-flat-button color="primary">Ver más</button>
