@@ -7,12 +7,17 @@
         </mat-card-header>
         <mat-card-content>
             @for (read of presenceData.readings; track $index) {
-            <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-sky-300 via-blue-400 to-sky-500 text-white">
+            <div matTooltip="Presencia" matTooltipShowDelay="250" matTooltipHideDelay="300" matTooltipPosition="above" class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-sky-300 via-blue-400 to-sky-500 text-white">
     
-                
-                <span>
-                    {{read.value}}
-                </span>
+                @if(read.value == 1){
+                    <span>
+                        Ocupado
+                    </span>
+                }@else {
+                    <span>
+                        Desocupado
+                    </span>
+                }
     
             </div>
             }
