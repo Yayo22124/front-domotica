@@ -23,6 +23,8 @@
     "@fortawesome/angular-fontawesome": "^0.14.1",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "highcharts": "^11.4.0",
+    "highcharts-angular": "^4.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.6.2",
     "zone.js": "~0.14.3"
