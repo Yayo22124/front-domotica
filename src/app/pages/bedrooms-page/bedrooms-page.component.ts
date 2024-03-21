@@ -18,7 +18,6 @@ import { PhotoresistorDataItemComponent } from '../../components/photoresistor-d
 import { TemperatureDataItemComponent } from '../../components/temperature-data-item/temperature-data-item.component';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
-import { iComponentInformation } from '../../core/interfaces/i-ComponentInformation';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 
 @Component({
@@ -45,6 +44,7 @@ import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
     FanDataItemComponent,
     InLightDataItemComponent,
     DoorDataItemComponent,
+    ExLightDataItemComponent
   ],
   templateUrl: './bedrooms-page.component.html',
   styleUrl: './bedrooms-page.component.scss',
@@ -67,10 +67,13 @@ export class BedroomsPageComponent implements OnInit {
   constructor(
     private bedroomsService: BedroomsService,
     private route: ActivatedRoute,
+    private router: Router,
     private loadingService: LoadingService
     ) {
       
     }
+
+    public roomPath: string = "";
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
