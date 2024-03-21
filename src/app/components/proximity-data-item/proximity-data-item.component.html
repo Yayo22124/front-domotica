@@ -17,7 +17,11 @@
         }
     </mat-card-content>
     <mat-card-footer class="w-full flex items-center justify-center">
-        <button mat-flat-button color="primary">Ver más</button>
+
+        <button matTooltip="Ver todos los registros." matTooltipPosition="below" mat-flat-button color="primary" 
+            (click)="seeMore()">Ver
+             más</button>
+
     </mat-card-footer>
 </mat-card>
 }
