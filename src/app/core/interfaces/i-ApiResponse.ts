@@ -28,3 +28,9 @@ export interface iLastApiResponse {
   }];
   error?: any;
 }
+
+export interface iSensorChartResponse {
+  success: boolean;
+  data: number[] | number[][];
+  error?: any;
+}

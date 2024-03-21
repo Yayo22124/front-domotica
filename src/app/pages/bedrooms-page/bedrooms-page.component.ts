@@ -1,3 +1,5 @@
+import * as Highcharts from 'highcharts';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
@@ -11,6 +13,7 @@ import { DoorDataItemComponent } from '../../components/door-data-item/door-data
 import { ExLightDataItemComponent } from '../../components/ex-light-data-item/ex-light-data-item.component';
 import { FanDataItemComponent } from '../../components/fan-data-item/fan-data-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HighchartsChartModule } from 'highcharts-angular';
 import { InLightDataItemComponent } from '../../components/in-light-data-item/in-light-data-item.component';
 import { LoadingService } from '../../core/services/Loading/loading.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -48,11 +51,16 @@ import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
     InLightDataItemComponent,
     DoorDataItemComponent,
     ExLightDataItemComponent,
+    HighchartsChartModule
   ],
   templateUrl: './bedrooms-page.component.html',
   styleUrl: './bedrooms-page.component.scss',
 })
 export class BedroomsPageComponent implements OnInit {
+  // * ####################
+  Highcharts: typeof Highcharts = Highcharts;
+  chartOptions!: Highcharts.Options;
+  // * ####################
   public sensorsData!: { _id: string; lastRecord: iSensorsData }[];
   public actuatorsData!: { _id: string; lastRecord: iActuatorsData }[];
   public bedroomName: string | null = '';
@@ -77,6 +85,24 @@ export class BedroomsPageComponent implements OnInit {
   public roomPath: string = '';
 
   ngOnInit(): void {
+    this.bedroomsService.getSensorChartData("Recámara 3", "Fotorresistencia").subscribe((res) => {
+      console.log(res.data);
+      const colors = ['red', 'blue', 'green', 'yellow', 'orange', 'purple'];
+      this.chartOptions = {
+        title: {
+          text: "Lecturas de Iluminación"
+        },
+        series: [{
+          name: 'Fotorresistencia',
+          data: res.data,
+          type: 'spline'
+        }]
+        
+      };
+    });
+    
+  
+
     this.route.paramMap.subscribe((params) => {
       this.room = this.bedroomName = params.get('location');
       console.log(this.router.url);
