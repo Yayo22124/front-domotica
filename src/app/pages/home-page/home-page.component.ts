@@ -12,7 +12,13 @@ import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [MatCardModule, MatDividerModule, MatButtonModule, MatIconModule, RouterLink],
+  imports: [
+    MatCardModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatIconModule,
+    RouterLink,
+  ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
@@ -20,14 +26,14 @@ export class HomePageComponent implements OnInit {
   constructor(
     private roomsService: RoomsService,
     private loadingService: LoadingService
-    ) {}
+  ) {}
   public rooms: any = {};
 
   ngOnInit(): void {
     this.getRoomsNames();
     console.log(this.rooms);
   }
-  
+
   getRoomsNames() {
     this.loadingService.showLoading();
     this.roomsService.getAllRooms().subscribe((res: iApiResponse) => {

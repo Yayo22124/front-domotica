@@ -18,37 +18,12 @@ export const routes: Routes = [
 
             return component.BedroomsPageComponent;
         },
-        // ! Sensor/Actuator Page Information
-        children: [
-            {
-                path: "sensor/:sensorName",
-                data: {
-                    room: "bedrooms"
-                },
-                async loadComponent() {
-                    const sensor = await import("./pages/sensor-information-page/sensor-information-page.component")
-                    
-                    return sensor.SensorInformationPageComponent
-                },
-            },
-            {
-                path: "actuator/:actuatorName",
-                data: {
-                    room: "bedrooms"
-                },
-                async loadComponent() {
-                    const actuator = await import("./pages/actuator-information-page/actuator-information-page.component")
-                    
-                    return actuator.ActuatorInformationPageComponent
-                },
-            },
-        ]
     },
     {
         path: "livingroom/:location",
         async loadComponent() {
             const component = await import("./pages/livingrooms/livingrooms.component");
-
+            
             return component.LivingroomsComponent;
         },
     },
@@ -56,7 +31,7 @@ export const routes: Routes = [
         path: "garage/:location",
         async loadComponent() {
             const component = await import("./pages/garages-page/garages-page.component");
-
+            
             return component.GaragesPageComponent;
         },
     },
@@ -72,8 +47,26 @@ export const routes: Routes = [
         path: "kitchen/:location",
         async loadComponent() {
             const component = await import("./pages/kitchens-page/kitchens-page.component");
-
+            
             return component.KitchensPageComponent;
         },
     },
+    // ! Sensor/Actuator Page Information
+        {
+            path: ":room/sensor/:location/:sensorName",          
+            async loadComponent() {
+                const component = await import("./pages/sensor-information-page/sensor-information-page.component")
+                
+                return component.SensorInformationPageComponent
+            },
+        },
+        {
+            path: ":room/actuator/:location/:actuatorName",
+            async loadComponent() {
+                const actuator = await import("./pages/actuator-information-page/actuator-information-page.component")
+                
+                return actuator.ActuatorInformationPageComponent
+            },
+        },
 ];
+

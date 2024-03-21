@@ -12,5 +12,6 @@ export interface iApiResponse {
     kitchens: string[],
     livingrooms: string[],
   }
+  lastRecord?: any;
   error?: any;
 }
