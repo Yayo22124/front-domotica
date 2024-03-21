@@ -9,7 +9,7 @@
         <app-temperature-data-item [dht-data]="dhtData" class="col-span-2 row-span-2" component-room-name="bedrooms" [component-location]="dhtData.location" [component-name]="dhtData.name"/>
         }
         @if (ldrData) {
-        <app-photoresistor-data-item [ldr-data]="ldrData" class="col-span-2 row-span-2" />
+        <app-photoresistor-data-item component-room-name="bedrooms" [component-location]="ldrData.location" [component-name]="ldrData.name" [ldr-data]="ldrData" class="col-span-2 row-span-2" />
         }
         
 

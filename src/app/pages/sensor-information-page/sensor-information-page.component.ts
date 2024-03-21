@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { LoadingService } from '../../core/services/Loading/loading.service';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RoomsService } from '../../core/services/Rooms/rooms.service';
@@ -15,16 +17,31 @@ import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 @Component({
   standalone: true,
   selector: 'app-sensor-information-page',
-  imports: [MatTableModule, HighchartsChartModule, MatIconModule, MatButtonModule, MatTooltipModule, CommonModule],
+  imports: [
+    MatTableModule,
+    HighchartsChartModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    CommonModule,
+    MatExpansionModule
+  ],
   templateUrl: './sensor-information-page.component.html',
   styleUrls: ['./sensor-information-page.component.scss'],
 })
 export class SensorInformationPageComponent implements OnInit {
-  displayedColumns: string[] = ['registro', 'ubicacion', 'estatus', 'lecturas', 'fecha']; // Definir las columnas a mostrar
+  displayedColumns: string[] = [
+    'registro',
+    'ubicacion',
+    'estatus',
+    'lecturas',
+    'fecha',
+  ]; // Definir las columnas a mostrar
 
   dataSource = new MatTableDataSource<iSensorsData | iActuatorsData>(); // DataSource para la tabla
   sensorName: string = '';
   roomName: string = '';
+  specifications: any[] = [];
 
   constructor(
     private roomsService: RoomsService,
@@ -43,15 +60,15 @@ export class SensorInformationPageComponent implements OnInit {
         params.get('sensorName') || ''
       );
     });
-    
   }
-  
+
   getSensorRecords(location: string, room: string, sensorName: string) {
     this.loadingService.showLoading();
     this.roomsService.getSensorRecords(location, room, sensorName).subscribe(
       (res) => {
         console.log(res);
         this.dataSource.data = res.records; // Asignar los datos al dataSource
+        this.specifications = res.records[0].specifications;
         this.loadingService.hideLoading();
       },
       (error) => {
@@ -63,17 +80,20 @@ export class SensorInformationPageComponent implements OnInit {
 
   getReadings(record: iSensorsData): any {
     let readings: string = '';
-    if (record.readings.length > 0) {
+    if (record.readings.length > 1) {
       return record.readings
         .map((read) => `${read.value} ${read.measurementUnit}`)
         .join(', ');
     }
-    return record.readings.map(
-      (read) => `${read.value}, ${read.measurementUnit}.`
-    );
+    return record.readings.map((read) => {
+      if (read.measurementUnit) {
+        return `${read.value}, ${read.measurementUnit}.`;
+      }
+      return `${read.value}`;
+    });
   }
-  
+
   goBack() {
-    this.location.back()
+    this.location.back();
   }
 }
