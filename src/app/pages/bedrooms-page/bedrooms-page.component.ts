@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { BedroomsService } from '../../core/services/Bedrooms/bedrooms.service';
 import { DoorDataItemComponent } from '../../components/door-data-item/door-data-item.component';
+import { ExLightDataItemComponent } from '../../components/ex-light-data-item/ex-light-data-item.component';
 import { FanDataItemComponent } from '../../components/fan-data-item/fan-data-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { InLightDataItemComponent } from '../../components/in-light-data-item/in-light-data-item.component';
@@ -49,11 +50,10 @@ import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
   styleUrl: './bedrooms-page.component.scss',
 })
 export class BedroomsPageComponent implements OnInit {
-  public sensorsData: iSensorsData[] | undefined = [];
-  public actuatorsData: iActuatorsData[] | undefined = [];
-  public bedroomName: string | null = '';
-  public room: string | null = '';
-  public roomPath: any = {};
+  public sensorsData: iSensorsData[] | undefined = [];  
+  public actuatorsData: iActuatorsData[] | undefined = [];  
+  public bedroomName: string | null = "";
+  public room: string | null = "";
 
   public dhtData: iSensorsData | null = null;
   public ldrData: iSensorsData | null = null;
@@ -67,9 +67,10 @@ export class BedroomsPageComponent implements OnInit {
   constructor(
     private bedroomsService: BedroomsService,
     private route: ActivatedRoute,
-    private router: Router,
     private loadingService: LoadingService
-  ) {}
+    ) {
+      
+    }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
