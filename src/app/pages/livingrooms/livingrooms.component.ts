@@ -1,7 +1,7 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
-import { ActivatedRoute } from '@angular/router';
 import { DoorDataItemComponent } from '../../components/door-data-item/door-data-item.component';
 import { ExLightDataItemComponent } from '../../components/ex-light-data-item/ex-light-data-item.component';
 import { FanDataItemComponent } from '../../components/fan-data-item/fan-data-item.component';
@@ -47,12 +47,19 @@ export class LivingroomsComponent implements OnInit {
   constructor(
     private LivingroomsService: LivingroomsService,
     private route: ActivatedRoute,
+    // * --------- *
+    private router: Router,
+    // * --------- *
     private loadingService: LoadingService
   ) {}
-
+  
   public livingroomsSensor: iSensorsData[] | undefined = [];
   public livingroomsActuators: iActuatorsData[] | undefined = [];
+  // * --------- *
   public livingroomName: string | null = '';
+  public roomPath: string = "";
+  public room: string | null = "";
+  // * --------- *
 
   public dhtData: iSensorsData | null = null;
   public ldrData: iSensorsData | null = null;
@@ -65,8 +72,10 @@ export class LivingroomsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      this.livingroomName = params.get('location');
-
+      // * --------
+      this.room = this.livingroomName = params.get('location');
+      this.roomPath = this.router.url;
+      // * --------
       this.getLivingroomData(this.livingroomName!);
     });
   }
