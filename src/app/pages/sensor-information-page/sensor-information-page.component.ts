@@ -7,7 +7,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { LoadingService } from '../../core/services/Loading/loading.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RoomsService } from '../../core/services/Rooms/rooms.service';
@@ -24,7 +24,7 @@ import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
     MatButtonModule,
     MatTooltipModule,
     CommonModule,
-    MatExpansionModule
+    MatExpansionModule,
   ],
   templateUrl: './sensor-information-page.component.html',
   styleUrls: ['./sensor-information-page.component.scss'],
