@@ -1,6 +1,10 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import {
+  iApiResponse,
+  iLastApiResponse,
+} from '../../core/interfaces/i-ApiResponse';
 
 import { BedroomsService } from '../../core/services/Bedrooms/bedrooms.service';
 import { DoorDataItemComponent } from '../../components/door-data-item/door-data-item.component';
@@ -17,7 +21,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { PhotoresistorDataItemComponent } from '../../components/photoresistor-data-item/photoresistor-data-item.component';
 import { TemperatureDataItemComponent } from '../../components/temperature-data-item/temperature-data-item.component';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
-import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 
 @Component({
@@ -44,36 +47,34 @@ import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
     FanDataItemComponent,
     InLightDataItemComponent,
     DoorDataItemComponent,
-    ExLightDataItemComponent
+    ExLightDataItemComponent,
   ],
   templateUrl: './bedrooms-page.component.html',
   styleUrl: './bedrooms-page.component.scss',
 })
 export class BedroomsPageComponent implements OnInit {
-  public sensorsData: iSensorsData[] | undefined = [];  
-  public actuatorsData: iActuatorsData[] | undefined = [];  
-  public bedroomName: string | null = "";
-  public room: string | null = "";
+  public sensorsData!: { _id: string; lastRecord: iSensorsData }[];
+  public actuatorsData!: { _id: string; lastRecord: iActuatorsData }[];
+  public bedroomName: string | null = '';
+  public room: string | null = '';
 
-  public dhtData: iSensorsData | null = null;
-  public ldrData: iSensorsData | null = null;
-  public fanData: iActuatorsData | null = null;
-  public doorData: iActuatorsData | null = null;
-  public windowLeftData: iActuatorsData | null = null;
-  public windowRightData: iActuatorsData | null = null;
-  public inLightData: iActuatorsData | null = null;
-  public exLightData: iActuatorsData | null = null;
+  public dhtData: iSensorsData | undefined = undefined;
+  public ldrData: iSensorsData | undefined = undefined;
+  public fanData: iActuatorsData | undefined = undefined;
+  public doorData: iActuatorsData | undefined = undefined;
+  public windowLeftData: iActuatorsData | undefined = undefined;
+  public windowRightData: iActuatorsData | undefined = undefined;
+  public inLightData: iActuatorsData | undefined = undefined;
+  public exLightData: iActuatorsData | undefined = undefined;
 
   constructor(
     private bedroomsService: BedroomsService,
     private route: ActivatedRoute,
     private router: Router,
     private loadingService: LoadingService
-    ) {
-      
-    }
+  ) {}
 
-    public roomPath: string = "";
+  public roomPath: string = '';
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -86,40 +87,46 @@ export class BedroomsPageComponent implements OnInit {
 
   getBedroomData(location: string) {
     this.loadingService.showLoading();
-    this.bedroomsService.getBedroomData(location).subscribe(
-      (response: iApiResponse) => {
+    this.bedroomsService.getLastData(location).subscribe(
+      (response: iLastApiResponse) => {
         console.log(response);
         this.actuatorsData = response.actuatorsData;
         this.sensorsData = response.sensorsData;
 
         if (this.actuatorsData && this.sensorsData) {
           // Separar los datos de sensores en variables individuales
-          this.dhtData = this.sensorsData.find(
-            (sensor) => sensor.name === 'Temperatura y Humedad'
-          )!;
+          this.dhtData = this.sensorsData.find(({ lastRecord }) =>
+            lastRecord.name.toLowerCase().includes('temperatura')
+          )?.lastRecord;
+
           this.ldrData = this.sensorsData.find(
-            (sensor) => sensor.name === 'Fotorresistencia'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Fotorresistencia'
+          )?.lastRecord;
 
           // Separar los datos de actuadores en variables individuales
           this.fanData = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Ventilador'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Ventilador'
+          )?.lastRecord;
+
           this.doorData = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Puerta'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Puerta'
+          )?.lastRecord;
+
           this.windowLeftData = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Ventana Doble Izquierda'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Ventana Doble Izquierda'
+          )?.lastRecord;
+
           this.windowRightData = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Ventana Doble Derecha'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Ventana Doble Derecha'
+          )?.lastRecord;
+
           this.inLightData = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Led Interior'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Led Interior'
+          )?.lastRecord;
+
           this.exLightData = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Led Exterior'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Led Exterior'
+          )?.lastRecord;
         }
         this.loadingService.hideLoading();
       },
