@@ -2,8 +2,7 @@
 <mat-card class="bg-gray-50 p-2 flex flex-col gap-5 animate-fade-down animate-duration-500 animate-ease-in">
     <mat-card-header>
         <mat-card-title class="text-xl font-medium">Temperatura y Humedad</mat-card-title>
-        <mat-card-subtitle><strong class="font-medium">Última Lectura:</strong> {{dhtData.registeredDate |
-            date:'short'}}</mat-card-subtitle>
+        <mat-card-subtitle><strong class="font-medium">Última Lectura:</strong> {{dhtData.registeredDate}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-actions class="flex justify-around">
         @for (read of dhtData.readings; track $index) {
@@ -31,7 +30,9 @@
         }
     </mat-card-actions>
     <mat-card-footer class="w-full flex items-center justify-center">
-        <button mat-flat-button color="primary">Más</button>
+        <!-- * --------- -->
+        <button mat-flat-button color="primary" matTooltip="Ver todos los registros." matTooltipPosition="below" mat-flat-button color="primary" (click)="seeMore()">Ver más</button>
+        <!-- * --------- -->
     </mat-card-footer>
 </mat-card>
 }

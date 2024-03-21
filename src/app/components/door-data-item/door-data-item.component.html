@@ -1,6 +1,6 @@
 @if (doorData){
-    <mat-card class="gap-5 p-2 flex flex-col justify-between col-span-2">
-        <mat-card-header>
+    <mat-card class="relative gap-5 p-2 flex flex-col justify-between col-span-2">
+        <mat-card-header class="mt-4">
             <mat-card-title class="text-xl font-medium">Puerta</mat-card-title>
             <mat-card-subtitle><strong class="font-medium">Última registro:</strong> {{doorData.registeredDate|
                 date:"short"}}</mat-card-subtitle>
@@ -17,15 +17,11 @@
                     class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-gray-300 via-gray-400 to-gray-500 text-white"><span>Cerrada</span><mat-icon>door_front</mat-icon> </div>
                 }
                 
-            <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl text-white mb-4">
-                <form action="">
-                    @if(action.value == false) {
-                        <mat-slide-toggle color="primary">Encender</mat-slide-toggle>
-                    }@else {
-                        <mat-slide-toggle color="primary">Apagar</mat-slide-toggle>
-                    }
-                </form>
-            </div>
+                @if (action.value) {
+                    <mat-slide-toggle color="primary" class="absolute top-1 right-1" checked="true">Cerrar</mat-slide-toggle>
+                } @else if (!action.value) {
+                    <mat-slide-toggle color="primary" class="absolute top-1 right-1" checked="false">Abrir</mat-slide-toggle>
+                }
             }
         </mat-card-content>
         <mat-card-footer class="w-full flex items-center justify-center">

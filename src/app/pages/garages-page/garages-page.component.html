@@ -1,32 +1,41 @@
 <section class="mt-5 px-5 mx-auto">
-   <div class="w-full flex items-center justify-center mb-3">
-       <h1 class="text-3xl text-neutral-800 font-bold">{{garageName}}</h1>
-   </div>
-   <div class="w-full grid grid-cols-8 max-w-full justify-center gap-4 mb-4">
-       <h2 class="col-span-8 font-semibold text-xl">Sensores</h2>
-       <mat-divider class="col-span-8"></mat-divider>
-       
-       @if (ldrData) {
-       <app-photoresistor-data-item [ldr-data]="ldrData" class="col-span-2 row-span-2"/>
-       }
-       @if (proximityData){
-         <app-proximity-data-item [proximity-data]="proximityData" class="col-span-2 row-span-2"/>
-       }
-       @if (presenceData){
-        <app-presence-data-item [presence-data]="presenceData" class="col-span-2 row-span-2" />
-        }
-       
-   </div>
-   <div class="w-full grid grid-cols-8 max-w-full justify-center gap-4 mb-5 place-content-center">
-       <h2 class="col-span-8">Actuadores</h2>
-       @if(inLightData){
+    <div class="w-full flex items-center justify-center mb-3">
+        <h1 class="text-3xl text-neutral-800 font-bold">{{garageName}}</h1>
+    </div>
+    <div class="w-full grid grid-cols-8 max-w-full justify-center gap-4 mb-4">
+        <h2 class="col-span-8 font-semibold text-xl">Sensores</h2>
+        <mat-divider class="col-span-8"></mat-divider>
+
+        @if (ldrData) {
+            <app-photoresistor-data-item component-room-name="garages" [component-location]="ldrData.location" [component-name]="ldrData.name" [ldr-data]="ldrData" class="col-span-2 row-span-2" />
+            }
+            @if (proximityData){
+            <app-proximity-data-item component-room-name="garages" [component-location]="proximityData.location" [component-name]="proximityData.name" [proximity-data]="proximityData" class="col-span-2 row-span-2" />
+            }
+            @if (presenceData){
+            <app-presence-data-item component-room-name="garages" [component-location]="presenceData.location" [component-name]="presenceData.name" [presence-data]="presenceData" class="col-span-2 row-span-2" />
+            }
+
+    </div>
+    <div class="w-full grid grid-cols-8 max-w-full justify-center gap-4 mb-5 place-content-center">
+        <h2 class="col-span-8 font-semibold text-xl">Actuadores</h2>
+        <mat-divider class="col-span-8"></mat-divider>
+        @if(inLightData){
         <app-in-light-data-item [inlight-data]="inLightData" class="col-span-2 row-span-2"></app-in-light-data-item>
         }
         @if(doorData){
-            <app-door-data-item [door-data]="doorData" class="col-span-2 row-span-2"></app-door-data-item>
+        <app-door-data-item [door-data]="doorData" class="col-span-2 row-span-2"></app-door-data-item>
         }
         @if(exLightData){
-            <app-ex-light-data-item [exlight-data]="exLightData" class="col-span-2 row-span-2"></app-ex-light-data-item>
+        <app-ex-light-data-item [exlight-data]="exLightData" class="col-span-2 row-span-2"></app-ex-light-data-item>
         }
-   </div>
+        @if(buzzerData){
+        <app-buzzer-data-item [buzzer-data]="buzzerData" class="col-span-2 row-span-2"></app-buzzer-data-item>
+        }
+
+        @if (gateLeftData && gateRightData) {
+        <app-gate-double-data-item [gateLeft-data]="gateLeftData" [gateRight-data]="gateRightData"
+            class="col-span-2 row-span-2" />
+        }
+    </div>
 </section>

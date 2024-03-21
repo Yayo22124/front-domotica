@@ -1,33 +1,35 @@
+import { iApiResponse, iLastApiResponse, iSensorChartResponse } from '../../interfaces/i-ApiResponse';
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { apiUrl } from '../../constants/apiUrl.constant';
-import { iApiResponse } from '../../interfaces/i-ApiResponse';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BedroomsService {
-  constructor(
-    private http: HttpClient
-  ) {}
+  constructor(private http: HttpClient) {}
 
   getAllBedrooms(): Observable<iApiResponse> {
-    return this.http.get<iApiResponse>(`${apiUrl}/bedrooms/?limit=1000`)  
+    return this.http.get<iApiResponse>(`${apiUrl}/bedrooms/?limit=1000`);
   }
 
   getBedroomData(location: string): Observable<iApiResponse> {
-    return this.http.get<iApiResponse>(`${apiUrl}/bedrooms/?location=${location}&limit=1000`) ;
+    return this.http.get<iApiResponse>(
+      `${apiUrl}/bedrooms/?location=${location}&limit=1000`
+    );
   }
 
-  getComponentRecords(location: string, room: string, componentName: string): Observable<iApiResponse> {
-    return this.http.get<iApiResponse>(`${apiUrl}/rooms/component/?location=${location}&room=${room}&componentName=${componentName}`);
+  getLastData(location: string): Observable<iLastApiResponse> {
+    return this.http.get<iLastApiResponse>(
+      `${apiUrl}/bedrooms/last?location=${location}`
+    );
   }
-  
-  handleInLed(arduinoIp: string, status: boolean): Observable<iApiResponse> {
-    if (status === true) {
-      return this.http.get<iApiResponse>(`http://${arduinoIp}/ledOn`)
-    } 
-    return this.http.get<iApiResponse>(`http://${arduinoIp}/ledOff`)
+
+  getSensorChartData(location: string, sensorName: string): Observable<iSensorChartResponse> {
+    return this.http.get<iSensorChartResponse>(
+      `${apiUrl}/bedrooms/sensor/chart/?location=${location}&sensorName=${sensorName}`
+    );
   }
 }

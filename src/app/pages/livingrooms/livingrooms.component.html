@@ -6,10 +6,14 @@
         <h2 class="col-span-8 font-semibold text-xl">Sensores</h2>
         <mat-divider class="col-span-8"></mat-divider>
         @if (dhtData) {
-        <app-temperature-data-item [dht-data]="dhtData" class="col-span-2 row-span-2" />
+            <!-- * ----------- -->
+            <app-temperature-data-item component-room-name="livingrooms" [component-location]="dhtData.location" [component-name]="dhtData.name"  [dht-data]="dhtData" class="col-span-2 row-span-2" />
+            <!-- * ----------- -->
         }
         @if (ldrData) {
-        <app-photoresistor-data-item [ldr-data]="ldrData" class="col-span-2 row-span-2"/>
+            <!-- * ----------- -->
+            <app-photoresistor-data-item component-room-name="livingrooms" [component-location]="ldrData.location" [component-name]="ldrData.name" [ldr-data]="ldrData" class="col-span-2 row-span-2"/>
+            <!-- * ----------- -->
         }
        
     </div>

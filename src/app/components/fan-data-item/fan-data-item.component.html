@@ -1,6 +1,6 @@
 @if (fanData) {
-    <mat-card class="gap-5 p-2 flex flex-col justify-between">
-        <mat-card-header>
+    <mat-card class="relative gap-5 p-2 flex flex-col justify-between">
+        <mat-card-header class="mt-4">
             <mat-card-title class="text-xl font-medium">{{fanData.name}}</mat-card-title>
             <mat-card-subtitle><strong class="font-medium">Fecha inicial:</strong> {{fanData.registeredDate|
                 date:"short"}}</mat-card-subtitle>
@@ -13,12 +13,14 @@
                         <span class="material-symbols-outlined">
                             mode_fan
                         </span>
+                        <span>Ventilador Encendido</span>
                     </div>
             } @else {
                 <div matTooltip="Apagado"   matTooltipPosition="above" class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl to-gray-500 via-gray-400 from-gray-300 text-black mb-4">
                     <span class="material-symbols-outlined">
                         mode_fan_off
                     </span>
+                    <span>Ventilador Apagado</span>
                 </div>
                 }
                 <!-- <span>
@@ -26,11 +28,11 @@
                 </span> -->
     
            
-            <div class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl text-white mb-4">
-                <form action="">
-                    <mat-slide-toggle color="primary">Encender ventilador</mat-slide-toggle>
-                </form>
-            </div>
+                @if (action.value) {
+                    <mat-slide-toggle color="primary" class="absolute top-1 right-1" checked="true">Apagar</mat-slide-toggle>
+                } @else if (!action.value) {
+                    <mat-slide-toggle color="primary" class="absolute top-1 right-1" checked="false">Encender</mat-slide-toggle>
+                }
             }
         </mat-card-content>
         <mat-card-footer class="w-full flex items-center justify-center">

@@ -6,13 +6,13 @@
         <h2 class="col-span-8">Sensores</h2>
         <mat-divider class="col-span-8"></mat-divider>
         @if (ldrData) {
-        <app-photoresistor-data-item [ldr-data]="ldrData" class="col-span-2 row-span-2" />
+        <app-photoresistor-data-item component-room-name="bathrooms" [component-location]="ldrData.location" [component-name]="ldrData.name" [ldr-data]="ldrData" class="col-span-2 row-span-2" />
         }
         @if (proximityData){
-        <app-proximity-data-item [proximity-data]="proximityData" class="col-span-2 row-span-2" />
+        <app-proximity-data-item component-room-name="bathrooms" [component-location]="proximityData.location" [component-name]="proximityData.name" [proximity-data]="proximityData" class="col-span-2 row-span-2" />
         }
         @if (presenceData){
-        <app-presence-data-item [presence-data]="presenceData" class="col-span-2 row-span-2" />
+        <app-presence-data-item component-room-name="bathrooms" [component-location]="presenceData.location" [component-name]="presenceData.name" [presence-data]="presenceData" class="col-span-2 row-span-2" />
         }
     </div>
 

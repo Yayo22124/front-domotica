@@ -1,6 +1,6 @@
 @if(exLightData){
     <mat-card class="gap-5 p-2 flex flex-col justify-between col-span-2">
-        <mat-card-header>
+        <mat-card-header class="mt-4">
             <mat-card-title class="text-xl font-medium">Luz Exterior</mat-card-title>
             <mat-card-subtitle><strong class="font-medium">Ultimo Registro:</strong> {{exLightData.registeredDate|
                 date:"short"}}</mat-card-subtitle>
@@ -9,17 +9,17 @@
             @for (action of exLightData.actions; track $index) {
             @if(action.value == false){
                 <div matTooltip="Luz Apagada" matTooltipShowDelay="250" matTooltipHideDelay="300" matTooltipPosition="above" class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl to-gray-500 via-gray-400 from-gray-300   text-black">
-                
+                    <mat-icon>motion_photos_off</mat-icon>
                     <span>
-                        Apagado
+                        Apagada
                     </span>
                     
                 </div>
             }@else{
                 <div matTooltip="Luz Encendida" matTooltipShowDelay="250" matTooltipHideDelay="300" matTooltipPosition="above" class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl to-yellow-500 via-yellow-400 from-yellow-300   text-white">
-                
+                    <mat-icon>lightbulb</mat-icon>
                     <span>
-                        Encendido
+                        Encendida
                     </span>
                     
                 </div>
