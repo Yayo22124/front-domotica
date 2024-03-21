@@ -11,22 +11,33 @@ import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 @Component({
   selector: 'app-photoresistor-data-item',
   standalone: true,
-  imports: [MatCardModule, MatTooltipModule, MatButtonModule, MatIconModule, CommonModule],
+  imports: [
+    MatCardModule,
+    MatTooltipModule,
+    MatButtonModule,
+    MatIconModule,
+    CommonModule,
+  ],
   templateUrl: './photoresistor-data-item.component.html',
-  styleUrl: './photoresistor-data-item.component.scss'
+  styleUrl: './photoresistor-data-item.component.scss',
 })
 export class PhotoresistorDataItemComponent {
-  constructor(
-    private router: Router,
-  ) {
-    
-  }
-  @Input("ldr-data") ldrData: iSensorsData | null = null;
+  // * -----------
+  constructor(private router: Router) {}
+  // * -----------
+  @Input('ldr-data') ldrData: iSensorsData | null = null;
+
+  // * -----------
   @Input('component-room-name') componentRoomName: string | null = null;
   @Input('component-location') componentLocation: string | null = null;
   @Input('component-name') componentName: string | null = null;
-
+  // * -----------
+  
+  // * -----------
   seeMore() {
-    this.router.navigate([`${this.componentRoomName}/sensor/${this.componentLocation}/${this.componentName}`]);
+    this.router.navigate([
+      `${this.componentRoomName}/sensor/${this.componentLocation}/${this.componentName}`,
+    ]);
   }
+  // * -----------
 }

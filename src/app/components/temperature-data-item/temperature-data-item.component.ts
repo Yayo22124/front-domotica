@@ -23,14 +23,23 @@ import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
   styleUrl: './temperature-data-item.component.scss',
 })
 export class TemperatureDataItemComponent {
+  // * ----------
   constructor(private router: Router) {}
-
+  // * ----------
+  
   @Input('dht-data') dhtData: iSensorsData | null = null;
+  
+  // * ----------
   @Input('component-room-name') componentRoomName: string | null = null;
   @Input('component-location') componentLocation: string | null = null;
   @Input('component-name') componentName: string | null = null;
-
+  // * ----------
+  
+  // * ----------
   seeMore() {
-    this.router.navigate([`${this.componentRoomName}/sensor/${this.componentLocation}/${this.componentName}`]);
+    this.router.navigate([
+      `${this.componentRoomName}/sensor/${this.componentLocation}/${this.componentName}`,
+    ]);
   }
+  // * ----------
 }
