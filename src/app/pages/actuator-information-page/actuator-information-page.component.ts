@@ -57,14 +57,14 @@ export class ActuatorInformationPageComponent implements OnInit {
       this.getActuatorRecords(
         params.get('location') || '',
         params.get('room') || '',
-        params.get('sensorName') || ''
+        params.get('actuatorName') || ''
       );
     });
   }
 
-  getActuatorRecords(location: string, room: string, sensorName: string) {
+  getActuatorRecords(location: string, room: string, actuatorName: string) {
     this.loadingService.showLoading();
-    this.roomsService.getActuatorRecords(location, room, sensorName).subscribe(
+    this.roomsService.getActuatorRecords(location, room, actuatorName).subscribe(
       (res) => {
         console.log(res);
         this.dataSource.data = res.records; // Asignar los datos al dataSource

@@ -18,7 +18,7 @@
                 }
                 
                 @if (action.value) {
-                    <mat-slide-toggle color="primary" class="absolute top-1 right-1" checked="true">Cerrar</mat-slide-toggle>
+                    <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value" [disabled]="isLoading" (toggleChange)="action.value ? turnOff(doorData.arduinoIp) : turnOn(doorData.arduinoIp)">Cerrar</mat-slide-toggle>
                 } @else if (!action.value) {
                     <mat-slide-toggle color="primary" class="absolute top-1 right-1" checked="false">Abrir</mat-slide-toggle>
                 }
