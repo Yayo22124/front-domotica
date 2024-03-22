@@ -26,13 +26,9 @@
                 <!-- <span>
                     {{action.name}}
                 </span> -->
-    
-           
-                @if (action.value) {
-                    <mat-slide-toggle color="primary" class="absolute top-1 right-1" checked="true">Apagar</mat-slide-toggle>
-                } @else if (!action.value) {
-                    <mat-slide-toggle color="primary" class="absolute top-1 right-1" checked="false">Encender</mat-slide-toggle>
-                }
+                <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value" [disabled]="isLoading" (toggleChange)="action.value ? fanOff(fanData.arduinoIp) : fanOn(fanData.arduinoIp)">
+                    @if (action.value) { Apagar } @else { Encender }
+                </mat-slide-toggle>
             }
         </mat-card-content>
         <mat-card-footer class="w-full flex items-center justify-center">
