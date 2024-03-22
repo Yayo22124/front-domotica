@@ -38,6 +38,13 @@
         </mat-accordion>
 
     </div>
+    <div class="w-full flex justify-around items-center">
+        <highcharts-chart 
+        [Highcharts]="Highcharts"
+        [options]="chartOptions"
+        class="w-1/2"
+      ></highcharts-chart>
+    </div>
 
     <h2 class="font-medium text-xl">Registros del sensor:</h2>
     <table mat-table [dataSource]="dataSource">
