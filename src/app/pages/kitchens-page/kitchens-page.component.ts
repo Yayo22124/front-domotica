@@ -127,7 +127,7 @@ export class KitchensPageComponent implements OnInit {
             (actuator) => actuator.name === 'Led Exterior'
           )!;
           this.buzzerData = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Buzzer'
+            (actuator) => actuator.name === 'Alarma' || actuator.name === "Buzzer"
           )!;
         }
         this.loadingService.hideLoading();
@@ -137,5 +137,9 @@ export class KitchensPageComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  onActuatorUpdate() {
+    this.getKitchenData(this.kitchenName!);
   }
 }

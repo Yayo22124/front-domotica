@@ -21,13 +21,13 @@
         <h2 class="col-span-8">Actuadores</h2>
         <mat-divider class="col-span-8"></mat-divider>
         @if (doorData){
-            <app-door-data-item component-room-name="bathrooms" [component-location]="doorData.location" [component-name]="doorData.name" [door-data]="doorData" class="col-span-2 row-span-2"></app-door-data-item>
+            <app-door-data-item (actuator-updated)="onActuatorUpdate()" component-room-name="bathrooms" [component-location]="doorData.location" [component-name]="doorData.name" [door-data]="doorData" class="col-span-2 row-span-2"></app-door-data-item>
         }
         @if (waterPumpData){
-            <app-water-pump-data-item component-room-name="bathrooms" [component-location]="waterPumpData.location" [component-name]="waterPumpData.name" [waterPump]="waterPumpData" class="col-span-2 row-span-2"/>
+            <app-water-pump-data-item (actuator-updated)="onActuatorUpdate()" component-room-name="bathrooms" [component-location]="waterPumpData.location" [component-name]="waterPumpData.name" [waterPump]="waterPumpData" class="col-span-2 row-span-2"/>
             }
         @if (inLightData){
-            <app-in-light-data-item component-room-name="bathrooms" [component-location]="inLightData.location" [component-name]="inLightData.name" [inlight-data]="inLightData" class="col-span-2 row-span-2"></app-in-light-data-item>
+            <app-in-light-data-item (actuator-updated)="onActuatorUpdate()" component-room-name="bathrooms" [component-location]="inLightData.location" [component-name]="inLightData.name" [inlight-data]="inLightData" class="col-span-2 row-span-2"></app-in-light-data-item>
         }
         @if (exLightData){
             <app-ex-light-data-item component-room-name="bathrooms" [component-location]="exLightData.location" [component-name]="exLightData.name" [exlight-data]="exLightData" class="col-span-2 row-span-2"></app-ex-light-data-item>

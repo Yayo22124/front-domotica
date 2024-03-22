@@ -21,13 +21,13 @@
         <mat-divider class="col-span-8"></mat-divider>
         
         @if(fanData){
-            <app-fan-data-item component-room-name="bedrooms" [component-location]="fanData.location" [component-name]="fanData.name" [fan-data]="fanData" class="col-span-2 row-span-2"></app-fan-data-item>
+            <app-fan-data-item (actuator-updated)="onActuatorUpdate()" component-room-name="bedrooms" [component-location]="fanData.location" [component-name]="fanData.name" [fan-data]="fanData" class="col-span-2 row-span-2"></app-fan-data-item>
         }
         @if(inLightData){
-            <app-in-light-data-item component-room-name="bedrooms" [component-location]="inLightData.location" [component-name]="inLightData.name" [inlight-data]="inLightData" class="col-span-2 row-span-2"></app-in-light-data-item>
+            <app-in-light-data-item (actuator-updated)="onActuatorUpdate()" component-room-name="bedrooms" [component-location]="inLightData.location" [component-name]="inLightData.name" [inlight-data]="inLightData" class="col-span-2 row-span-2"></app-in-light-data-item>
         }
         @if(doorData){
-            <app-door-data-item component-room-name="bedrooms" [component-location]="doorData.location" [component-name]="doorData.name" [door-data]="doorData" class="col-span-2 row-span-2"></app-door-data-item>
+            <app-door-data-item (actuator-updated)="onActuatorUpdate()" component-room-name="bedrooms" [component-location]="doorData.location" [component-name]="doorData.name" [door-data]="doorData" class="col-span-2 row-span-2"></app-door-data-item>
         }
         @if(exLightData){
             <app-ex-light-data-item component-room-name="bedrooms" [component-location]="exLightData.location" [component-name]="exLightData.name" [exlight-data]="exLightData" class="col-span-2 row-span-2"></app-ex-light-data-item>

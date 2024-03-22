@@ -133,4 +133,8 @@ export class BedroomsPageComponent implements OnInit {
       }
     );
   }
+
+  onActuatorUpdate() {
+    this.getBedroomData(this.bedroomName!);
+  }
 }

@@ -117,7 +117,7 @@ export class GaragesPageComponent implements OnInit {
             (actuator) => actuator.name === 'Led Exterior'
           )!;
           this.buzzerData = this.garageActuators.find(
-            (actuator) => actuator.name === 'Buzzer'
+            (actuator) => actuator.name === 'Alarma' || actuator.name === "Buzzer"
           )!;
           this.gateLeftData = this.garageActuators.find(
             (actuator) => actuator.name === 'Porton Izquierda'
@@ -133,5 +133,9 @@ export class GaragesPageComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  onActuatorUpdate() {
+    this.getGaragesData(this.garageName!);
   }
 }

@@ -137,4 +137,8 @@ export class LivingroomsComponent implements OnInit {
       }
     );
   }
+
+  onActuatorUpdate() {
+    this.getLivingroomData(this.livingroomName!);
+  }
 }

@@ -1,17 +1,17 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+
 import { CommonModule } from '@angular/common';
+import { ComponentControlService } from '../../core/services/ComponentControl/component-control.service';
+import { LoadingService } from '../../core/services/Loading/loading.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
-
-import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
-import { ComponentControlService } from '../../core/services/ComponentControl/component-control.service';
-import { LoadingService } from '../../core/services/Loading/loading.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
+import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
+
 @Component({
   selector: 'app-fan-data-item',
   standalone: true,
@@ -35,6 +35,9 @@ export class FanDataItemComponent {
   @Input('component-location') componentLocation: string | null = null;
   @Input('component-name') componentName: string | null = null;
 
+  @Output('actuator-updated') actuatorUpdated: EventEmitter<void> =
+    new EventEmitter<void>();
+
   seeMore() {
     this.router.navigate([
       `${this.componentRoomName}/actuator/${this.componentLocation}/${this.componentName}`,
@@ -50,6 +53,7 @@ export class FanDataItemComponent {
       (res)=>{
         this.loadingService.hideLoading();
         this.isLoading = false;
+        this.actuatorUpdated.emit();
         this._snackbar.open("Ventilador Encendido", "Cerrar", {
           duration: 2.5*1000
         });
@@ -57,6 +61,7 @@ export class FanDataItemComponent {
       (err) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
+        this.actuatorUpdated.emit();
         this._snackbar.open("Error al apagar el Ventilador", "Cerrar", {
           duration: 2.5*1000
         });
@@ -70,6 +75,7 @@ export class FanDataItemComponent {
       (res)=>{
         this.loadingService.hideLoading();
         this.isLoading = false;
+        this.actuatorUpdated.emit();
         this._snackbar.open("Ventilador Apagado", "Cerrar", {
           duration: 2.5*1000
         });
@@ -77,6 +83,7 @@ export class FanDataItemComponent {
       (err) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
+        this.actuatorUpdated.emit();
         this._snackbar.open("Error al apagar el Ventilador", "Cerrar", {
           duration: 2.5*1000
         });

@@ -95,15 +95,30 @@ export class ActuatorInformationPageComponent implements OnInit {
   }
 
   getActions(record: iActuatorsData): any {
-    let actions: string = '';
-    if (record.actions.length > 1) {
-      return record.actions
-        .map((action) => `${action.value}`)
-        .join(', ');
+    if (this.actuatorName.includes("Ventilador")) {
+      return record.actions.map((action) => {
+        if (action.value) {
+          return "Encendido";
+        } 
+        return "Apagado";
+      });
     }
-    return record.actions.map((action) => {
-      return `${action.value}`;
-    });
+    if (this.actuatorName.startsWith("Puerta") || this.actuatorName.startsWith("Ventana")) {
+      return record.actions.map((action) => {
+        if (action.value) {
+          return "Abierta";
+        } 
+        return "Cerrada";
+      });
+    }
+    if (this.actuatorName.startsWith("Luz") || this.actuatorName.includes("Led") || this.actuatorName.startsWith("Alarma")) {
+      return record.actions.map((action) => {
+        if (action.value) {
+          return "Encendida";
+        } 
+        return "Apagada";
+      });
+    }
   }
 
   goBack() {

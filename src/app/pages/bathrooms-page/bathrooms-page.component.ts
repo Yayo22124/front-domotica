@@ -120,4 +120,8 @@ export class BathroomsPageComponent implements OnInit {
       }
     );
   }
+
+  onActuatorUpdate() {
+    this.getBathroomsData(this.bathroomName!);
+  }
 }
