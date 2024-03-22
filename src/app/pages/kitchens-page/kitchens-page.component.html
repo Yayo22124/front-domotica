@@ -20,22 +20,22 @@
         <h2 class="col-span-8 font-semibold text-xl">Actuadores</h2>
         <mat-divider class="col-span-8"></mat-divider>
         @if (fanData) {
-            <app-fan-data-item [fan-data]="fanData" class="col-span-2 row-span-2"/>
+            <app-fan-data-item component-room-name="kitchens" [component-location]="fanData.location" [component-name]="fanData.name" [fan-data]="fanData" class="col-span-2 row-span-2"></app-fan-data-item>
             }
         @if (doorData) {
-            <app-door-data-item [door-data]="doorData" class="col-span-2 row-span-2"/>
+            <app-door-data-item component-room-name="kitchens" [component-location]="doorData.location" [component-name]="doorData.name" [door-data]="doorData" class="col-span-2 row-span-2"></app-door-data-item>
             }    
         @if (inLightData) {
-            <app-in-light-data-item [inlight-data]="inLightData" class="col-span-2 row-span-2"/>
+            <app-in-light-data-item component-room-name="kitchens" [component-location]="inLightData.location" [component-name]="inLightData.name" [inlight-data]="inLightData" class="col-span-2 row-span-2"></app-in-light-data-item>
             }    
         @if (exLightData) {
-            <app-ex-light-data-item [exlight-data]="exLightData" class="col-span-2 row-span-2"/>
+            <app-ex-light-data-item component-room-name="kitchens" [component-location]="exLightData.location" [component-name]="exLightData.name" [exlight-data]="exLightData" class="col-span-2 row-span-2"></app-ex-light-data-item>
         }
         @if (buzzerData) {
-            <app-buzzer-data-item [buzzer-data]="buzzerData" class="col-span-2 row-span-2"/>
+            <app-buzzer-data-item component-room-name="kitchens" [component-location]="buzzerData.location" [component-name]="buzzerData.name" [buzzer-data]="buzzerData" class="col-span-2 row-span-2"/>
         }      
         @if (windowLeftData && windowRightData) {
-            <app-window-double-data-item [windowDL-data]="windowLeftData" [windowDR-data]="windowRightData" class="col-span-2 row-span-2" />
+            <app-window-double-data-item component-room-name="livingrooms" [component-location]="windowRightData.location" [component-name]="windowRightData.name" [windowDL-data]="windowLeftData" [windowDR-data]="windowRightData" class="col-span-2 row-span-2" />
         }
          
         </div>
