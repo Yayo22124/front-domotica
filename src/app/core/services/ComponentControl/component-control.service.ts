@@ -13,36 +13,36 @@ export class ComponentControlService {
   private url = "http://";
 
   lightOn(arduinoIp: string): Observable<any> {
-    return this.http.get<any>(`${this.url}${arduinoIp}/ledOn`)
+    return this.http.get<any>(`${this.url}${arduinoIp}/ledIndoorOn`)
   }
   
   lightOff(arduinoIp: string): Observable<any> {
-    return this.http.get<any>(`${this.url}${arduinoIp}/ledOff`)
+    return this.http.get<any>(`${this.url}${arduinoIp}/ledIndoorOff`)
   }
 
   doubleWindowsOpen(arduinoIp: string): Observable<any> {
-    const windowLeft = this.http.get<any>(`${this.url}${arduinoIp}/windowLeftOn`);
-    const windowRight = this.http.get<any>(`${this.url}${arduinoIp}/windowRightOn`);
+    const windowLeft = this.http.get<any>(`${this.url}${arduinoIp}/windowLeftOpen`);
+    const windowRight = this.http.get<any>(`${this.url}${arduinoIp}/windowRightOpen`);
 
     return windowLeft;
   }
 
   doubleWindowsClose(arduinoIp: string): Observable<any> {
-    const windowLeft = this.http.get<any>(`${this.url}${arduinoIp}/windowLeftOff`);
-    const windowRight = this.http.get<any>(`${this.url}${arduinoIp}/windowRightOff`);
+    const windowLeft = this.http.get<any>(`${this.url}${arduinoIp}/windowLeftClose`);
+    const windowRight = this.http.get<any>(`${this.url}${arduinoIp}/windowRightClose`);
 
     return windowLeft;
   }
   
   
   simpleWindowOpen(arduinoIp: string): Observable<any> {
-    const window = this.http.get<any>(`${this.url}${arduinoIp}/windowOn`);
+    const window = this.http.get<any>(`${this.url}${arduinoIp}/windowLeftOpen`);
     
     return window;
   }
   
   simpleWindowClose(arduinoIp: string): Observable<any> {
-    const window = this.http.get<any>(`${this.url}${arduinoIp}/windowOff`);
+    const window = this.http.get<any>(`${this.url}${arduinoIp}/windowLeftClose`);
     
     return window;
   }
