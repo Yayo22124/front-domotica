@@ -11,6 +11,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 
+
 @Component({
   selector: 'app-in-light-data-item',
   standalone: true,
