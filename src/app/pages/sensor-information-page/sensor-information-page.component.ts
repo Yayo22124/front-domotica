@@ -15,6 +15,7 @@ import { RoomsService } from '../../core/services/Rooms/rooms.service';
 import { SensorChartComponent } from '../../components/sensor-chart/sensor-chart.component';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
+import { pollingIntervalTime } from '../../core/constants/pollingInterval';
 
 @Component({
   standalone: true,
@@ -56,6 +57,8 @@ export class SensorInformationPageComponent implements OnInit {
   private loadingService = inject(LoadingService);
   private location = inject(Location);
 
+  private pollingInterval: any;
+
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.sensorName = params.get('sensorName') || '';
@@ -66,8 +69,19 @@ export class SensorInformationPageComponent implements OnInit {
         params.get('sensorName') || ''
       );
     });
+
+    this.pollingInterval = setInterval(() => {
+      this.getSensorRecords(
+        this.route.snapshot.params['location'],
+        this.route.snapshot.params['room'],
+        this.route.snapshot.params['sensorName'],
+      );
+    }, pollingIntervalTime);
   }
 
+  ngOnDestroy(): void {
+    clearInterval(this.pollingInterval);
+  }
   getSensorRecords(location: string, room: string, sensorName: string) {
     this.loadingService.showLoading();
     this.roomsService.getSensorRecords(location, room, sensorName).subscribe(

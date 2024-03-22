@@ -21,6 +21,7 @@ import { WindowDoubleDataItemComponent } from '../../components/window-double-da
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
+import { pollingIntervalTime } from '../../core/constants/pollingInterval';
 
 @Component({
   selector: 'app-kitchens-page',
@@ -67,12 +68,23 @@ export class KitchensPageComponent implements OnInit {
     private loadingService: LoadingService
   ) {}
 
+  private pollingInterval: any;
+
+
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.kitchenName = params.get('location');
 
       this.getKitchenData(this.kitchenName!);
     });
+
+    this.pollingInterval = setInterval(() => {
+      this.getKitchenData(this.kitchenName!);
+    }, pollingIntervalTime);
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.pollingInterval);
   }
 
   getKitchenData(location: string) {

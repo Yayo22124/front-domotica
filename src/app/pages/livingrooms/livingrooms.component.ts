@@ -20,6 +20,7 @@ import { WindowDoubleDataItemComponent } from '../../components/window-double-da
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
+import { pollingIntervalTime } from '../../core/constants/pollingInterval';
 
 @Component({
   selector: 'app-livingrooms',
@@ -70,6 +71,9 @@ export class LivingroomsComponent implements OnInit {
   public inLightData: iActuatorsData | null = null;
   public exLightData: iActuatorsData | null = null;
 
+  private pollingInterval: any;
+
+
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       // * --------
@@ -78,6 +82,14 @@ export class LivingroomsComponent implements OnInit {
       // * --------
       this.getLivingroomData(this.livingroomName!);
     });
+
+    this.pollingInterval = setInterval(() => {
+      this.getLivingroomData(this.livingroomName!);
+    }, pollingIntervalTime);
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.pollingInterval);
   }
 
   getLivingroomData(location: string) {

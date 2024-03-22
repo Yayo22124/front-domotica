@@ -13,6 +13,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RoomsService } from '../../core/services/Rooms/rooms.service';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
+import { pollingIntervalTime } from '../../core/constants/pollingInterval';
 
 @Component({
   selector: 'app-actuator-information-page',
@@ -43,6 +44,9 @@ export class ActuatorInformationPageComponent implements OnInit {
   roomName: string = '';
   specifications: any[] = [];
 
+  private pollingInterval: any;
+
+
   constructor(
     private roomsService: RoomsService,
     private route: ActivatedRoute,
@@ -60,6 +64,18 @@ export class ActuatorInformationPageComponent implements OnInit {
         params.get('actuatorName') || ''
       );
     });
+    
+    this.pollingInterval = setInterval(() => {
+      this.getActuatorRecords(
+        this.roomName,
+        this.route.snapshot.params['room'],
+        this.actuatorName
+      );
+    }, pollingIntervalTime);
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.pollingInterval);
   }
 
   getActuatorRecords(location: string, room: string, actuatorName: string) {

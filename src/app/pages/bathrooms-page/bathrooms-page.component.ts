@@ -20,6 +20,7 @@ import { apiUrl } from '../../core/constants/apiUrl.constant';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
+import { pollingIntervalTime } from '../../core/constants/pollingInterval';
 
 @Component({
   selector: 'app-bathrooms-page',
@@ -54,6 +55,9 @@ export class BathroomsPageComponent implements OnInit {
   public exLightData: iActuatorsData | null = null;
   public waterPumpData: iActuatorsData | null = null;
 
+  private pollingInterval: any;
+
+
   constructor(
     private bathroomsService: BathroomsService,
     private route: ActivatedRoute,
@@ -64,7 +68,17 @@ export class BathroomsPageComponent implements OnInit {
       this.bathroomName = params.get('location');
       this.getBathroomsData(this.bathroomName!);
     });
+
+    this.pollingInterval = setInterval(() => {
+      this.getBathroomsData(this.bathroomName!);
+    }, pollingIntervalTime);
   }
+
+  ngOnDestroy(): void {
+    clearInterval(this.pollingInterval);
+  }
+
+
   getBathroomsData(location: string) {
     this.loadinService.showLoading();
     this.bathroomsService.getBathroomsData(location).subscribe(
