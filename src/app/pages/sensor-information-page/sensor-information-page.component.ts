@@ -35,8 +35,7 @@ import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 export class SensorInformationPageComponent implements OnInit {
   Highcharts: typeof Highcharts = Highcharts;
 
-  chartOptions!: Highcharts.Options;
-
+  
   displayedColumns: string[] = [
     'registro',
     'ubicacion',
@@ -44,12 +43,13 @@ export class SensorInformationPageComponent implements OnInit {
     'lecturas',
     'fecha',
   ]; // Definir las columnas a mostrar
-
+  
   dataSource = new MatTableDataSource<iSensorsData | iActuatorsData>(); // DataSource para la tabla
   sensorName: string = '';
   roomName: string = '';
   specifications: any[] = [];
   records: iSensorsData[] = [];
+  chartOptions!: Highcharts.Options;
 
   private roomsService = inject(RoomsService);
   private route = inject(ActivatedRoute);
@@ -78,6 +78,10 @@ export class SensorInformationPageComponent implements OnInit {
         this.records = res.records;
         
         this.getCharts();
+        console.log(
+          "Current date",
+          new Date(this.records[0].registeredDate)
+        );
         this.loadingService.hideLoading();
       },
       (error) => {
@@ -102,19 +106,29 @@ export class SensorInformationPageComponent implements OnInit {
   }
   
   getCharts() {
+    const formattedRecords = this.records.map(record => ({
+      ...record,
+      formattedDate: Highcharts.dateFormat('%Y-%m-%d %H:%M', Date.parse(record.registeredDate))
+    }));
     if (this.sensorName.toLocaleLowerCase().includes("temperatura")) {
-      this.chartOptions = {
+      return this.chartOptions = {
+        time: {
+          timezone: "America/Mexico_City"
+        },
         title: {
           text: 'Temperatura y Humedad',
         },
+        xAxis: {
+          type: "datetime",
+          categories: formattedRecords.map(record => record.formattedDate), // Usar las fechas formateadas
+        },
         series: [
           {
-            type: 'spline',
+            type: 'line',
             name: 'Temperatura',
             color: "#10b981",
             data: this.records.map((record, index) => {
               return {
-                x: index,
                 y: record.readings[0].value,
                 name: 'Detección de Temperatura',
                 color: "#059669"
@@ -122,12 +136,11 @@ export class SensorInformationPageComponent implements OnInit {
             }),
           },
           {
-            type: 'spline',
+            type: 'line',
             name: 'Humedad',
             color: "#475569",
             data: this.records.map((record, index) => {
               return {
-                x: index,
                 y: record.readings[1].value,
                 color: "#0f172a",
                 name: 'Detección de Humedad',
@@ -137,25 +150,78 @@ export class SensorInformationPageComponent implements OnInit {
         ],
       };  
     } else {
-      this.chartOptions = {
+      let chartTitle: string = "";
+      let chartName: string = "";
+
+      if (this.records[0].name.toLocaleLowerCase().includes("presencia")) {
+        chartTitle = "Presencia"
+        chartName = "Detección de Presencia"
+        return this.chartOptions = {
+          time: {
+            timezone: "America/Mexico_City"
+          },
+          title: {
+            text: chartTitle,
+          },
+          xAxis: {
+            type: "datetime",
+            categories: formattedRecords.map(record => record.formattedDate), // Usar las fechas formateadas
+          },
+          series: [
+            {
+              type: "column",
+              color: "#10b981",
+              name: chartName,
+              data: this.records.map((record, index) => {
+                return {
+                  x: index,
+                  color: "#059669",
+                  y: record.readings[0].value,
+                  name: chartName,
+                };
+              }),
+            },
+          ],
+        };
+      }
+      if (this.records[0].name.toLocaleLowerCase().includes("proximidad")) {
+        chartTitle = "Registros de Proximidad",
+        chartName = "Detección de Proximidad"
+      } else if (this.records[0].name.toLocaleLowerCase().includes("fotorresistencia")) {
+        chartTitle = "Registros de Iluminación",
+        chartName = "Detección de Iluminación"
+
+      }
+
+      return this.chartOptions = {
+        time: {
+          timezone: "America/Mexico_City"
+        },
         title: {
-          text: this.records[0].name,
+          text: chartTitle,
+        },
+        xAxis: {
+          type: "datetime",
+          categories: formattedRecords.map(record => record.formattedDate), // Usar las fechas formateadas
         },
         series: [
           {
-            type: 'line',
+            type: "area",
             color: "#10b981",
+            name: chartName,
             data: this.records.map((record, index) => {
               return {
                 x: index,
                 color: "#059669",
                 y: record.readings[0].value,
-                name: record.name,
+                name: chartName,
               };
             }),
           },
         ],
       };
+      
+      
     }
 
   }
