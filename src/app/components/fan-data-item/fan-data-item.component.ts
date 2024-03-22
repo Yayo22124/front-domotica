@@ -11,6 +11,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { ComponentControlService } from '../../core/services/ComponentControl/component-control.service';
 import { LoadingService } from '../../core/services/Loading/loading.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-fan-data-item',
   standalone: true,
@@ -23,11 +24,23 @@ export class FanDataItemComponent {
   constructor(
     private componentService: ComponentControlService, 
     private loadingService: LoadingService, 
-    private _snackbar: MatSnackBar) {
+    private _snackbar: MatSnackBar,
+    private router: Router) {
     
   }
 
   @Input("fan-data") fanData: iActuatorsData | null = null;
+
+  @Input('component-room-name') componentRoomName: string | null = null;
+  @Input('component-location') componentLocation: string | null = null;
+  @Input('component-name') componentName: string | null = null;
+
+  seeMore() {
+    this.router.navigate([
+      `${this.componentRoomName}/actuator/${this.componentLocation}/${this.componentName}`,
+    ]);
+  }
+
   public isLoading: boolean = false;
 
   fanOn(arduinoIp:string){

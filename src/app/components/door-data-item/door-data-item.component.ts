@@ -9,6 +9,7 @@ import { ComponentControlService } from '../../core/services/ComponentControl/co
 import { LoadingService } from '../../core/services/Loading/loading.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-door-data-item',
@@ -18,10 +19,21 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
   styleUrl: './door-data-item.component.scss'
 })
 export class DoorDataItemComponent {
-  constructor(private componentService: ComponentControlService, private loadingService: LoadingService, private _snackbar: MatSnackBar) {
+  constructor(private componentService: ComponentControlService, private loadingService: LoadingService, private _snackbar: MatSnackBar, private router: Router) {
 
   }
   @Input("door-data") doorData : iActuatorsData | null = null;
+
+  @Input('component-room-name') componentRoomName: string | null = null;
+  @Input('component-location') componentLocation: string | null = null;
+  @Input('component-name') componentName: string | null = null;
+
+  seeMore() {
+    this.router.navigate([
+      `${this.componentRoomName}/actuator/${this.componentLocation}/${this.componentName}`,
+    ]);
+  }
+
   public isLoading: boolean = false;
 
   turnOff(arduinoIp:string) {
