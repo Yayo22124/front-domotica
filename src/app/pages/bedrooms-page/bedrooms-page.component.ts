@@ -1,7 +1,4 @@
-import * as Highcharts from 'highcharts';
-
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   iApiResponse,
@@ -12,55 +9,36 @@ import { BedroomsService } from '../../core/services/Bedrooms/bedrooms.service';
 import { DoorDataItemComponent } from '../../components/door-data-item/door-data-item.component';
 import { ExLightDataItemComponent } from '../../components/ex-light-data-item/ex-light-data-item.component';
 import { FanDataItemComponent } from '../../components/fan-data-item/fan-data-item.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HighchartsChartModule } from 'highcharts-angular';
 import { InLightDataItemComponent } from '../../components/in-light-data-item/in-light-data-item.component';
 import { LoadingService } from '../../core/services/Loading/loading.service';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { PhotoresistorDataItemComponent } from '../../components/photoresistor-data-item/photoresistor-data-item.component';
+import { Subscription } from 'rxjs';
 import { TemperatureDataItemComponent } from '../../components/temperature-data-item/temperature-data-item.component';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
+import { pollingIntervalTime } from '../../core/constants/pollingInterval';
 
 @Component({
   selector: 'app-bedrooms-page',
   standalone: true,
   imports: [
-    MatCardModule,
     MatButtonModule,
-    CommonModule,
     MatIconModule,
     MatDividerModule,
     TemperatureDataItemComponent,
     PhotoresistorDataItemComponent,
-    FontAwesomeModule,
-    MatCardModule,
-    MatButtonModule,
-    CommonModule,
-    MatIconModule,
-    MatDividerModule,
-    TemperatureDataItemComponent,
-    PhotoresistorDataItemComponent,
-    FontAwesomeModule,
-    MatSlideToggleModule,
     FanDataItemComponent,
     InLightDataItemComponent,
     DoorDataItemComponent,
     ExLightDataItemComponent,
-    HighchartsChartModule
   ],
   templateUrl: './bedrooms-page.component.html',
   styleUrl: './bedrooms-page.component.scss',
 })
 export class BedroomsPageComponent implements OnInit {
-  // * ####################
-  Highcharts: typeof Highcharts = Highcharts;
-  chartOptions!: Highcharts.Options;
-  // * ####################
   public sensorsData!: { _id: string; lastRecord: iSensorsData }[];
   public actuatorsData!: { _id: string; lastRecord: iActuatorsData }[];
   public bedroomName: string | null = '';
@@ -75,6 +53,9 @@ export class BedroomsPageComponent implements OnInit {
   public inLightData: iActuatorsData | undefined = undefined;
   public exLightData: iActuatorsData | undefined = undefined;
 
+  private pollingInterval: any;
+
+
   constructor(
     private bedroomsService: BedroomsService,
     private route: ActivatedRoute,
@@ -85,30 +66,20 @@ export class BedroomsPageComponent implements OnInit {
   public roomPath: string = '';
 
   ngOnInit(): void {
-    this.bedroomsService.getSensorChartData("Recámara 3", "Fotorresistencia").subscribe((res) => {
-      console.log(res.data);
-      const colors = ['red', 'blue', 'green', 'yellow', 'orange', 'purple'];
-      this.chartOptions = {
-        title: {
-          text: "Lecturas de Iluminación"
-        },
-        series: [{
-          name: 'Fotorresistencia',
-          data: res.data,
-          type: 'spline'
-        }]
-        
-      };
-    });
-    
-  
-
     this.route.paramMap.subscribe((params) => {
       this.room = this.bedroomName = params.get('location');
       console.log(this.router.url);
       this.roomPath = this.router.url;
       this.getBedroomData(this.bedroomName!);
     });
+
+    this.pollingInterval = setInterval(() => {
+      this.getBedroomData(this.bedroomName!);
+    }, pollingIntervalTime);
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.pollingInterval);
   }
 
   getBedroomData(location: string) {

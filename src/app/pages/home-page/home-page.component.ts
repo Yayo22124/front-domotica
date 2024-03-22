@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RoomsService } from '../../core/services/Rooms/rooms.service';
 import { RouterLink } from '@angular/router';
 import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
+import { pollingIntervalTime } from '../../core/constants/pollingInterval';
 
 @Component({
   selector: 'app-home-page',
@@ -29,9 +30,19 @@ export class HomePageComponent implements OnInit {
   ) {}
   public rooms: any = {};
 
+  private pollingInterval: any;
+
+
   ngOnInit(): void {
     this.getRoomsNames();
-    console.log(this.rooms);
+    
+    this.pollingInterval = setInterval(() => {
+      this.getRoomsNames();
+    }, pollingIntervalTime);
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.pollingInterval);
   }
 
   getRoomsNames() {

@@ -20,6 +20,7 @@ import { ProximityDataItemComponent } from '../../components/proximity-data-item
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
+import { pollingIntervalTime } from '../../core/constants/pollingInterval';
 
 @Component({
   selector: 'app-garages-page',
@@ -66,12 +67,23 @@ export class GaragesPageComponent implements OnInit {
   public gateLeftData: iActuatorsData | null = null;
   public gateRightData: iActuatorsData | null = null;
 
+  private pollingInterval: any;
+
+
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.garageName = params.get('location');
 
       this.getGaragesData(this.garageName!);
     });
+
+    this.pollingInterval = setInterval(() => {
+      this.getGaragesData(this.garageName!);
+    }, pollingIntervalTime); // 5000 milisegundos = 5 segundos
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.pollingInterval);
   }
 
   getGaragesData(location: string) {
