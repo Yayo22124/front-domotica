@@ -17,7 +17,8 @@
         } @else {
         <div matTooltip="Puerta cerrada" matTooltipPosition="above"
             class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-gray-300 via-gray-400 to-gray-500 text-white">
-            <span>Cerrada</span><mat-icon>door_front</mat-icon> </div>
+            <span>Cerrada</span><mat-icon>door_front</mat-icon>
+        </div>
         }
 
         <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value" [disabled]="isLoading"
