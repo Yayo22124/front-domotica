@@ -108,7 +108,7 @@ export class ExLightDataItemComponent {
   lightOff(arduinoIp: string) {
     this.isLoading = true;
     this.loadingService.showLoading();
-    this.componentService.lightOff(arduinoIp).subscribe(
+    this.componentService.lightOutOff(arduinoIp).subscribe(
       (res) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
@@ -130,7 +130,7 @@ export class ExLightDataItemComponent {
   lightOn(arduinoIp: string) {
     this.isLoading = true;
     this.loadingService.showLoading();
-    this.componentService.lightOn(arduinoIp).subscribe(
+    this.componentService.lightOutOn(arduinoIp).subscribe(
       (res) => {
         this.loadingService.hideLoading();
         this.isLoading = false;

@@ -54,7 +54,7 @@ export class InLightDataItemComponent {
   turnOff(arduinoIp: string) {
     this.isLoading = true;
     this.loadingService.showLoading();
-    this.componentService.lightOff(arduinoIp).subscribe(
+    this.componentService.lightInOff(arduinoIp).subscribe(
       (res) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
@@ -76,7 +76,7 @@ export class InLightDataItemComponent {
   turnOn(arduinoIp: string) {
     this.isLoading = true;
     this.loadingService.showLoading();
-    this.componentService.lightOn(arduinoIp).subscribe(
+    this.componentService.lightInOn(arduinoIp).subscribe(
       (res) => {
         this.loadingService.hideLoading();
         this.isLoading = false;

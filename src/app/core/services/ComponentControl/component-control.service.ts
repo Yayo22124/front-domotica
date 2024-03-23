@@ -12,14 +12,20 @@ export class ComponentControlService {
   constructor(private http: HttpClient) { }
   private url = "http://";
 
-  lightOn(arduinoIp: string): Observable<any> {
+  lightInOn(arduinoIp: string): Observable<any> {
     return this.http.get<any>(`${this.url}${arduinoIp}/ledIndoorOn`)
   }
   
-  lightOff(arduinoIp: string): Observable<any> {
+  lightInOff(arduinoIp: string): Observable<any> {
     return this.http.get<any>(`${this.url}${arduinoIp}/ledIndoorOff`)
   }
-
+  lightOutOn(arduinoIp: string): Observable<any> {
+    return this.http.get<any>(`${this.url}${arduinoIp}/ledOutdoorOn`)
+  }
+  
+  lightOutOff(arduinoIp: string): Observable<any> {
+    return this.http.get<any>(`${this.url}${arduinoIp}/ledOutdoorOff`)
+  }
   doubleWindowsOpen(arduinoIp: string): Observable<any> {
     const windowLeft = this.http.get<any>(`${this.url}${arduinoIp}/windowLeftOpen`);
     const windowRight = this.http.get<any>(`${this.url}${arduinoIp}/windowRightOpen`);
