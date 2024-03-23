@@ -70,4 +70,12 @@ export class ComponentControlService {
     
     return fan;
   }
+
+  controlOn(arduinoIp: string): Observable<any> {
+    return this.http.get<any>(`${this.url}${arduinoIp}/controlOn`);
+  }
+
+  controlOff(arduinoIp: string): Observable<any> {
+    return this.http.get<any>(`${this.url}${arduinoIp}/controlOff`);
+  }
 }

@@ -1,36 +1,47 @@
 @if(exLightData){
-    <mat-card class="gap-5 p-2 flex flex-col justify-between col-span-2">
-        <mat-card-header class="mt-4">
-            <mat-card-title class="text-xl font-medium">Luz Exterior</mat-card-title>
-            <mat-card-subtitle><strong class="font-medium">Ultimo Registro:</strong> {{exLightData.registeredDate|
-                date:"short"}}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            @for (action of exLightData.actions; track $index) {
-            @if(action.value == false){
-                <div matTooltip="Luz Apagada" matTooltipShowDelay="250" matTooltipHideDelay="300" matTooltipPosition="above" class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl to-gray-500 via-gray-400 from-gray-300   text-black">
-                    <mat-icon>motion_photos_off</mat-icon>
-                    <span>
-                        Apagada
-                    </span>
-                    
-                </div>
-            }@else{
-                <div matTooltip="Luz Encendida" matTooltipShowDelay="250" matTooltipHideDelay="300" matTooltipPosition="above" class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl to-yellow-500 via-yellow-400 from-yellow-300   text-white">
-                    <mat-icon>lightbulb</mat-icon>
-                    <span>
-                        Encendida
-                    </span>
-                    
-                </div>
-            }}
-        </mat-card-content>
-        <mat-card-footer class="w-full flex items-center justify-center">
+<mat-card class="gap-5 p-2 flex flex-col justify-between col-span-2">
+    <mat-card-header class="mt-4">
+        <mat-card-title class="text-xl font-medium">Luz Exterior</mat-card-title>
+        <mat-card-subtitle><strong class="font-medium">Ultimo Registro:</strong> {{exLightData.registeredDate|
+            date:"short"}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        @for (action of exLightData.actions; track $index) {
+        @if(action.value == false){
+        <div matTooltip="Luz Apagada" matTooltipShowDelay="250" matTooltipHideDelay="300" matTooltipPosition="above"
+            class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl to-gray-500 via-gray-400 from-gray-300   text-black">
+            <mat-icon>motion_photos_off</mat-icon>
+            <span>
+                Apagada
+            </span>
 
-            <button matTooltip="Ver todos los registros." matTooltipPosition="below" mat-flat-button color="primary"
+        </div>
+        }@else{
+        <div matTooltip="Luz Encendida" matTooltipShowDelay="250" matTooltipHideDelay="300" matTooltipPosition="above"
+            class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl to-yellow-500 via-yellow-400 from-yellow-300   text-white">
+            <mat-icon>lightbulb</mat-icon>
+            <span>
+                Encendida
+            </span>
+
+        </div>
+        }
+        <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value"
+            [disabled]="isLoading || isChecked"
+            (toggleChange)="action.value ? controlOff(exLightData.arduinoIp) : controlOn(exLightData.arduinoIp)">
+            @if (action.value) { Apagar } @else { Encender }
+        </mat-slide-toggle>
+
+        <mat-checkbox class="absolute top-1 left-1" matTooltipPosition="above" [matTooltip]="isChecked ? 'Desactivar Luz Automática' : 'Activar Luz Automática'" color="primary" [disabled]="isLoading" (change)="onCheckboxChange()">Luz Automática</mat-checkbox>
+        }
+    </mat-card-content>
+    <mat-card-footer class="w-full flex items-center justify-center">
+
+        <button matTooltip="Ver todos los registros." matTooltipPosition="below" mat-flat-button color="primary"
             (click)="seeMore()">Ver
             más</button>
-            
-        </mat-card-footer>
-    </mat-card>
+
+
+    </mat-card-footer>
+</mat-card>
 }
