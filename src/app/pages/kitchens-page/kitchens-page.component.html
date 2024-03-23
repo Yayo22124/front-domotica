@@ -26,10 +26,6 @@
         <app-fan-data-item (actuator-updated)="onActuatorUpdate()" component-room-name="kitchens" [component-location]="fanData.location"
             [component-name]="fanData.name" [fan-data]="fanData" class="col-span-2 row-span-2"></app-fan-data-item>
         }
-        @if (doorData) {
-        <app-door-data-item (actuator-updated)="onActuatorUpdate()" component-room-name="kitchens" [component-location]="doorData.location"
-            [component-name]="doorData.name" [door-data]="doorData" class="col-span-2 row-span-2"></app-door-data-item>
-        }
         @if (inLightData) {
         <app-in-light-data-item (actuator-updated)="onActuatorUpdate()" component-room-name="kitchens" [component-location]="inLightData.location"
             [component-name]="inLightData.name" [inlight-data]="inLightData"
