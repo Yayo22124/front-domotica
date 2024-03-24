@@ -113,7 +113,7 @@ export class SensorInformationPageComponent implements OnInit {
     }
     return record.readings.map((read) => {
       if (read.measurementUnit) {
-        return `${read.value}, ${read.measurementUnit}.`;
+        return `${read.value} ${read.measurementUnit}.`;
       }
       return `${read.value}`;
     });
@@ -122,7 +122,7 @@ export class SensorInformationPageComponent implements OnInit {
   getCharts() {
     const formattedRecords = this.records.map(record => ({
       ...record,
-      formattedDate: Highcharts.dateFormat('%Y-%m-%d %H:%M', Date.parse(record.registeredDate))
+      formattedDate: Highcharts.dateFormat('%y-%m-%d %H:%M', Date.parse(record.registeredDate))
     }));
     if (this.sensorName.toLocaleLowerCase().includes("temperatura")) {
       return this.chartOptions = {
@@ -141,6 +141,9 @@ export class SensorInformationPageComponent implements OnInit {
             type: 'line',
             name: 'Temperatura',
             color: "#10b981",
+            tooltip: {
+              valueSuffix: " °C"
+            },
             data: this.records.map((record, index) => {
               return {
                 y: record.readings[0].value,
@@ -153,6 +156,9 @@ export class SensorInformationPageComponent implements OnInit {
             type: 'line',
             name: 'Humedad',
             color: "#475569",
+            tooltip: {
+              valueSuffix: " %"
+            },
             data: this.records.map((record, index) => {
               return {
                 y: record.readings[1].value,
@@ -166,6 +172,7 @@ export class SensorInformationPageComponent implements OnInit {
     } else {
       let chartTitle: string = "";
       let chartName: string = "";
+      let chartSuffix: string = "";
 
       if (this.records[0].name.toLocaleLowerCase().includes("presencia")) {
         chartTitle = "Presencia"
@@ -201,11 +208,15 @@ export class SensorInformationPageComponent implements OnInit {
       if (this.records[0].name.toLocaleLowerCase().includes("proximidad")) {
         chartTitle = "Registros de Proximidad",
         chartName = "Detección de Proximidad"
+        chartSuffix = " cm"
       } else if (this.records[0].name.toLocaleLowerCase().includes("fotorresistencia")) {
         chartTitle = "Registros de Iluminación",
         chartName = "Detección de Iluminación"
-
-      }
+      } else if (this.records[0].name.toLocaleLowerCase().includes("gas")) {
+        chartTitle = "Lecturas de Presencia de Gas",
+        chartName = "Detección de Gas",
+        chartSuffix = " ppm"
+      } 
 
       return this.chartOptions = {
         time: {
@@ -223,6 +234,9 @@ export class SensorInformationPageComponent implements OnInit {
             type: "area",
             color: "#10b981",
             name: chartName,
+            tooltip: {
+              valueSuffix: chartSuffix
+            },
             data: this.records.map((record, index) => {
               return {
                 x: index,
