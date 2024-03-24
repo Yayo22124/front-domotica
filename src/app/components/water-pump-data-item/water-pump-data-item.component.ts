@@ -50,48 +50,5 @@ export class WaterPumpDataItemComponent {
 
   public isLoading: boolean = false;
 
-  waterOff(arduinoIp: string) {
-    this.isLoading = true;
-    this.loadingService.showLoading();
-    this.componentService.lightOff(arduinoIp).subscribe(
-      (res) => {
-        this.loadingService.hideLoading();
-        this.isLoading = false;
-        this.actuatorUpdated.emit();
-        this._snackbar.open('Luz Apagada Correctamente', 'Cerrar', {
-          duration: 2.5 * 1000,
-        });
-      },
-      (err) => {
-        this.loadingService.hideLoading();
-        this.isLoading = false;
-        this.actuatorUpdated.emit();
-        this._snackbar.open('Error al Apagar la Luz', 'Cerrar', {
-          duration: 2.5 * 1000,
-        });
-      }
-    );
-  }
-  waterOn(arduinoIp: string) {
-    this.isLoading = true;
-    this.loadingService.showLoading();
-    this.componentService.lightOn(arduinoIp).subscribe(
-      (res) => {
-        this.loadingService.hideLoading();
-        this.isLoading = false;
-        this.actuatorUpdated.emit();
-        this._snackbar.open('Luz Encendida Correctamente', 'Cerrar', {
-          duration: 2.5 * 1000,
-        });
-      },
-      (err) => {
-        this.loadingService.hideLoading();
-        this.isLoading = false;
-        this.actuatorUpdated.emit();
-        this._snackbar.open('Error al Encender la Luz', 'Cerrar', {
-          duration: 2.5 * 1000,
-        });
-      }
-    );
-  }
+  
 }

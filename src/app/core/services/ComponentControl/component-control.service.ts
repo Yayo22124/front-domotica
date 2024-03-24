@@ -78,10 +78,18 @@ export class ComponentControlService {
   }
 
   controlOn(arduinoIp: string): Observable<any> {
-    return this.http.get<any>(`${this.url}${arduinoIp}/controlOn`);
+    return this.http.get<any>(`${this.url}${arduinoIp}/controlLedOutOn`);
   }
 
   controlOff(arduinoIp: string): Observable<any> {
-    return this.http.get<any>(`${this.url}${arduinoIp}/controlOff`);
+    return this.http.get<any>(`${this.url}${arduinoIp}/controlLedOutOff`);
+  }
+
+  controlFOn(arduinoIp: string): Observable<any> {
+    return this.http.get<any>(`${this.url}${arduinoIp}/controlFanOn`);
+  }
+
+  controlFOff(arduinoIp: string): Observable<any> {
+    return this.http.get<any>(`${this.url}${arduinoIp}/controlFanOff`);
   }
 }

@@ -20,6 +20,7 @@ import { TemperatureDataItemComponent } from '../../components/temperature-data-
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 import { pollingIntervalTime } from '../../core/constants/pollingInterval';
+import { WindowDoubleDataItemComponent } from '../../components/window-double-data-item/window-double-data-item.component';
 
 @Component({
   selector: 'app-bedrooms-page',
@@ -34,6 +35,7 @@ import { pollingIntervalTime } from '../../core/constants/pollingInterval';
     InLightDataItemComponent,
     DoorDataItemComponent,
     ExLightDataItemComponent,
+    WindowDoubleDataItemComponent
   ],
   templateUrl: './bedrooms-page.component.html',
   styleUrl: './bedrooms-page.component.scss',
@@ -110,11 +112,11 @@ export class BedroomsPageComponent implements OnInit {
           )?.lastRecord;
 
           this.windowLeftData = this.actuatorsData.find(
-            ({ lastRecord }) => lastRecord.name === 'Ventana Doble Izquierda'
+            ({ lastRecord }) => lastRecord.name === 'Ventana Izquierda'
           )?.lastRecord;
 
           this.windowRightData = this.actuatorsData.find(
-            ({ lastRecord }) => lastRecord.name === 'Ventana Doble Derecha'
+            ({ lastRecord }) => lastRecord.name === 'Ventana Derecha'
           )?.lastRecord;
 
           this.inLightData = this.actuatorsData.find(

@@ -20,7 +20,7 @@
             </span>
             }
         </div>
-        <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value" [disabled]="true" (toggleChange)="action.value ? waterOff(waterPumpData.arduinoIp) : waterOn(waterPumpData.arduinoIp)">
+        <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value" [disabled]="true">
             @if (action.value) { Apagar } @else { Encender }
         </mat-slide-toggle>
 

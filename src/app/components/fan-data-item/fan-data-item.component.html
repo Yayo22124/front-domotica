@@ -28,10 +28,12 @@
         <!-- <span>
                     {{action.name}}
                 </span> -->
-        <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value" [disabled]="isLoading"
+        <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value" [disabled]="isLoading || !isChecked"
             (toggleChange)="action.value ? fanOff(fanData.arduinoIp) : fanOn(fanData.arduinoIp)">
             @if (action.value) { Apagar } @else { Encender }
         </mat-slide-toggle>
+
+        <mat-checkbox class="absolute top-1 left-1" matTooltipPosition="above" [matTooltip]="isChecked ? 'Desactivar Luz Automática' : 'Activar Luz Automática'" color="primary" [disabled]="isLoading" (change)="onCheckboxChange()">Luz Manual</mat-checkbox>
         }
     </mat-card-content>
     <mat-card-footer class="w-full flex items-center justify-center">

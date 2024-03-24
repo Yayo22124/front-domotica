@@ -27,12 +27,12 @@
         </div>
         }
         <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value"
-            [disabled]="isLoading || isChecked"
+            [disabled]="isLoading || !isChecked"
             (toggleChange)="action.value ? lightOff(exLightData.arduinoIp) : lightOn(exLightData.arduinoIp)">
             @if (action.value) { Apagar } @else { Encender }
         </mat-slide-toggle>
 
-        <mat-checkbox class="absolute top-1 left-1" matTooltipPosition="above" [matTooltip]="isChecked ? 'Desactivar Luz Automática' : 'Activar Luz Automática'" color="primary" [disabled]="isLoading" (change)="onCheckboxChange()">Luz Automática</mat-checkbox>
+        <mat-checkbox class="absolute top-1 left-1" matTooltipPosition="above" [matTooltip]="isChecked ? 'Desactivar Luz Automática' : 'Activar Luz Automática'" color="primary" [disabled]="isLoading" (change)="onCheckboxChange()">Luz Manual</mat-checkbox>
         }
     </mat-card-content>
     <mat-card-footer class="w-full flex items-center justify-center">

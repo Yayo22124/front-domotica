@@ -11,11 +11,12 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-fan-data-item',
   standalone: true,
-  imports: [MatCardModule, MatTooltipModule, MatButtonModule, MatIconModule, CommonModule, MatSlideToggleModule, MatSnackBarModule],
+  imports: [MatCardModule, MatTooltipModule, MatButtonModule, MatIconModule, CommonModule, MatSlideToggleModule, MatSnackBarModule, MatCheckboxModule],
   templateUrl: './fan-data-item.component.html',
   styleUrl: './fan-data-item.component.scss'
 })
@@ -44,7 +45,62 @@ export class FanDataItemComponent {
     ]);
   }
 
+  public isChecked: boolean = false;
   public isLoading: boolean = false;
+
+  onCheckboxChange() {
+    this.isChecked = !this.isChecked;
+    this.isChecked ? this.controlOn(this.fanData!.arduinoIp) : this.controlOff(this.fanData!.arduinoIp);
+  }
+
+  controlOff(arduinoIp: string) {
+    this.isLoading = true;
+    this.loadingService.showLoading();
+    this.componentService.controlFOff(arduinoIp).subscribe(
+      (res) => {
+        this.loadingService.hideLoading();
+        this.isLoading = false;
+        this.actuatorUpdated.emit();
+        this._snackbar.open('Luz Exterior Automática Desactivada', 'Cerrar', {
+          duration: 2.5 * 1000,
+        });
+      },
+      (err) => {
+        this.loadingService.hideLoading();
+        this.isLoading = false;
+        this.actuatorUpdated.emit();
+        this._snackbar.open(
+          'Error al Desactivar la Luz Exterior Automática',
+          'Cerrar',
+          {
+            duration: 2.5 * 1000,
+          }
+        );
+      }
+    );
+  }
+  controlOn(arduinoIp: string) {
+    this.isLoading = true;
+    this.loadingService.showLoading();
+    this.componentService.controlFOn(arduinoIp).subscribe(
+      (res) => {
+        this.loadingService.hideLoading();
+        this.isLoading = false;
+        this.actuatorUpdated.emit();
+        this._snackbar.open('Luz Encendida Correctamente', 'Cerrar', {
+          duration: 2.5 * 1000,
+        });
+      },
+      (err) => {
+        this.loadingService.hideLoading();
+        this.isLoading = false;
+        this.actuatorUpdated.emit();
+        this._snackbar.open('Error al Encender la Luz', 'Cerrar', {
+          duration: 2.5 * 1000,
+        });
+      }
+    );
+  }
 
   fanOn(arduinoIp:string){
     this.isLoading=true;
