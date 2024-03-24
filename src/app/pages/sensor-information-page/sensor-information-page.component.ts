@@ -36,7 +36,6 @@ import { pollingIntervalTime } from '../../core/constants/pollingInterval';
 export class SensorInformationPageComponent implements OnInit {
   Highcharts: typeof Highcharts = Highcharts;
 
-  
   displayedColumns: string[] = [
     'registro',
     'ubicacion',
@@ -44,7 +43,7 @@ export class SensorInformationPageComponent implements OnInit {
     'lecturas',
     'fecha',
   ]; // Definir las columnas a mostrar
-  
+
   dataSource = new MatTableDataSource<iSensorsData | iActuatorsData>(); // DataSource para la tabla
   sensorName: string = '';
   roomName: string = '';
@@ -74,7 +73,7 @@ export class SensorInformationPageComponent implements OnInit {
       this.getSensorRecords(
         this.route.snapshot.params['location'],
         this.route.snapshot.params['room'],
-        this.route.snapshot.params['sensorName'],
+        this.route.snapshot.params['sensorName']
       );
     }, pollingIntervalTime);
   }
@@ -90,26 +89,23 @@ export class SensorInformationPageComponent implements OnInit {
         this.dataSource.data = res.records; // Asignar los datos al dataSource
         this.specifications = res.records[0].specifications;
         this.records = res.records;
-        
+
         this.getCharts();
-        console.log(
-          "Current date",
-          new Date(this.records[0].registeredDate)
-        );
+        console.log('Current date', new Date(this.records[0].registeredDate));
         this.loadingService.hideLoading();
       },
       (error) => {
         console.error(error);
         this.loadingService.hideLoading();
       }
-      );
-    }
+    );
+  }
   getReadings(record: iSensorsData): any {
     let readings: string = '';
     if (record.readings.length > 1) {
       return record.readings
-      .map((read) => `${read.value} ${read.measurementUnit}`)
-      .join(', ');
+        .map((read) => `${read.value} ${read.measurementUnit}`)
+        .join(', ');
     }
     return record.readings.map((read) => {
       if (read.measurementUnit) {
@@ -118,140 +114,226 @@ export class SensorInformationPageComponent implements OnInit {
       return `${read.value}`;
     });
   }
-  
+
   getCharts() {
-    const formattedRecords = this.records.map(record => ({
+    const formattedRecords = this.records.map((record) => ({
       ...record,
-      formattedDate: Highcharts.dateFormat('%y-%m-%d %H:%M', Date.parse(record.registeredDate))
+      formattedDate: Highcharts.dateFormat(
+        '%d/%m %H:%m',
+        Date.parse(record.registeredDate)
+      ),
     }));
-    if (this.sensorName.toLocaleLowerCase().includes("temperatura")) {
-      return this.chartOptions = {
+    if (this.sensorName.toLocaleLowerCase().includes('temperatura')) {
+      return (this.chartOptions = {
+        chart: {
+          scrollablePlotArea: {
+            minWidth: 700,
+            scrollPositionX: 1,
+          },
+        },
+        scrollbar: {
+          enabled: true,
+        },
         time: {
-          timezone: "America/Mexico_City"
+          timezone: 'America/Mexico_City',
         },
         title: {
           text: 'Temperatura y Humedad',
         },
         xAxis: {
-          type: "datetime",
-          categories: formattedRecords.map(record => record.formattedDate), // Usar las fechas formateadas
+          type: 'datetime',
+          margin: 2,
+          title: {
+            text: 'Fecha y Hora',
+          },
+          tickWidth: 1,
+          lineWidth: 1,
+          categories: formattedRecords.map((record) => record.formattedDate), // Usar las fechas formateadas
+        },
+        yAxis: {
+          title: {
+            text: 'Temperatura y Humedad',
+          },
+          lineWidth: 1,
+          tickWidth: 1,
+          tickInterval: 10,
+        },
+        plotOptions: {
+          spline: {
+            lineWidth: 2,
+            states: {
+              hover: {
+                lineWidth: 3,
+              },
+            },
+            // pointInterval: 1
+          },
+          series: {
+            turboThreshold: 100000
+          }
         },
         series: [
           {
-            type: 'line',
+            type: 'spline',
             name: 'Temperatura',
-            color: "#10b981",
+            color: '#10b981',
             tooltip: {
-              valueSuffix: " °C"
+              valueSuffix: ' °C',
             },
             data: this.records.map((record, index) => {
               return {
                 y: record.readings[0].value,
                 name: 'Detección de Temperatura',
-                color: "#059669"
+                color: '#059669',
               };
             }),
           },
           {
-            type: 'line',
+            type: 'spline',
             name: 'Humedad',
-            color: "#475569",
+            color: '#475569',
             tooltip: {
-              valueSuffix: " %"
+              valueSuffix: ' %',
             },
             data: this.records.map((record, index) => {
               return {
                 y: record.readings[1].value,
-                color: "#0f172a",
+                color: '#0f172a',
                 name: 'Detección de Humedad',
               };
             }),
           },
         ],
-      };  
+      });
     } else {
-      let chartTitle: string = "";
-      let chartName: string = "";
-      let chartSuffix: string = "";
+      let chartTitle: string = '';
+      let chartName: string = '';
+      let chartSuffix: string = '';
 
-      if (this.records[0].name.toLocaleLowerCase().includes("presencia")) {
-        chartTitle = "Presencia"
-        chartName = "Detección de Presencia"
-        return this.chartOptions = {
+      if (this.records[0].name.toLocaleLowerCase().includes('presencia')) {
+        chartTitle = 'Presencia';
+        chartName = 'Detección de Presencia';
+        return (this.chartOptions = {
+          chart: {
+            scrollablePlotArea: {
+              minWidth: 700,
+              scrollPositionX: 1,
+            },
+          },
           time: {
-            timezone: "America/Mexico_City"
+            timezone: 'America/Mexico_City',
           },
           title: {
             text: chartTitle,
           },
           xAxis: {
-            type: "datetime",
-            categories: formattedRecords.map(record => record.formattedDate), // Usar las fechas formateadas
+            type: 'datetime',
+            categories: formattedRecords.map((record) => record.formattedDate), // Usar las fechas formateadas
+          },
+          yAxis: {
+            title: {
+              text: 'Presencia',
+            },
+            lineWidth: 1,
+            tickWidth: 1,
+          },
+          plotOptions: {
+            spline: {
+              lineWidth: 2,
+              states: {
+                hover: {
+                  lineWidth: 3,
+                },
+              },
+              // pointInterval: 1
+            },
+            series: {
+              turboThreshold: 100000
+            }
           },
           series: [
             {
-              type: "column",
-              color: "#10b981",
+              type: 'column',
+              color: '#10b981',
               name: chartName,
               data: this.records.map((record, index) => {
                 return {
                   x: index,
-                  color: "#059669",
+                  color: '#059669',
                   y: record.readings[0].value,
                   name: chartName,
                 };
               }),
             },
           ],
-        };
+        });
       }
-      if (this.records[0].name.toLocaleLowerCase().includes("proximidad")) {
-        chartTitle = "Registros de Proximidad",
-        chartName = "Detección de Proximidad"
-        chartSuffix = " cm"
-      } else if (this.records[0].name.toLocaleLowerCase().includes("fotorresistencia")) {
-        chartTitle = "Registros de Iluminación",
-        chartName = "Detección de Iluminación"
-      } else if (this.records[0].name.toLocaleLowerCase().includes("gas")) {
-        chartTitle = "Lecturas de Presencia de Gas",
-        chartName = "Detección de Gas",
-        chartSuffix = " ppm"
-      } 
+      if (this.records[0].name.toLocaleLowerCase().includes('proximidad')) {
+        (chartTitle = 'Registros de Proximidad'),
+          (chartName = 'Detección de Proximidad');
+        chartSuffix = ' cm';
+      } else if (
+        this.records[0].name.toLocaleLowerCase().includes('fotorresistencia')
+      ) {
+        (chartTitle = 'Registros de Iluminación'),
+          (chartName = 'Detección de Iluminación');
+      } else if (this.records[0].name.toLocaleLowerCase().includes('gas')) {
+        (chartTitle = 'Lecturas de Presencia de Gas'),
+          (chartName = 'Detección de Gas'),
+          (chartSuffix = ' ppm');
+      }
 
-      return this.chartOptions = {
+      return (this.chartOptions = {
+        chart:{
+          scrollablePlotArea: {
+            minWidth: 700,
+            scrollPositionX: 1
+          }
+        },
         time: {
-          timezone: "America/Mexico_City"
+          timezone: 'America/Mexico_City',
         },
         title: {
           text: chartTitle,
         },
         xAxis: {
-          type: "datetime",
-          categories: formattedRecords.map(record => record.formattedDate), // Usar las fechas formateadas
+          type: 'datetime',
+          categories: formattedRecords.map((record) => record.formattedDate), // Usar las fechas formateadas
+        },
+        plotOptions: {
+          spline: {
+            lineWidth: 2,
+            states: {
+              hover: {
+                lineWidth: 3,
+              },
+            },
+            // pointInterval: 1
+          },
+          series: {
+            turboThreshold: 100000
+          }
         },
         series: [
           {
-            type: "area",
-            color: "#10b981",
+            type: 'area',
+            color: '#10b981',
             name: chartName,
             tooltip: {
-              valueSuffix: chartSuffix
+              valueSuffix: chartSuffix,
             },
             data: this.records.map((record, index) => {
               return {
                 x: index,
-                color: "#059669",
+                color: '#059669',
                 y: record.readings[0].value,
                 name: chartName,
               };
             }),
           },
         ],
-      };
-      
-      
+      });
     }
-
   }
 
   goBack() {

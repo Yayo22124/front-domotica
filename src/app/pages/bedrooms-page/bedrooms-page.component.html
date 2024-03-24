@@ -33,7 +33,7 @@
             <app-ex-light-data-item component-room-name="bedrooms" [component-location]="exLightData.location" [component-name]="exLightData.name" [exlight-data]="exLightData" class="col-span-2 row-span-2"></app-ex-light-data-item>
         }
         @if(windowLeftData && windowRightData){
-            <app-window-double-data-item component-room-name="bedrooms" [component-location]="windowRightData.location" [component-name]="windowRightData.name || windowLeftData.name" class="col-span-2 row-span-2"/>
+            <app-window-double-data-item (actuator-updated)="onActuatorUpdate()" [windowDL-data]="windowLeftData" [windowDR-data]="windowRightData" component-room-name="bedrooms" [component-location]="windowRightData.location" [component-name]="windowRightData.name || windowLeftData.name" class="col-span-2 row-span-2"/>
         }
     </div>
 </section>
