@@ -33,7 +33,7 @@
             <app-ex-light-data-item component-room-name="bathrooms" [component-location]="exLightData.location" [component-name]="exLightData.name" [exlight-data]="exLightData" class="col-span-2 row-span-2"></app-ex-light-data-item>
         }
         @if (windowData){
-            <app-simple-window (actuator-updated)="onActuatorUpdate()" [component-location]="windowData.location" [component-name]="windowData.name" [window-data]="windowData"/>
+            <app-simple-window (actuator-updated)="onActuatorUpdate()" component-room-name="bathrooms" [component-location]="windowData.location" [component-name]="windowData.name" [window-data]="windowData"/>
         }
     </div>
 </section>

@@ -40,16 +40,15 @@
         <app-buzzer-data-item component-room-name="kitchens" [component-location]="buzzerData.location"
             [component-name]="buzzerData.name" [buzzer-data]="buzzerData" class="col-span-2 row-span-2" />
         }
-        @if (windowLeftDataL && windowRightDataL) {
-            <h1></h1>
-        <app-window-double-data-item (actuator-updated)="onActuatorUpdate()" component-room-name="livingrooms" [component-location]="windowRightDataL.location"
-            [component-name]="windowRightDataL.name" [windowDL-data]="windowLeftDataL" [windowDR-data]="windowRightDataR"
+        @if (windowLeftDataR && windowRightDataR) {
+        <app-window-double-data-item (actuator-updated)="onActuatorUpdate()" component-room-name="kitchens" [component-location]="windowRightDataR.location"
+            [component-name]="windowRightDataR.name" [windowDLR-data]="windowLeftDataR" [windowDRR-data]="windowRightDataR"
             class="col-span-2 row-span-2" />
         }
         
-        @if (windowLeftDataR && windowRightDataR) {
-        <app-window-double-data-item (actuator-updated)="onActuatorUpdate()" component-room-name="livingrooms" [component-location]="windowRightDataR.location"
-            [component-name]="windowRightDataR.name" [windowDL-data]="windowLeftDataL" [windowDR-data]="windowRightDataR"
+        @if (windowLeftDataL && windowRightDataL) {
+        <app-window-double-data-item (actuator-updated)="onActuatorUpdate()" component-room-name="kitchens" [component-location]="windowRightDataL.location"
+            [component-name]="windowRightDataL.name" [windowDLL-data]="windowLeftDataL" [windowDRL-data]="windowRightDataL"
             class="col-span-2 row-span-2" />
         }
 
