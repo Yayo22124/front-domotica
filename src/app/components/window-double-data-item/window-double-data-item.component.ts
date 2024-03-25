@@ -71,7 +71,7 @@ export class WindowDoubleDataItemComponent {
     closeWindows(arduinoIp:string) {
       this.isLoading = true;
       this.loadingService.showLoading();
-    this.componentsService.doubleWindowsOpen(arduinoIp).subscribe(
+    this.componentsService.doubleWindowsClose(arduinoIp).subscribe(
       (res) => {
         this.loadingService.hideLoading();
         this.isLoading = false;

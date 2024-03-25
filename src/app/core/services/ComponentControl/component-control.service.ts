@@ -27,15 +27,13 @@ export class ComponentControlService {
     return this.http.get<any>(`${this.url}${arduinoIp}/ledOutdoorOff`)
   }
   doubleWindowsOpen(arduinoIp: string): Observable<any> {
-    const windowLeft = this.http.get<any>(`${this.url}${arduinoIp}/windowLeftOpen`);
-    const windowRight = this.http.get<any>(`${this.url}${arduinoIp}/windowRightOpen`);
+    const windowLeft = this.http.get<any>(`${this.url}${arduinoIp}/windowsOpen`);
 
     return windowLeft;
   }
 
   doubleWindowsClose(arduinoIp: string): Observable<any> {
-    const windowLeft = this.http.get<any>(`${this.url}${arduinoIp}/windowLeftClose`);
-    const windowRight = this.http.get<any>(`${this.url}${arduinoIp}/windowRightClose`);
+    const windowLeft = this.http.get<any>(`${this.url}${arduinoIp}/windowsClose`);
 
     return windowLeft;
   }

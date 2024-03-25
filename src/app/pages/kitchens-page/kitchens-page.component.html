@@ -40,9 +40,15 @@
         <app-buzzer-data-item component-room-name="kitchens" [component-location]="buzzerData.location"
             [component-name]="buzzerData.name" [buzzer-data]="buzzerData" class="col-span-2 row-span-2" />
         }
-        @if (windowLeftData && windowRightData) {
-        <app-window-double-data-item (actuator-updated)="onActuatorUpdate()" component-room-name="livingrooms" [component-location]="windowRightData.location"
-            [component-name]="windowRightData.name" [windowDL-data]="windowLeftData" [windowDR-data]="windowRightData"
+        @if (windowLeftDataL && windowRightDataL) {
+        <app-window-double-data-item (actuator-updated)="onActuatorUpdate()" component-room-name="livingrooms" [component-location]="windowRightDataL.location"
+            [component-name]="windowRightDataL.name" [windowDL-data]="windowLeftDataL" [windowDR-data]="windowRightDataR"
+            class="col-span-2 row-span-2" />
+        }
+        
+        @if (windowLeftDataR && windowRightDataR) {
+        <app-window-double-data-item (actuator-updated)="onActuatorUpdate()" component-room-name="livingrooms" [component-location]="windowRightDataR.location"
+            [component-name]="windowRightDataR.name" [windowDL-data]="windowLeftDataL" [windowDR-data]="windowRightDataR"
             class="col-span-2 row-span-2" />
         }
 

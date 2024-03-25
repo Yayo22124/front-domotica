@@ -55,8 +55,10 @@ export class KitchensPageComponent implements OnInit {
   public ldrData: iSensorsData | null = null;
   public fanData: iActuatorsData | null = null;
   public doorData: iActuatorsData | null = null;
-  public windowLeftData: iActuatorsData | null = null;
-  public windowRightData: iActuatorsData | null = null;
+  public windowLeftDataL: iActuatorsData | null = null;
+  public windowRightDataL: iActuatorsData | null = null;
+  public windowLeftDataR: iActuatorsData | null = null;
+  public windowRightDataR: iActuatorsData | null = null;
   public inLightData: iActuatorsData | null = null;
   public exLightData: iActuatorsData | null = null;
   public buzzerData: iActuatorsData | null = null;
@@ -114,11 +116,17 @@ export class KitchensPageComponent implements OnInit {
           this.doorData = this.actuatorsData.find(
             (actuator) => actuator.name === 'Puerta'
           )!;
-          this.windowLeftData = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Ventana Doble Izquierda'
+          this.windowLeftDataL = this.actuatorsData.find(
+            (actuator) => actuator.name === 'Ventana Doble Izquierda L'
           )!;
-          this.windowRightData = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Ventana Doble Derecha'
+          this.windowRightDataL = this.actuatorsData.find(
+            (actuator) => actuator.name === 'Ventana Doble Derecha L'
+          )!;
+          this.windowLeftDataR = this.actuatorsData.find(
+            (actuator) => actuator.name === 'Ventana Doble Izquierda R'
+          )!;
+          this.windowRightDataR = this.actuatorsData.find(
+            (actuator) => actuator.name === 'Ventana Doble Derecha R'
           )!;
           this.inLightData = this.actuatorsData.find(
             (actuator) => actuator.name === 'Led Interior'
