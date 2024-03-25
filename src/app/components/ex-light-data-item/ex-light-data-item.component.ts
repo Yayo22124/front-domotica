@@ -53,54 +53,56 @@ export class ExLightDataItemComponent {
 
   onCheckboxChange() {
     this.isChecked = !this.isChecked;
-    this.isChecked ? this.controlOn(this.exLightData!.arduinoIp) : this.controlOff(this.exLightData!.arduinoIp);
+    this.isChecked
+      ? this.controlOn(this.exLightData!.arduinoIp)
+      : this.controlOff(this.exLightData!.arduinoIp);
   }
 
   controlOff(arduinoIp: string) {
     this.isLoading = true;
     this.loadingService.showLoading();
+    this._snackbar.open('Luz Exterior Automática Desactivada', 'Cerrar', {
+      duration: 2.5 * 1000,
+    });
     this.componentService.controlOff(arduinoIp).subscribe(
       (res) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
         this.actuatorUpdated.emit();
-        this._snackbar.open('Luz Exterior Automática Desactivada', 'Cerrar', {
-          duration: 2.5 * 1000,
-        });
       },
       (err) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
         this.actuatorUpdated.emit();
-        this._snackbar.open(
-          'Error al Desactivar la Luz Exterior Automática',
-          'Cerrar',
-          {
-            duration: 2.5 * 1000,
-          }
-        );
+        // this._snackbar.open(
+        //   'Error al Desactivar la Luz Exterior Automática',
+        //   'Cerrar',
+        //   {
+        //     duration: 2.5 * 1000,
+        //   }
+        // );
       }
     );
   }
   controlOn(arduinoIp: string) {
     this.isLoading = true;
     this.loadingService.showLoading();
+    this._snackbar.open('Luz Exterior Encendida Correctamente', 'Cerrar', {
+      duration: 2.5 * 1000,
+    });
     this.componentService.controlOn(arduinoIp).subscribe(
       (res) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
         this.actuatorUpdated.emit();
-        this._snackbar.open('Luz Encendida Correctamente', 'Cerrar', {
-          duration: 2.5 * 1000,
-        });
       },
       (err) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
         this.actuatorUpdated.emit();
-        this._snackbar.open('Error al Encender la Luz', 'Cerrar', {
-          duration: 2.5 * 1000,
-        });
+        // this._snackbar.open('Error al Encender la Luz Exterior', 'Cerrar', {
+        //   duration: 2.5 * 1000,
+        // });
       }
     );
   }
@@ -108,44 +110,44 @@ export class ExLightDataItemComponent {
   lightOff(arduinoIp: string) {
     this.isLoading = true;
     this.loadingService.showLoading();
+    this._snackbar.open('Luz Exterior Apagada Correctamente', 'Cerrar', {
+      duration: 2.5 * 1000,
+    });
     this.componentService.lightOutOff(arduinoIp).subscribe(
       (res) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
         this.actuatorUpdated.emit();
-        this._snackbar.open('Luz Apagada Correctamente', 'Cerrar', {
-          duration: 2.5 * 1000,
-        });
       },
       (err) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
         this.actuatorUpdated.emit();
-        this._snackbar.open('Error al Apagar la Luz', 'Cerrar', {
-          duration: 2.5 * 1000,
-        });
+        // this._snackbar.open('Error al Apagar la Luz', 'Cerrar', {
+        //   duration: 2.5 * 1000,
+        // });
       }
     );
   }
   lightOn(arduinoIp: string) {
     this.isLoading = true;
     this.loadingService.showLoading();
+    this._snackbar.open('Luz Exterior Encendida Correctamente', 'Cerrar', {
+      duration: 2.5 * 1000,
+    });
     this.componentService.lightOutOn(arduinoIp).subscribe(
       (res) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
         this.actuatorUpdated.emit();
-        this._snackbar.open('Luz Encendida Correctamente', 'Cerrar', {
-          duration: 2.5 * 1000,
-        });
       },
       (err) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
         this.actuatorUpdated.emit();
-        this._snackbar.open('Error al Encender la Luz', 'Cerrar', {
-          duration: 2.5 * 1000,
-        });
+        // this._snackbar.open('Error al Encender la Luz', 'Cerrar', {
+        //   duration: 2.5 * 1000,
+        // });
       }
     );
   }

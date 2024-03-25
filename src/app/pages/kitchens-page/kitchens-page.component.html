@@ -41,6 +41,7 @@
             [component-name]="buzzerData.name" [buzzer-data]="buzzerData" class="col-span-2 row-span-2" />
         }
         @if (windowLeftDataL && windowRightDataL) {
+            <h1></h1>
         <app-window-double-data-item (actuator-updated)="onActuatorUpdate()" component-room-name="livingrooms" [component-location]="windowRightDataL.location"
             [component-name]="windowRightDataL.name" [windowDL-data]="windowLeftDataL" [windowDR-data]="windowRightDataR"
             class="col-span-2 row-span-2" />

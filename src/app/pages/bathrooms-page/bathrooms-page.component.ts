@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 import { PhotoresistorDataItemComponent } from '../../components/photoresistor-data-item/photoresistor-data-item.component';
 import { PresenceDataItemComponent } from '../../components/presence-data-item/presence-data-item.component';
 import { ProximityDataItemComponent } from '../../components/proximity-data-item/proximity-data-item.component';
+import { SimpleWindowComponent } from '../../components/simple-window/simple-window.component';
 import { WaterPumpDataItemComponent } from '../../components/water-pump-data-item/water-pump-data-item.component';
 import { apiUrl } from '../../core/constants/apiUrl.constant';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
@@ -38,6 +39,7 @@ import { pollingIntervalTime } from '../../core/constants/pollingInterval';
     WaterPumpDataItemComponent,
     DoorDataItemComponent,
     ExLightDataItemComponent,
+    SimpleWindowComponent
   ],
   templateUrl: './bathrooms-page.component.html',
   styleUrl: './bathrooms-page.component.scss',
@@ -51,6 +53,7 @@ export class BathroomsPageComponent implements OnInit {
   public presenceData: iSensorsData | null = null;
   public proximityData: iSensorsData | null = null;
   public doorData: iActuatorsData | null = null;
+  public windowData: iActuatorsData | null = null;
   public inLightData: iActuatorsData | null = null;
   public exLightData: iActuatorsData | null = null;
   public waterPumpData: iActuatorsData | null = null;
@@ -101,12 +104,18 @@ export class BathroomsPageComponent implements OnInit {
           this.doorData = this.actuatorsData.find(
             (actuator) => actuator.name === 'Puerta'
           )!;
+          this.windowData = this.actuatorsData.find(
+            (actuator) => actuator.name === 'Ventana'
+          )!;
+
           this.inLightData = this.actuatorsData.find(
             (actuator) => actuator.name === 'Led Interior'
           )!;
+
           this.exLightData = this.actuatorsData.find(
             (actuator) => actuator.name === 'Led Exterior'
           )!;
+
           this.waterPumpData = this.actuatorsData.find(
             (actuator) => actuator.name === 'Bomba de Agua'
           )!;

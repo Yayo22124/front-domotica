@@ -54,44 +54,44 @@ export class DoorDataItemComponent {
   closeDoor(arduinoIp: string) {
     this.isLoading = true;
     this.loadingService.showLoading();
+    this._snackbar.open('Puerta cerrada', 'Cerrar', {
+      duration: 2.5 * 1000,
+    });
     this.componentService.doorClose(arduinoIp).subscribe(
       (res) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
         this.actuatorUpdated.emit();
-        this._snackbar.open('Puerta cerrada', 'Cerrar', {
-          duration: 2.5 * 1000,
-        });
       },
       (err) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
         this.actuatorUpdated.emit();
-        this._snackbar.open('Error al cerrar la puerta', 'Cerrar', {
-          duration: 2.5 * 1000,
-        });
+        // this._snackbar.open('Error al cerrar la puerta', 'Cerrar', {
+        //   duration: 2.5 * 1000,
+        // });
       }
     );
   }
   openDoor(arduinoIp: string) {
     this.isLoading = true;
     this.loadingService.showLoading();
+    this._snackbar.open('Puerta abierta correctamente', 'Cerrar', {
+      duration: 2.5 * 1000,
+    });
     this.componentService.doorOpen(arduinoIp).subscribe(
       (res) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
         this.actuatorUpdated.emit();
-        this._snackbar.open('Puerta abierta correctamente', 'Cerrar', {
-          duration: 2.5 * 1000,
-        });
       },
       (err) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
         this.actuatorUpdated.emit();
-        this._snackbar.open('Error al cerrar la pueta', 'Cerrar', {
-          duration: 2.5 * 1000,
-        });
+        // this._snackbar.open('Error al cerrar la pueta', 'Cerrar', {
+        //   duration: 2.5 * 1000,
+        // });
       }
     );
   }

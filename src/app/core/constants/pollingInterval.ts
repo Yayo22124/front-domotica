@@ -1,1 +1,1 @@
-export const pollingIntervalTime: number = 5*1000;
+export const pollingIntervalTime: number = 9*1000;

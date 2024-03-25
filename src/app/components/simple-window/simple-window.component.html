@@ -1,0 +1,52 @@
+@if(windowData){
+<mat-card class=" relative gap-5 p-2 flex flex-col justify-between col-span-2">
+    <mat-card-header>
+        <mat-card-title class="text-xl font-medium">Ventana</mat-card-title>
+        <mat-card-subtitle><strong class="font-medium">Ultimo Registro:</strong>{{windowData.registeredDate | date:"short"}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="flex justify-center w-full">
+        @for (action of windowData.actions; track $index) {
+        @if(action.value == false){
+
+        <div matTooltip="Ventana cerrada" matTooltipPosition="above"
+            class="w-full cursor-pointer shadow-md rounded-sm bg-gradient-to-tr from-slate-600 via-gray-400 to-slate-500 p-2 flex items-center justify-center text-white font-medium ">
+            <mat-icon>block</mat-icon>
+            <span>
+                Cerrada
+            </span>
+        </div>
+
+        } @else{
+        <div matTooltip="Ventana abierta" matTooltipPosition="above"
+            class="w-full cursor-pointer shadow-md rounded-sm bg-gradient-to-tr from-emerald-400 via-emerald-600 to-emerald-500 p-2 flex items-center justify-center text-white font-medium">
+            <mat-icon>done_outline</mat-icon>
+            <span>
+                Abierta
+            </span>
+        </div>
+
+        }
+        @if (action.value) {
+
+        <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value" [disabled]="isLoading"
+            (toggleChange)="closeWindow(windowData.arduinoIp)">
+            Cerrar
+        </mat-slide-toggle>
+        } @else {
+
+        <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value" [disabled]="isLoading"
+            (toggleChange)="openWindow(windowData.arduinoIp)">
+            Abrir
+        </mat-slide-toggle>
+        }
+        }
+    </mat-card-content>
+    <mat-card-footer class="w-full flex items-center justify-center">
+
+        <button matTooltip="Ver todos los registros." matTooltipPosition="below" mat-flat-button color="primary"
+            (click)="seeMore()">Ver
+            más</button>
+
+    </mat-card-footer>
+</mat-card>
+}

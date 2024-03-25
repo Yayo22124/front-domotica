@@ -53,44 +53,44 @@ export class GateDoubleDataItemComponent {
   closePorton(arduinoIp: string) {
     this.isLoading = true;
     this.loadingService.showLoading();
+    this._snackbar.open('Porton Cerrado Correctamente', 'Cerrar', {
+      duration: 2.5 * 1000,
+    });
     this.componentService.doorClose(arduinoIp).subscribe(
       (res) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
         this.actuatorUpdated.emit();
-        this._snackbar.open('Porton Cerrado Correctamente', 'Cerrar', {
-          duration: 2.5 * 1000,
-        });
       },
       (err) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
         this.actuatorUpdated.emit();
-        this._snackbar.open('Error al Cerrar al Porton', 'Cerrar', {
-          duration: 2.5 * 1000,
-        });
+        // this._snackbar.open('Error al Cerrar al Porton', 'Cerrar', {
+        //   duration: 2.5 * 1000,
+        // });
       }
     );
   }
   openPorton(arduinoIp: string) {
     this.isLoading = true;
     this.loadingService.showLoading();
+    this._snackbar.open('Porton Abierto Correctamente', 'Cerrar', {
+      duration: 2.5 * 1000,
+    });
     this.componentService.doorOpen(arduinoIp).subscribe(
       (res) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
         this.actuatorUpdated.emit();
-        this._snackbar.open('Porton Abierto Correctamente', 'Cerrar', {
-          duration: 2.5 * 1000,
-        });
       },
       (err) => {
         this.loadingService.hideLoading();
         this.isLoading = false;
         this.actuatorUpdated.emit();
-        this._snackbar.open('Error al Abrir el Porton', 'Cerrar', {
-          duration: 2.5 * 1000,
-        });
+        // this._snackbar.open('Error al Abrir el Porton', 'Cerrar', {
+        //   duration: 2.5 * 1000,
+        // });
       }
     );
   }
