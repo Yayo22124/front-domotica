@@ -82,7 +82,7 @@ export class SensorInformationPageComponent implements OnInit {
     clearInterval(this.pollingInterval);
   }
   getSensorRecords(location: string, room: string, sensorName: string) {
-    // this.loadingService.showLoading();
+    this.loadingService.showLoading();
     this.roomsService.getSensorRecords(location, room, sensorName).subscribe(
       (res) => {
         console.log(res);

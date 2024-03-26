@@ -46,7 +46,7 @@ export class HomePageComponent implements OnInit {
   }
 
   getRoomsNames() {
-    // this.loadingService.showLoading();
+    this.loadingService.showLoading();
     this.roomsService.getAllRooms().subscribe((res: iApiResponse) => {
       console.log(res);
       this.rooms = res.roomsNames;

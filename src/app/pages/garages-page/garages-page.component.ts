@@ -87,7 +87,7 @@ export class GaragesPageComponent implements OnInit {
   }
 
   getGaragesData(location: string) {
-    // this.loadingService.showLoading();
+    this.loadingService.showLoading();
     this.garagesService.getGaragesData(location).subscribe(
       (response: iApiResponse) => {
         console.log(response);

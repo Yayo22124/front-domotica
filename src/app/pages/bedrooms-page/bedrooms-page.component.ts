@@ -85,7 +85,7 @@ export class BedroomsPageComponent implements OnInit {
   }
 
   getBedroomData(location: string) {
-    // this.loadingService.showLoading();
+    this.loadingService.showLoading();
     this.bedroomsService.getLastData(location).subscribe(
       (response: iLastApiResponse) => {
         console.log(response);

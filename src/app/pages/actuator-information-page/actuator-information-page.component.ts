@@ -79,7 +79,7 @@ export class ActuatorInformationPageComponent implements OnInit {
   }
 
   getActuatorRecords(location: string, room: string, actuatorName: string) {
-    // this.loadingService.showLoading();
+    this.loadingService.showLoading();
     this.roomsService.getActuatorRecords(location, room, actuatorName).subscribe(
       (res) => {
         console.log(res);
