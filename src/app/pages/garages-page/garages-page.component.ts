@@ -1,24 +1,25 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import {
+  iApiResponse,
+  iLastApiResponse,
+} from '../../core/interfaces/i-ApiResponse';
 
 import { ActivatedRoute } from '@angular/router';
 import { BuzzerDataItemComponent } from '../../components/buzzer-data-item/buzzer-data-item.component';
 import { DoorDataItemComponent } from '../../components/door-data-item/door-data-item.component';
 import { ExLightDataItemComponent } from '../../components/ex-light-data-item/ex-light-data-item.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GaragesService } from './../../core/services/Garages/garages.service';
 import { GateDoubleDataItemComponent } from '../../components/gate-double-data-item/gate-double-data-item.component';
 import { InLightDataItemComponent } from '../../components/in-light-data-item/in-light-data-item.component';
 import { LoadingService } from '../../core/services/Loading/loading.service';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { PhotoresistorDataItemComponent } from '../../components/photoresistor-data-item/photoresistor-data-item.component';
 import { PresenceDataItemComponent } from '../../components/presence-data-item/presence-data-item.component';
 import { ProximityDataItemComponent } from '../../components/proximity-data-item/proximity-data-item.component';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
-import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 import { pollingIntervalTime } from '../../core/constants/pollingInterval';
 
@@ -26,13 +27,11 @@ import { pollingIntervalTime } from '../../core/constants/pollingInterval';
   selector: 'app-garages-page',
   standalone: true,
   imports: [
-    MatCardModule,
     MatButtonModule,
     CommonModule,
     MatIconModule,
     MatDividerModule,
     PhotoresistorDataItemComponent,
-    FontAwesomeModule,
     ProximityDataItemComponent,
     PresenceDataItemComponent,
     InLightDataItemComponent,
@@ -50,25 +49,24 @@ export class GaragesPageComponent implements OnInit {
     private route: ActivatedRoute,
     private loadingService: LoadingService
   ) {}
-  public garageSensor: iSensorsData[] | undefined = [];
-  public garageActuators: iActuatorsData[] | undefined = [];
+  public garageSensor!: { _id: string; lastRecord: iSensorsData }[];
+  public garageActuators!: { _id: string; lastRecord: iActuatorsData }[];
   public garageName: string | null = '';
-  public presenceData: iSensorsData | null = null;
-  public dhtData: iSensorsData | null = null;
-  public ldrData: iSensorsData | null = null;
-  public proximityData: iSensorsData | null = null;
-  public fanData: iActuatorsData | null = null;
-  public doorData: iActuatorsData | null = null;
-  public windowLeftData: iActuatorsData | null = null;
-  public windowRightData: iActuatorsData | null = null;
-  public inLightData: iActuatorsData | null = null;
-  public exLightData: iActuatorsData | null = null;
-  public buzzerData: iActuatorsData | null = null;
-  public gateLeftData: iActuatorsData | null = null;
-  public gateRightData: iActuatorsData | null = null;
+  public presenceData: iSensorsData | undefined = undefined;
+  public dhtData: iSensorsData | undefined = undefined;
+  public ldrData: iSensorsData | undefined = undefined;
+  public proximityData: iSensorsData | undefined = undefined;
+  public fanData: iActuatorsData | undefined = undefined;
+  public doorData: iActuatorsData | undefined = undefined;
+  public windowLeftData: iActuatorsData | undefined = undefined;
+  public windowRightData: iActuatorsData | undefined = undefined;
+  public inLightData: iActuatorsData | undefined = undefined;
+  public exLightData: iActuatorsData | undefined = undefined;
+  public buzzerData: iActuatorsData | undefined = undefined;
+  public gateLeftData: iActuatorsData | undefined = undefined;
+  public gateRightData: iActuatorsData | undefined = undefined;
 
   private pollingInterval: any;
-
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -88,56 +86,76 @@ export class GaragesPageComponent implements OnInit {
 
   getGaragesData(location: string) {
     this.loadingService.showLoading();
-    console.log(`Obteniendo Datos en ${this.garageName}`)
-    
-    this
-    .garagesService.getGaragesData(location).subscribe(
-      (response: iApiResponse) => {
+    console.log(`Obteniendo Datos en ${this.garageName}`);
+
+    this.garagesService.getLastData(location).subscribe(
+      (response: iLastApiResponse) => {
         console.log(response);
         this.garageActuators = response.actuatorsData;
         this.garageSensor = response.sensorsData;
 
         if (this.garageActuators && this.garageSensor) {
-          // Separar los datos de sensores en variables individuales
+          this.dhtData = this.garageSensor.find(({ lastRecord }) =>
+            lastRecord.name.toLowerCase().includes('temperatura')
+          )?.lastRecord;
+          
           this.ldrData = this.garageSensor.find(
-            (sensor) => sensor.name === 'Fotorresistencia'
-          )!;
-          this.proximityData = this.garageSensor.find(
-            (sensor) => sensor.name === 'Proximidad'
-            )!;
-            this.presenceData = this.garageSensor.find(
-            (sensor) => sensor.name === 'Presencia'
-            )!;
+            ({ lastRecord }) => lastRecord.name === 'Fotorresistencia'
+          )?.lastRecord;
 
-          // Separar los datos de actuadores en variables individuales
-          this.inLightData = this.garageActuators.find(
-            (actuator) => actuator.name === 'Led Interior'
-            )!;
+          this.fanData = this.garageActuators.find(
+            ({ lastRecord }) => lastRecord.name === 'Ventilador'
+          )?.lastRecord;
+
           this.doorData = this.garageActuators.find(
-            (actuator) => actuator.name === 'Puerta'
-            )!;
-            this.exLightData = this.garageActuators.find(
-              (actuator) => actuator.name === 'Led Exterior'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Puerta'
+          )?.lastRecord;
+
+          this.windowLeftData = this.garageActuators.find(
+            ({ lastRecord }) => lastRecord.name === 'Ventana Izquierda'
+          )?.lastRecord;
+
+          this.windowRightData = this.garageActuators.find(
+            ({ lastRecord }) => lastRecord.name === 'Ventana Derecha'
+          )?.lastRecord;
+
+          this.inLightData = this.garageActuators.find(
+            ({ lastRecord }) => lastRecord.name === 'Led Interior'
+          )?.lastRecord;
+
+          this.exLightData = this.garageActuators.find(
+            ({ lastRecord }) => lastRecord.name === 'Led Exterior'
+          )?.lastRecord;
+
           this.buzzerData = this.garageActuators.find(
-            (actuator) => actuator.name === 'Alarma' || actuator.name === "Buzzer"
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Alarma'
+          )?.lastRecord;
+
           this.gateLeftData = this.garageActuators.find(
-            (actuator) => actuator.name === 'Porton Izquierda'
-            )!;
+            ({ lastRecord }) => lastRecord.name === 'Porton Izquierda'
+          )?.lastRecord;
+
           this.gateRightData = this.garageActuators.find(
-            (actuator) => actuator.name === 'Porton Derecha'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Porton Derecha'
+          )?.lastRecord;
+
+          this.proximityData = this.garageSensor.find(
+            ({ lastRecord }) => lastRecord.name === 'Proximidad'
+          )?.lastRecord;
+
+          this.presenceData = this.garageSensor.find(
+            ({ lastRecord }) => lastRecord.name === 'Presencia'
+          )?.lastRecord;
         }
         this.loadingService.hideLoading();
-        console.log(`Datos Obtenidos en ${this.garageName}`)
+        console.log(`Datos Obtenidos en ${this.garageName}`);
       },
       (error) => {
-        console.log(`Datos No Obtenidos en ${this.garageName}`)
+        console.log(`Datos No Obtenidos en ${this.garageName}`);
         this.loadingService.hideLoading();
         console.error(error);
       }
-      );
+    );
   }
 
   onActuatorUpdate() {

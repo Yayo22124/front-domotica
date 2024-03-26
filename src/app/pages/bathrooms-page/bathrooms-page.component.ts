@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  iApiResponse,
+  iLastApiResponse,
+} from '../../core/interfaces/i-ApiResponse';
 
 import { ActivatedRoute } from '@angular/router';
 import { BathroomsService } from '../../core/services/Bathrooms/bathrooms.service';
@@ -19,7 +23,6 @@ import { SimpleWindowComponent } from '../../components/simple-window/simple-win
 import { WaterPumpDataItemComponent } from '../../components/water-pump-data-item/water-pump-data-item.component';
 import { apiUrl } from '../../core/constants/apiUrl.constant';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
-import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 import { pollingIntervalTime } from '../../core/constants/pollingInterval';
 
@@ -45,18 +48,18 @@ import { pollingIntervalTime } from '../../core/constants/pollingInterval';
   styleUrl: './bathrooms-page.component.scss',
 })
 export class BathroomsPageComponent implements OnInit {
-  public sensorsData: iSensorsData[] | undefined = [];
-  public actuatorsData: iActuatorsData[] | undefined = [];
+  public sensorsData!: { _id: string; lastRecord: iSensorsData }[];
+  public actuatorsData!: { _id: string; lastRecord: iActuatorsData }[];
   public bathroomName: string | null = '';
 
-  public ldrData: iSensorsData | null = null;
-  public presenceData: iSensorsData | null = null;
-  public proximityData: iSensorsData | null = null;
-  public doorData: iActuatorsData | null = null;
-  public windowData: iActuatorsData | null = null;
-  public inLightData: iActuatorsData | null = null;
-  public exLightData: iActuatorsData | null = null;
-  public waterPumpData: iActuatorsData | null = null;
+  public ldrData: iSensorsData | undefined = undefined;
+  public presenceData: iSensorsData | undefined = undefined;
+  public proximityData: iSensorsData | undefined = undefined;
+  public doorData: iActuatorsData | undefined = undefined;
+  public windowData: iActuatorsData | undefined = undefined;
+  public inLightData: iActuatorsData | undefined = undefined;
+  public exLightData: iActuatorsData | undefined = undefined;
+  public waterPumpData: iActuatorsData | undefined = undefined;
 
   private pollingInterval: any;
 
@@ -83,48 +86,47 @@ export class BathroomsPageComponent implements OnInit {
   getBathroomsData(location: string) {
     console.log(`Obteniendo Datos en ${this.bathroomName}`);
     this.loadinService.showLoading();
-    this.bathroomsService.getBathroomsData(location).subscribe(
-      (response: iApiResponse) => {
+    this.bathroomsService.getLastData(location).subscribe(
+      (response: iLastApiResponse) => {
         console.log(response);
         this.actuatorsData = response.actuatorsData;
         this.sensorsData = response.sensorsData;
 
         if (this.actuatorsData && this.sensorsData) {
           this.ldrData = this.sensorsData.find(
-            (sensor) => sensor.name === 'Fotorresistencia'
-          )!;
-          this.presenceData = this.sensorsData.find(
-            (sensor) => sensor.name === 'Presencia'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Fotorresistencia'
+          )?.lastRecord;
+
           this.proximityData = this.sensorsData.find(
-            (sensor) => sensor.name === 'Proximidad'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Proximidad'
+          )?.lastRecord;
+
+          this.presenceData = this.sensorsData.find(
+            ({ lastRecord }) => lastRecord.name === 'Presencia'
+          )?.lastRecord;
 
           this.doorData = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Puerta'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Puerta'
+          )?.lastRecord;
+
           this.windowData = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Ventana'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Ventana'
+          )?.lastRecord;
 
           this.inLightData = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Led Interior'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Led Interior'
+          )?.lastRecord;
 
           this.exLightData = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Led Exterior'
-          )!;
-
-          this.waterPumpData = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Bomba de Agua'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Led Exterior'
+          )?.lastRecord;
         }
 
-        console.log(`Datos Obtenidos en ${this.bathroomName}`)
+        console.log(`Datos Obtenidos en ${this.bathroomName}`);
         this.loadinService.hideLoading();
       },
       (error) => {
-        console.log(`Datos No Obtenidos en ${this.bathroomName}`)
+        console.log(`Datos No Obtenidos en ${this.bathroomName}`);
         this.loadinService.hideLoading();
         console.error(error);
       }

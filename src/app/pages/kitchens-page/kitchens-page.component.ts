@@ -1,5 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { iApiResponse, iLastApiResponse } from '../../core/interfaces/i-ApiResponse';
 
 import { ActivatedRoute } from '@angular/router';
 import { BuzzerDataItemComponent } from '../../components/buzzer-data-item/buzzer-data-item.component';
@@ -19,7 +20,6 @@ import { PhotoresistorDataItemComponent } from '../../components/photoresistor-d
 import { TemperatureDataItemComponent } from '../../components/temperature-data-item/temperature-data-item.component';
 import { WindowDoubleDataItemComponent } from '../../components/window-double-data-item/window-double-data-item.component';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
-import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 import { pollingIntervalTime } from '../../core/constants/pollingInterval';
 
@@ -47,22 +47,22 @@ import { pollingIntervalTime } from '../../core/constants/pollingInterval';
   styleUrl: './kitchens-page.component.scss',
 })
 export class KitchensPageComponent implements OnInit {
-  public sensorsData: iSensorsData[] | undefined = [];
-  public actuatorsData: iActuatorsData[] | undefined = [];
+  public sensorsData!: { _id: string; lastRecord: iSensorsData }[];
+  public actuatorsData!: { _id: string; lastRecord: iActuatorsData }[];
   public kitchenName: string | null = '';
 
-  public dhtData: iSensorsData | null = null;
-  public ldrData: iSensorsData | null = null;
-  public fanData: iActuatorsData | null = null;
-  public doorData: iActuatorsData | null = null;
-  public windowLeftDataL: iActuatorsData | null = null;
-  public windowRightDataL: iActuatorsData | null = null;
-  public windowLeftDataR: iActuatorsData | null = null;
-  public windowRightDataR: iActuatorsData | null = null;
-  public inLightData: iActuatorsData | null = null;
-  public exLightData: iActuatorsData | null = null;
-  public buzzerData: iActuatorsData | null = null;
-  public gasData: iSensorsData | null = null;
+  public dhtData: iSensorsData | undefined = undefined;
+  public ldrData: iSensorsData | undefined = undefined;
+  public fanData: iActuatorsData | undefined = undefined;
+  public doorData: iActuatorsData | undefined = undefined;
+  public windowLeftDataL: iActuatorsData | undefined = undefined;
+  public windowRightDataL: iActuatorsData | undefined = undefined;
+  public windowLeftDataR: iActuatorsData | undefined = undefined;
+  public windowRightDataR: iActuatorsData | undefined = undefined;
+  public inLightData: iActuatorsData | undefined = undefined;
+  public exLightData: iActuatorsData | undefined = undefined;
+  public buzzerData: iActuatorsData | undefined = undefined;
+  public gasData: iSensorsData | undefined = undefined;
 
   constructor(
     private kitchensService: KitchensService,
@@ -94,52 +94,57 @@ export class KitchensPageComponent implements OnInit {
     console.log(`Obteniendo datos en ${this.kitchenName}`)
     console.log(`Datos Obtenidos en ${this.kitchenName}`)
     
-    this.kitchensService.getKitchenData(location).subscribe(
-      (response: iApiResponse) => {
+    this.kitchensService.getLastData(location).subscribe(
+      (response: iLastApiResponse) => {
         console.log(response);
         this.actuatorsData = response.actuatorsData;
         this.sensorsData = response.sensorsData;
         
         if (this.actuatorsData && this.sensorsData) {
-          // Separar los datos de sensores en variables individuales
-          this.dhtData = this.sensorsData.find(
-            (sensor) => sensor.name === 'Temperatura y Humedad'
-            )!;
+          this.dhtData = this.sensorsData.find(({ lastRecord }) =>
+            lastRecord.name.toLowerCase().includes('temperatura')
+          )?.lastRecord;
+
+          this.gasData = this.sensorsData.find(({ lastRecord }) =>
+            lastRecord.name.toLowerCase().includes('gas')
+          )?.lastRecord;
+
           this.ldrData = this.sensorsData.find(
-            (sensor) => sensor.name === 'Fotorresistencia'
-          )!;
-          this.gasData = this.sensorsData.find(
-            (sensor) => sensor.name === 'Gas'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Fotorresistencia'
+          )?.lastRecord;
 
           // Separar los datos de actuadores en variables individuales
           this.fanData = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Ventilador'
-            )!;
+            ({ lastRecord }) => lastRecord.name === 'Ventilador'
+          )?.lastRecord;
+
           this.doorData = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Puerta'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Puerta'
+          )?.lastRecord;
+
           this.windowLeftDataL = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Ventana Doble Izquierda L'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Ventana Doble Izquierda L'
+          )?.lastRecord;
+
           this.windowRightDataL = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Ventana Doble Derecha L'
-            )!;
-            this.windowLeftDataR = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Ventana Doble Izquierda R'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Ventana Doble Derecha L'
+          )?.lastRecord;
+
+          this.windowLeftDataR = this.actuatorsData.find(
+            ({ lastRecord }) => lastRecord.name === 'Ventana Doble Izquierda R'
+          )?.lastRecord;
+
           this.windowRightDataR = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Ventana Doble Derecha R'
-            )!;
+            ({ lastRecord }) => lastRecord.name === 'Ventana Doble Derecha R'
+          )?.lastRecord;
+
           this.inLightData = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Led Interior'
-            )!;
+            ({ lastRecord }) => lastRecord.name === 'Led Interior'
+          )?.lastRecord;
+
           this.exLightData = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Led Exterior'
-          )!;
-          this.buzzerData = this.actuatorsData.find(
-            (actuator) => actuator.name === 'Alarma' || actuator.name === "Buzzer"
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Led Exterior'
+          )?.lastRecord;
         }
         console.log(`Datos Obtenidos en ${this.kitchenName}`)
         this.loadingService.hideLoading();

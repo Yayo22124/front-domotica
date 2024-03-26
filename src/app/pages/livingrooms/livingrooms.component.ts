@@ -1,6 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { iApiResponse, iLastApiResponse } from '../../core/interfaces/i-ApiResponse';
 
 import { DoorDataItemComponent } from '../../components/door-data-item/door-data-item.component';
 import { ExLightDataItemComponent } from '../../components/ex-light-data-item/ex-light-data-item.component';
@@ -18,7 +19,6 @@ import { PhotoresistorDataItemComponent } from '../../components/photoresistor-d
 import { TemperatureDataItemComponent } from '../../components/temperature-data-item/temperature-data-item.component';
 import { WindowDoubleDataItemComponent } from '../../components/window-double-data-item/window-double-data-item.component';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
-import { iApiResponse } from '../../core/interfaces/i-ApiResponse';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 import { pollingIntervalTime } from '../../core/constants/pollingInterval';
 
@@ -54,22 +54,22 @@ export class LivingroomsComponent implements OnInit {
     private loadingService: LoadingService
   ) {}
 
-  public livingroomsSensor: iSensorsData[] | undefined = [];
-  public livingroomsActuators: iActuatorsData[] | undefined = [];
+  public livingroomsSensor!: { _id: string; lastRecord: iSensorsData }[];
+  public livingroomsActuators!: { _id: string; lastRecord: iActuatorsData }[];
   // * --------- *
   public livingroomName: string | null = '';
   public roomPath: string = '';
   public room: string | null = '';
   // * --------- *
 
-  public dhtData: iSensorsData | null = null;
-  public ldrData: iSensorsData | null = null;
-  public fanData: iActuatorsData | null = null;
-  public doorData: iActuatorsData | null = null;
-  public windowLeftData: iActuatorsData | null = null;
-  public windowRightData: iActuatorsData | null = null;
-  public inLightData: iActuatorsData | null = null;
-  public exLightData: iActuatorsData | null = null;
+  public dhtData: iSensorsData | undefined = undefined;
+  public ldrData: iSensorsData | undefined = undefined;
+  public fanData: iActuatorsData | undefined = undefined;
+  public doorData: iActuatorsData | undefined = undefined;
+  public windowLeftData: iActuatorsData | undefined = undefined;
+  public windowRightData: iActuatorsData | undefined = undefined;
+  public inLightData: iActuatorsData | undefined = undefined;
+  public exLightData: iActuatorsData | undefined = undefined;
 
   private pollingInterval: any;
 
@@ -94,40 +94,45 @@ export class LivingroomsComponent implements OnInit {
   getLivingroomData(location: string) {
     console.log(`Obteniendo Datos en ${this.livingroomName}`);
     this.loadingService.showLoading();
-    this.LivingroomsService.getLivingroomData(location).subscribe(
-      (response: iApiResponse) => {
+    this.LivingroomsService.getLastData(location).subscribe(
+      (response: iLastApiResponse) => {
         console.log(response);
         this.livingroomsActuators = response.actuatorsData;
         this.livingroomsSensor = response.sensorsData;
 
         if (this.livingroomsActuators && this.livingroomsSensor) {
           // Separar los datos de sensores en variables individuales
-          this.dhtData = this.livingroomsSensor.find(
-            (sensor) => sensor.name === 'Temperatura y Humedad'
-          )!;
+          this.dhtData = this.livingroomsSensor.find(({lastRecord}) => lastRecord.name.toLowerCase().includes('temperatura'))?.lastRecord;
+
           this.ldrData = this.livingroomsSensor.find(
-            (sensor) => sensor.name === 'Fotorresistencia'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Fotorresistencia'
+          )?.lastRecord;
 
           // Separar los datos de actuadores en variables individuales
           this.fanData = this.livingroomsActuators.find(
-            (actuator) => actuator.name === 'Ventilador'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Ventilador'
+          )?.lastRecord;
+
           this.doorData = this.livingroomsActuators.find(
-            (actuator) => actuator.name === 'Puerta'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Puerta'
+          )?.lastRecord;
+
           this.windowLeftData = this.livingroomsActuators.find(
-            (actuator) => actuator.name === 'Ventana Doble Izquierda'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Ventana Izquierda'
+          )?.lastRecord;
+
           this.windowRightData = this.livingroomsActuators.find(
-            (actuator) => actuator.name === 'Ventana Doble Derecha'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Ventana Derecha'
+          )?.lastRecord;
+
+
           this.inLightData = this.livingroomsActuators.find(
-            (actuator) => actuator.name === 'Led Interior'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Led Interior'
+          )?.lastRecord;
+
           this.exLightData = this.livingroomsActuators.find(
-            (actuator) => actuator.name === 'Led Exterior'
-          )!;
+            ({ lastRecord }) => lastRecord.name === 'Led Exterior'
+          )?.lastRecord;
         }
         console.log(`Datos Obtenidos en ${this.livingroomName}`)
         this.loadingService.hideLoading();
