@@ -1,7 +1,7 @@
 @if (fanData) {
 <mat-card class="relative gap-5 p-2 flex flex-col justify-between">
     <mat-card-header class="mt-4">
-        <mat-card-title class="text-xl font-medium">{{fanData.name}}</mat-card-title>
+        <mat-card-title class="text-xl font-medium">{{fanData.name}} <br> {{fanData.arduinoIp}}</mat-card-title>
         <mat-card-subtitle><strong class="font-medium">Fecha inicial:</strong> {{fanData.registeredDate|
             date:"short"}}</mat-card-subtitle>
     </mat-card-header>
@@ -28,12 +28,25 @@
         <!-- <span>
                     {{action.name}}
                 </span> -->
-        <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value" [disabled]="isLoading || !isChecked"
-            (toggleChange)="action.value ? fanOff(fanData.arduinoIp) : fanOn(fanData.arduinoIp)">
-            @if (action.value) { Apagar } @else { Encender }
+        @if (action.value) {
+        <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="true"
+            [disabled]="isLoading || !isChecked"
+            (toggleChange)="fanOff(fanData.arduinoIp)">
+            Apagar
         </mat-slide-toggle>
 
-        <mat-checkbox class="absolute top-1 left-1" matTooltipPosition="above" [matTooltip]="isChecked ? 'Desactivar Modo Manual' : 'Activar Modo Manual'" color="primary" [disabled]="isLoading" (change)="onCheckboxChange()">Modo Manual</mat-checkbox>
+        } @else if(!action.value){
+        <mat-slide-toggle color="primary" class="absolute top-1 right-1"
+            [disabled]="isLoading || !isChecked"
+            (toggleChange)="fanOn(fanData.arduinoIp)">
+            Encender
+        </mat-slide-toggle>
+
+        }
+
+        <mat-checkbox class="absolute top-1 left-1" matTooltipPosition="above"
+            [matTooltip]="isChecked ? 'Desactivar Modo Manual' : 'Activar Modo Manual'" color="primary"
+            [disabled]="isLoading" (change)="onCheckboxChange()">Modo Manual</mat-checkbox>
         }
     </mat-card-content>
     <mat-card-footer class="w-full flex items-center justify-center">

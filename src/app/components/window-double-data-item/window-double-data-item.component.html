@@ -51,109 +51,109 @@
     </mat-card-footer>
 </mat-card>
 } @else if(windowDLLData && windowDRLData) {
-    <mat-card class=" relative gap-5 p-2 flex flex-col justify-between col-span-2">
-        <mat-card-header>
-            <mat-card-title class="text-xl font-medium">Ventanas Izquierda</mat-card-title>
-            <mat-card-subtitle><strong class="font-medium">Ultimo Registro:</strong> {{windowDLLData.registeredDate|
-                date:"short"}}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content class="flex justify-center w-full">
-            @for (action of windowDLLData.actions; track $index) {
-            @if(action.value == false){
-    
-            <div matTooltip="Ventana cerrada" matTooltipPosition="above"
-                class="w-full cursor-pointer shadow-md rounded-sm bg-gradient-to-tr from-slate-500 via-gray-600 to-slate-500 p-2 flex items-center justify-center text-white font-medium ">
-                <mat-icon>block</mat-icon>
-                <span>
-                    Cerradas
-                </span>
-            </div>
-    
-            } @else{
-            <div matTooltip="Ventana abierta" matTooltipPosition="above"
-                class="w-full cursor-pointer shadow-md rounded-sm bg-gradient-to-tr from-emerald-500 via-emerald-400 to-emerald-500 p-2 flex items-center justify-center text-white font-medium">
-                <mat-icon>done_outline</mat-icon>
-                <span>
-                    Abiertas
-                </span>
-            </div>
-    
-            }
-            @if (action.value) {
-    
-            <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value" [disabled]="isLoading"
-                (toggleChange)="closeWindows(windowDLLData.arduinoIp, 'L')">
-                Cerrar
-            </mat-slide-toggle>
-            } @else {
-    
-            <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value" [disabled]="isLoading"
-                (toggleChange)="openWindows(windowDLLData.arduinoIp, 'L')">
-                Abrir
-            </mat-slide-toggle>
-            }
-            }
-        </mat-card-content>
-        <mat-card-footer class="w-full flex items-center justify-center">
-    
-            <button matTooltip="Ver todos los registros." matTooltipPosition="below" mat-flat-button color="primary"
-                (click)="seeMore()">Ver
-                más</button>
-    
-        </mat-card-footer>
-    </mat-card>
-    
+<mat-card class=" relative gap-5 p-2 flex flex-col justify-between col-span-2">
+    <mat-card-header>
+        <mat-card-title class="text-xl font-medium">Ventanas Izquierda</mat-card-title>
+        <mat-card-subtitle><strong class="font-medium">Ultimo Registro:</strong> {{windowDLLData.registeredDate|
+            date:"short"}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="flex justify-center w-full">
+        @for (action of windowDLLData.actions; track $index) {
+        @if(action.value == false){
+
+        <div matTooltip="Ventana cerrada" matTooltipPosition="above"
+            class="w-full cursor-pointer shadow-md rounded-sm bg-gradient-to-tr from-slate-500 via-gray-600 to-slate-500 p-2 flex items-center justify-center text-white font-medium ">
+            <mat-icon>block</mat-icon>
+            <span>
+                Cerradas
+            </span>
+        </div>
+
+        } @else{
+        <div matTooltip="Ventana abierta" matTooltipPosition="above"
+            class="w-full cursor-pointer shadow-md rounded-sm bg-gradient-to-tr from-emerald-500 via-emerald-400 to-emerald-500 p-2 flex items-center justify-center text-white font-medium">
+            <mat-icon>done_outline</mat-icon>
+            <span>
+                Abiertas
+            </span>
+        </div>
+
+        }
+        @if (action.value) {
+
+        <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value" [disabled]="isLoading"
+            (toggleChange)="closeWindows(windowDLLData.arduinoIp, 'L')">
+            Cerrar
+        </mat-slide-toggle>
+        } @else {
+
+        <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value" [disabled]="isLoading"
+            (toggleChange)="openWindows(windowDLLData.arduinoIp, 'L')">
+            Abrir
+        </mat-slide-toggle>
+        }
+        }
+    </mat-card-content>
+    <mat-card-footer class="w-full flex items-center justify-center">
+
+        <button matTooltip="Ver todos los registros." matTooltipPosition="below" mat-flat-button color="primary"
+            (click)="seeMore()">Ver
+            más</button>
+
+    </mat-card-footer>
+</mat-card>
+
 } @else if (windowDLRData && windowDRRData) {
-    <mat-card class=" relative gap-5 p-2 flex flex-col justify-between col-span-2">
-        <mat-card-header>
-            <mat-card-title class="text-xl font-medium">Ventanas Derecha</mat-card-title>
-            <mat-card-subtitle><strong class="font-medium">Ultimo Registro:</strong> {{windowDLRData.registeredDate|
-                date:"short"}}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content class="flex justify-center w-full">
-            @for (action of windowDLRData.actions; track $index) {
-            @if(action.value == false){
-    
-            <div matTooltip="Ventana cerrada" matTooltipPosition="above"
-                class="w-full cursor-pointer shadow-md rounded-sm bg-gradient-to-tr from-slate-500 via-gray-600 to-slate-500 p-2 flex items-center justify-center text-white font-medium ">
-                <mat-icon>block</mat-icon>
-                <span>
-                    Cerradas
-                </span>
-            </div>
-    
-            } @else{
-            <div matTooltip="Ventana abierta" matTooltipPosition="above"
-                class="w-full cursor-pointer shadow-md rounded-sm bg-gradient-to-tr from-emerald-500 via-emerald-400 to-emerald-500 p-2 flex items-center justify-center text-white font-medium">
-                <mat-icon>done_outline</mat-icon>
-                <span>
-                    Abiertas
-                </span>
-            </div>
-    
-            }
-            @if (action.value) {
-    
-            <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value" [disabled]="isLoading"
-                (toggleChange)="closeWindows(windowDLRData.arduinoIp, 'R')">
-                Cerrar
-            </mat-slide-toggle>
-            } @else {
-    
-            <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value" [disabled]="isLoading"
-                (toggleChange)="openWindows(windowDLRData.arduinoIp, 'R')">
-                Abrir
-            </mat-slide-toggle>
-            }
-            }
-        </mat-card-content>
-        <mat-card-footer class="w-full flex items-center justify-center">
-    
-            <button matTooltip="Ver todos los registros." matTooltipPosition="below" mat-flat-button color="primary"
-                (click)="seeMore()">Ver
-                más</button>
-    
-        </mat-card-footer>
-    </mat-card>
+<mat-card class=" relative gap-5 p-2 flex flex-col justify-between col-span-2">
+    <mat-card-header>
+        <mat-card-title class="text-xl font-medium">Ventanas Derecha</mat-card-title>
+        <mat-card-subtitle><strong class="font-medium">Ultimo Registro:</strong> {{windowDLRData.registeredDate|
+            date:"short"}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="flex justify-center w-full">
+        @for (action of windowDLRData.actions; track $index) {
+        @if(action.value == false){
+
+        <div matTooltip="Ventana cerrada" matTooltipPosition="above"
+            class="w-full cursor-pointer shadow-md rounded-sm bg-gradient-to-tr from-slate-500 via-gray-600 to-slate-500 p-2 flex items-center justify-center text-white font-medium ">
+            <mat-icon>block</mat-icon>
+            <span>
+                Cerradas
+            </span>
+        </div>
+
+        } @else{
+        <div matTooltip="Ventana abierta" matTooltipPosition="above"
+            class="w-full cursor-pointer shadow-md rounded-sm bg-gradient-to-tr from-emerald-500 via-emerald-400 to-emerald-500 p-2 flex items-center justify-center text-white font-medium">
+            <mat-icon>done_outline</mat-icon>
+            <span>
+                Abiertas
+            </span>
+        </div>
+
+        }
+        @if (action.value) {
+
+        <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="true" [disabled]="isLoading"
+            (toggleChange)="closeWindows(windowDLRData.arduinoIp, 'R')">
+            Cerrar
+        </mat-slide-toggle>
+        } @else {
+
+        <mat-slide-toggle color="primary" class="absolute top-1 right-1" [disabled]="isLoading"
+            (toggleChange)="openWindows(windowDLRData.arduinoIp, 'R')">
+            Abrir
+        </mat-slide-toggle>
+        }
+        }
+    </mat-card-content>
+    <mat-card-footer class="w-full flex items-center justify-center">
+
+        <button matTooltip="Ver todos los registros." matTooltipPosition="below" mat-flat-button color="primary"
+            (click)="seeMore()">Ver
+            más</button>
+
+    </mat-card-footer>
+</mat-card>
 
 }

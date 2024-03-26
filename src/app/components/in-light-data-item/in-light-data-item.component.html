@@ -27,9 +27,18 @@
 
         </div>
         }
-        <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value" [disabled]="isLoading" (toggleChange)="action.value ? turnOff(inLightData.arduinoIp) : turnOn(inLightData.arduinoIp)">
-            @if (action.value) { Apagar } @else { Encender }
+        @if (action.value) {
+        <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="true" [disabled]="isLoading"
+            (toggleChange)="turnOff(inLightData.arduinoIp)">
+            Apagar
         </mat-slide-toggle>
+        } @else {
+        <mat-slide-toggle color="primary" class="absolute top-1 right-1" [disabled]="isLoading"
+            (toggleChange)=" turnOn(inLightData.arduinoIp)">
+            Encender
+        </mat-slide-toggle>
+
+        }
         }
     </mat-card-content>
     <mat-card-footer class="w-full flex items-center justify-center">
@@ -37,7 +46,7 @@
         <button matTooltip="Ver todos los registros." matTooltipPosition="below" mat-flat-button color="primary"
             (click)="seeMore()">Ver
             más</button>
-            
+
     </mat-card-footer>
 </mat-card>
 }

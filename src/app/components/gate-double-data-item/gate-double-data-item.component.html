@@ -26,10 +26,17 @@
 
         </div>
         }
-        <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="action.value" [disabled]="isLoading"
-            (toggleChange)="action.value ? closePorton(gateLeftData.arduinoIp) : openPorton(gateLeftData.arduinoIp)">
-            @if (action.value) { Cerrar } @else { Abrir }
+        @if (action.value) {
+        <mat-slide-toggle color="primary" class="absolute top-1 right-1" checked="true" [disabled]="isLoading"
+            (toggleChange)=" closePorton(gateLeftData.arduinoIp) ">
+            Cerrar
         </mat-slide-toggle>
+        } @else {
+        <mat-slide-toggle color="primary" class="absolute top-1 right-1" [disabled]="isLoading"
+            (toggleChange)="openPorton(gateLeftData.arduinoIp)">
+            Abrir
+        </mat-slide-toggle>
+        }
         }
     </mat-card-content>
     <mat-card-footer class="w-full flex items-center justify-center">
