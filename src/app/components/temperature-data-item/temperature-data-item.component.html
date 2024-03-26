@@ -2,7 +2,7 @@
 <mat-card class="bg-gray-50 p-2 flex flex-col gap-5 animate-fade-down animate-duration-500 animate-ease-in">
     <mat-card-header>
         <mat-card-title class="text-xl font-medium">Temperatura y Humedad</mat-card-title>
-        <mat-card-subtitle><strong class="font-medium">Última Lectura:</strong> {{dhtData.registeredDate}}</mat-card-subtitle>
+        <mat-card-subtitle><strong class="font-medium">Última Lectura:</strong> {{dhtData.registeredDate|date:"short"}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-actions class="flex justify-around">
         @for (read of dhtData.readings; track $index) {
