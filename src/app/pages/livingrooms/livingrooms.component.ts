@@ -93,7 +93,7 @@ export class LivingroomsComponent implements OnInit {
   }
 
   getLivingroomData(location: string) {
-    this.loadingService.showLoading();
+    // this.loadingService.showLoading();
     this.LivingroomsService.getLivingroomData(location).subscribe(
       (response: iApiResponse) => {
         console.log(response);

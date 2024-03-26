@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { apiUrl } from '../../constants/apiUrl.constant';
 import { Observable } from 'rxjs';
+import { apiUrl } from '../../constants/apiUrl.constant';
 import { iApiResponse } from '../../interfaces/i-ApiResponse';
 
 @Injectable({
@@ -12,10 +12,10 @@ export class LivingroomsService {
     ) { }
 
     getAllLivingrooms(): Observable<iApiResponse>{
-      return this.http.get<iApiResponse>(`${apiUrl}/livingrooms/?limit=10000`);    
+      return this.http.get<iApiResponse>(`${apiUrl}/livingrooms/?limit=500`);    
     }
 
     getLivingroomData(location: string): Observable <iApiResponse> {
-      return this.http.get<iApiResponse>(`${apiUrl}/livingrooms/?location=${location}&limit=10000`);
+      return this.http.get<iApiResponse>(`${apiUrl}/livingrooms/?location=${location}&limit=500`);
     }
 }

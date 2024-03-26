@@ -82,7 +82,7 @@ export class SensorInformationPageComponent implements OnInit {
     clearInterval(this.pollingInterval);
   }
   getSensorRecords(location: string, room: string, sensorName: string) {
-    this.loadingService.showLoading();
+    // this.loadingService.showLoading();
     this.roomsService.getSensorRecords(location, room, sensorName).subscribe(
       (res) => {
         console.log(res);
@@ -169,7 +169,7 @@ export class SensorInformationPageComponent implements OnInit {
             // pointInterval: 1
           },
           series: {
-            turboThreshold: 100000
+            turboThreshold: 600
           }
         },
         series: [
@@ -248,7 +248,7 @@ export class SensorInformationPageComponent implements OnInit {
               // pointInterval: 1
             },
             series: {
-              turboThreshold: 100000
+              turboThreshold: 600
             }
           },
           series: [
@@ -311,7 +311,7 @@ export class SensorInformationPageComponent implements OnInit {
             // pointInterval: 1
           },
           series: {
-            turboThreshold: 100000
+            turboThreshold: 600
           }
         },
         series: [

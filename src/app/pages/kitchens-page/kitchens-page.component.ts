@@ -90,7 +90,7 @@ export class KitchensPageComponent implements OnInit {
   }
 
   getKitchenData(location: string) {
-    this.loadingService.showLoading();
+    // this.loadingService.showLoading();
     this.kitchensService.getKitchenData(location).subscribe(
       (response: iApiResponse) => {
         console.log(response);

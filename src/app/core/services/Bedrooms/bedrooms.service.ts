@@ -12,12 +12,12 @@ export class BedroomsService {
   constructor(private http: HttpClient) {}
 
   getAllBedrooms(): Observable<iApiResponse> {
-    return this.http.get<iApiResponse>(`${apiUrl}/bedrooms/?limit=1000`);
+    return this.http.get<iApiResponse>(`${apiUrl}/bedrooms/?limit=500`);
   }
 
   getBedroomData(location: string): Observable<iApiResponse> {
     return this.http.get<iApiResponse>(
-      `${apiUrl}/bedrooms/?location=${location}&limit=1000`
+      `${apiUrl}/bedrooms/?location=${location}&limit=500`
     );
   }
 

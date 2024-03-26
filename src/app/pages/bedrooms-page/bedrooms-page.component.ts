@@ -17,10 +17,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { PhotoresistorDataItemComponent } from '../../components/photoresistor-data-item/photoresistor-data-item.component';
 import { Subscription } from 'rxjs';
 import { TemperatureDataItemComponent } from '../../components/temperature-data-item/temperature-data-item.component';
+import { WindowDoubleDataItemComponent } from '../../components/window-double-data-item/window-double-data-item.component';
 import { iActuatorsData } from '../../core/interfaces/i-ActuatorsData.interface';
 import { iSensorsData } from '../../core/interfaces/iSensorsData.interface';
 import { pollingIntervalTime } from '../../core/constants/pollingInterval';
-import { WindowDoubleDataItemComponent } from '../../components/window-double-data-item/window-double-data-item.component';
 
 @Component({
   selector: 'app-bedrooms-page',
@@ -85,7 +85,7 @@ export class BedroomsPageComponent implements OnInit {
   }
 
   getBedroomData(location: string) {
-    this.loadingService.showLoading();
+    // this.loadingService.showLoading();
     this.bedroomsService.getLastData(location).subscribe(
       (response: iLastApiResponse) => {
         console.log(response);

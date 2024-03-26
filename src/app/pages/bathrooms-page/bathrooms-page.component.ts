@@ -83,7 +83,7 @@ export class BathroomsPageComponent implements OnInit {
 
 
   getBathroomsData(location: string) {
-    this.loadinService.showLoading();
+    // this.loadinService.showLoading();
     this.bathroomsService.getBathroomsData(location).subscribe(
       (response: iApiResponse) => {
         console.log(response);

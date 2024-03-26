@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { apiUrl } from '../../constants/apiUrl.constant';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -15,11 +14,11 @@ export class KitchensService {
   ) {}
 
   getAllKitchens(): Observable<iApiResponse> {
-    return this.http.get<iApiResponse>(`${apiUrl}/kitchens/?limit=1000`)  
+    return this.http.get<iApiResponse>(`${apiUrl}/kitchens/?limit=500`)  
   }
 
   getKitchenData(location: string): Observable<iApiResponse> {
-    return this.http.get<iApiResponse>(`${apiUrl}/kitchens/?location=${location}&limit=1000`)   
+    return this.http.get<iApiResponse>(`${apiUrl}/kitchens/?location=${location}&limit=500`)   
   }
 
 
