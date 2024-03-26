@@ -86,6 +86,7 @@ export class BedroomsPageComponent implements OnInit {
 
   getBedroomData(location: string) {
     this.loadingService.showLoading();
+    console.log(`Obteniendo Datos en ${this.bedroomName}`)
     this.bedroomsService.getLastData(location).subscribe(
       (response: iLastApiResponse) => {
         console.log(response);
@@ -127,9 +128,11 @@ export class BedroomsPageComponent implements OnInit {
             ({ lastRecord }) => lastRecord.name === 'Led Exterior'
           )?.lastRecord;
         }
+        console.log(`Datos Obtenidos en ${this.bedroomName}`)
         this.loadingService.hideLoading();
       },
       (error) => {
+        console.log(`Datos No Obtenidos en ${this.bedroomName}`)
         this.loadingService.hideLoading();
         console.error(error);
       }

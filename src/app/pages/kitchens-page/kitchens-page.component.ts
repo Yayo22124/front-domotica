@@ -91,17 +91,20 @@ export class KitchensPageComponent implements OnInit {
 
   getKitchenData(location: string) {
     this.loadingService.showLoading();
+    console.log(`Obteniendo datos en ${this.kitchenName}`)
+    console.log(`Datos Obtenidos en ${this.kitchenName}`)
+    
     this.kitchensService.getKitchenData(location).subscribe(
       (response: iApiResponse) => {
         console.log(response);
         this.actuatorsData = response.actuatorsData;
         this.sensorsData = response.sensorsData;
-
+        
         if (this.actuatorsData && this.sensorsData) {
           // Separar los datos de sensores en variables individuales
           this.dhtData = this.sensorsData.find(
             (sensor) => sensor.name === 'Temperatura y Humedad'
-          )!;
+            )!;
           this.ldrData = this.sensorsData.find(
             (sensor) => sensor.name === 'Fotorresistencia'
           )!;
@@ -112,7 +115,7 @@ export class KitchensPageComponent implements OnInit {
           // Separar los datos de actuadores en variables individuales
           this.fanData = this.actuatorsData.find(
             (actuator) => actuator.name === 'Ventilador'
-          )!;
+            )!;
           this.doorData = this.actuatorsData.find(
             (actuator) => actuator.name === 'Puerta'
           )!;
@@ -121,16 +124,16 @@ export class KitchensPageComponent implements OnInit {
           )!;
           this.windowRightDataL = this.actuatorsData.find(
             (actuator) => actuator.name === 'Ventana Doble Derecha L'
-          )!;
-          this.windowLeftDataR = this.actuatorsData.find(
+            )!;
+            this.windowLeftDataR = this.actuatorsData.find(
             (actuator) => actuator.name === 'Ventana Doble Izquierda R'
           )!;
           this.windowRightDataR = this.actuatorsData.find(
             (actuator) => actuator.name === 'Ventana Doble Derecha R'
-          )!;
+            )!;
           this.inLightData = this.actuatorsData.find(
             (actuator) => actuator.name === 'Led Interior'
-          )!;
+            )!;
           this.exLightData = this.actuatorsData.find(
             (actuator) => actuator.name === 'Led Exterior'
           )!;
@@ -138,13 +141,15 @@ export class KitchensPageComponent implements OnInit {
             (actuator) => actuator.name === 'Alarma' || actuator.name === "Buzzer"
           )!;
         }
+        console.log(`Datos Obtenidos en ${this.kitchenName}`)
         this.loadingService.hideLoading();
       },
       (error) => {
+        console.log(`Datos No Obtenidos en ${this.kitchenName}`)
         this.loadingService.hideLoading();
         console.error(error);
       }
-    );
+      );
   }
 
   onActuatorUpdate() {

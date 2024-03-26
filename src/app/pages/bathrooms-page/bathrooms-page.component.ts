@@ -39,7 +39,7 @@ import { pollingIntervalTime } from '../../core/constants/pollingInterval';
     WaterPumpDataItemComponent,
     DoorDataItemComponent,
     ExLightDataItemComponent,
-    SimpleWindowComponent
+    SimpleWindowComponent,
   ],
   templateUrl: './bathrooms-page.component.html',
   styleUrl: './bathrooms-page.component.scss',
@@ -59,7 +59,6 @@ export class BathroomsPageComponent implements OnInit {
   public waterPumpData: iActuatorsData | null = null;
 
   private pollingInterval: any;
-
 
   constructor(
     private bathroomsService: BathroomsService,
@@ -81,8 +80,8 @@ export class BathroomsPageComponent implements OnInit {
     clearInterval(this.pollingInterval);
   }
 
-
   getBathroomsData(location: string) {
+    console.log(`Obteniendo Datos en ${this.bathroomName}`);
     this.loadinService.showLoading();
     this.bathroomsService.getBathroomsData(location).subscribe(
       (response: iApiResponse) => {
@@ -121,9 +120,11 @@ export class BathroomsPageComponent implements OnInit {
           )!;
         }
 
+        console.log(`Datos Obtenidos en ${this.bathroomName}`)
         this.loadinService.hideLoading();
       },
       (error) => {
+        console.log(`Datos No Obtenidos en ${this.bathroomName}`)
         this.loadinService.hideLoading();
         console.error(error);
       }

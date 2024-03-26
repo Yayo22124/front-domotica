@@ -88,7 +88,10 @@ export class GaragesPageComponent implements OnInit {
 
   getGaragesData(location: string) {
     this.loadingService.showLoading();
-    this.garagesService.getGaragesData(location).subscribe(
+    console.log(`Obteniendo Datos en ${this.garageName}`)
+    
+    this
+    .garagesService.getGaragesData(location).subscribe(
       (response: iApiResponse) => {
         console.log(response);
         this.garageActuators = response.actuatorsData;
@@ -101,38 +104,40 @@ export class GaragesPageComponent implements OnInit {
           )!;
           this.proximityData = this.garageSensor.find(
             (sensor) => sensor.name === 'Proximidad'
-          )!;
-          this.presenceData = this.garageSensor.find(
+            )!;
+            this.presenceData = this.garageSensor.find(
             (sensor) => sensor.name === 'Presencia'
-          )!;
+            )!;
 
           // Separar los datos de actuadores en variables individuales
           this.inLightData = this.garageActuators.find(
             (actuator) => actuator.name === 'Led Interior'
-          )!;
+            )!;
           this.doorData = this.garageActuators.find(
             (actuator) => actuator.name === 'Puerta'
-          )!;
-          this.exLightData = this.garageActuators.find(
-            (actuator) => actuator.name === 'Led Exterior'
+            )!;
+            this.exLightData = this.garageActuators.find(
+              (actuator) => actuator.name === 'Led Exterior'
           )!;
           this.buzzerData = this.garageActuators.find(
             (actuator) => actuator.name === 'Alarma' || actuator.name === "Buzzer"
           )!;
           this.gateLeftData = this.garageActuators.find(
             (actuator) => actuator.name === 'Porton Izquierda'
-          )!;
+            )!;
           this.gateRightData = this.garageActuators.find(
             (actuator) => actuator.name === 'Porton Derecha'
           )!;
         }
         this.loadingService.hideLoading();
+        console.log(`Datos Obtenidos en ${this.garageName}`)
       },
       (error) => {
+        console.log(`Datos No Obtenidos en ${this.garageName}`)
         this.loadingService.hideLoading();
         console.error(error);
       }
-    );
+      );
   }
 
   onActuatorUpdate() {

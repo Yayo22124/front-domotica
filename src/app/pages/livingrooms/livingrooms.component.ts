@@ -53,13 +53,13 @@ export class LivingroomsComponent implements OnInit {
     // * --------- *
     private loadingService: LoadingService
   ) {}
-  
+
   public livingroomsSensor: iSensorsData[] | undefined = [];
   public livingroomsActuators: iActuatorsData[] | undefined = [];
   // * --------- *
   public livingroomName: string | null = '';
-  public roomPath: string = "";
-  public room: string | null = "";
+  public roomPath: string = '';
+  public room: string | null = '';
   // * --------- *
 
   public dhtData: iSensorsData | null = null;
@@ -72,7 +72,6 @@ export class LivingroomsComponent implements OnInit {
   public exLightData: iActuatorsData | null = null;
 
   private pollingInterval: any;
-
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -93,6 +92,7 @@ export class LivingroomsComponent implements OnInit {
   }
 
   getLivingroomData(location: string) {
+    console.log(`Obteniendo Datos en ${this.livingroomName}`);
     this.loadingService.showLoading();
     this.LivingroomsService.getLivingroomData(location).subscribe(
       (response: iApiResponse) => {
@@ -129,9 +129,11 @@ export class LivingroomsComponent implements OnInit {
             (actuator) => actuator.name === 'Led Exterior'
           )!;
         }
+        console.log(`Datos Obtenidos en ${this.livingroomName}`)
         this.loadingService.hideLoading();
       },
       (error) => {
+        console.log(`Datos No Obtenidos en ${this.livingroomName}`)
         this.loadingService.hideLoading();
         console.error(error);
       }
