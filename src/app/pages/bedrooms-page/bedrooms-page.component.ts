@@ -93,7 +93,6 @@ export class BedroomsPageComponent implements OnInit {
         this.sensorsData = response.sensorsData;
 
         if (this.actuatorsData && this.sensorsData) {
-          // Separar los datos de sensores en variables individuales
           this.dhtData = this.sensorsData.find(({ lastRecord }) =>
             lastRecord.name.toLowerCase().includes('temperatura')
           )?.lastRecord;
@@ -102,7 +101,6 @@ export class BedroomsPageComponent implements OnInit {
             ({ lastRecord }) => lastRecord.name === 'Fotorresistencia'
           )?.lastRecord;
 
-          // Separar los datos de actuadores en variables individuales
           this.fanData = this.actuatorsData.find(
             ({ lastRecord }) => lastRecord.name === 'Ventilador'
           )?.lastRecord;
