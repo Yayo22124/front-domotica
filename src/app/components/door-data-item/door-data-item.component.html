@@ -8,7 +8,7 @@
     <mat-card-content>
         @for (action of doorData.actions; track $index) {
 
-        @if (action.value == true) {
+        @if (action.value) {
         <div matTooltip="Puerta abierta" matTooltipPosition="above"
             class="w-11/12 py-2 flex items-center justify-center gap-5 mx-auto rounded-sm bg-gradient-to-tl from-green-300 via-green-400 to-green-500 text-white">
             <span>Abierta</span>
@@ -22,12 +22,12 @@
         }
         @if (action.value) {
         <mat-slide-toggle color="primary" class="absolute top-1 right-1" [checked]="true" [disabled]="isLoading"
-            (toggleChange)=" openDoor(doorData.arduinoIp)">
+            (toggleChange)=" closeDoor(doorData.arduinoIp)">
             Cerrar
         </mat-slide-toggle>
         } @else {
         <mat-slide-toggle color="primary" class="absolute top-1 right-1"  [disabled]="isLoading"
-            (toggleChange)="closeDoor(doorData.arduinoIp)">
+            (toggleChange)="openDoor(doorData.arduinoIp)">
             Abrir
         </mat-slide-toggle>
 
